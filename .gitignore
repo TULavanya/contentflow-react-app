@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-package-lock.json
 
 # Build output
 dist/
@@ -41,6 +40,7 @@ Thumbs.db
 *.temp
 .cache/
 .parcel-cache/
+.vite/
 
 # Coverage
 coverage/
