@@ -19,6 +19,9 @@
   ],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "@contentstack/delivery-sdk": "^4.10.0",
     "@contentstack/live-preview-utils": "^4.1.1",
