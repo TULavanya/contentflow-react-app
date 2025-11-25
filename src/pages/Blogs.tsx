@@ -69,7 +69,7 @@ const Blogs: React.FC = () => {
     console.log(`📸 [Blogs] Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
     
     // Add cache buster to force fresh load (increment this version when images change)
-    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=2` : undefined;
+    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=3` : undefined;
     console.log(`🎯 [Blogs] FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
     
     return imageWithCacheBuster;
