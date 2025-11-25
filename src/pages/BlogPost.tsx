@@ -94,6 +94,9 @@ const BlogPost: React.FC = () => {
             console.log('=== BLOG POST DEBUG ===');
             console.log('✅ Found blog post:', foundPost.title);
             console.log('📝 URL matched:', foundPost.url);
+            console.log('🖼️ Featured Image RAW:', foundPost.featured_image);
+            console.log('🖼️ Featured Image type:', typeof foundPost.featured_image, Array.isArray(foundPost.featured_image) ? 'Array' : 'Object');
+            console.log('🖼️ Featured Image URL:', foundPost.featured_image?.url || 'NO URL');
             console.log('👤 Author data RAW:', foundPost.author);
             console.log('👤 Author type:', typeof foundPost.author, Array.isArray(foundPost.author) ? 'Array' : 'Object');
             console.log('👤 Author full structure:', JSON.stringify(foundPost.author, null, 2));
@@ -116,6 +119,15 @@ const BlogPost: React.FC = () => {
             } else {
               console.error('❌ NO AUTHOR DATA IN BLOG POST');
             }
+            
+            // Handle featured_image if it's an array
+            if (foundPost.featured_image && Array.isArray(foundPost.featured_image) && foundPost.featured_image.length > 0) {
+              console.log('🖼️ Featured image was an array, extracting first item...');
+              foundPost.featured_image = foundPost.featured_image[0];
+              console.log('🖼️ Extracted featured image:', foundPost.featured_image);
+            }
+            
+            console.log('🖼️ Final featured image URL:', foundPost.featured_image?.url || foundPost.featured_image);
             
             setBlogPost(foundPost);
           } else {
@@ -944,7 +956,7 @@ const BlogPost: React.FC = () => {
                 }}></div>
                 
                 <ImageSync
-                  src={blogPost.featured_image}
+                  src={blogPost.featured_image?.url || blogPost.featured_image}
                   alt={blogPost.title}
                   fallbackSrc="/images/BlogHero-Product_Updates-01.webp"
                   style={{
