@@ -88,29 +88,48 @@ const ImageSync: React.FC<ImageSyncProps> = ({
       resolvedSrc = defaultFallback;
     }
 
+    console.log('🖼️ ImageSync setting src:', {
+      originalSrc: src,
+      resolvedSrc,
+      fallbackSrc,
+      defaultFallback
+    });
+
     setImageSrc(resolvedSrc);
   }, [src, fallbackSrc]);
 
   const handleLoad = () => {
     setIsLoading(false);
+    console.log('✅ ImageSync - Image loaded successfully:', imageSrc);
     onLoad?.();
   };
 
-  const handleError = () => {
+  const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     setIsLoading(false);
+    
+    console.error('❌ ImageSync - Image failed to load:', {
+      attemptedSrc: imageSrc,
+      fallbackSrc,
+      defaultFallback,
+      error: e,
+      imgElement: e.currentTarget
+    });
     
     // Try fallback if we haven't already
     if (imageSrc !== fallbackSrc && fallbackSrc) {
+      console.warn('🔄 Trying fallbackSrc:', fallbackSrc);
       setImageSrc(fallbackSrc);
       return;
     }
     
     // Use default fallback
     if (imageSrc !== defaultFallback) {
+      console.warn('🔄 Trying defaultFallback:', defaultFallback);
       setImageSrc(defaultFallback);
       return;
     }
     
+    console.error('❌ All image loading attempts failed!');
     onError?.();
   };
 
