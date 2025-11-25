@@ -93,17 +93,18 @@ const LargeFeatureCard: React.FC<LargeFeatureCardProps> = ({
             position: 'absolute',
             top: '20px',
             right: '20px',
-            background: 'rgba(255, 255, 255, 0.95)',
+            background: 'rgba(255, 255, 255, 0.98)',
             borderRadius: '50%',
-            width: '60px',
-            height: '60px',
+            width: '70px',
+            height: '70px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '1.8em',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.15)',
+            fontSize: '2em',
+            boxShadow: '0 6px 20px rgba(0,0,0,0.3)',
             backdropFilter: 'blur(10px)',
-            transition: 'transform 0.3s ease'
+            transition: 'transform 0.3s ease',
+            border: '3px solid rgba(255, 255, 255, 0.8)'
           }}>
             {safeIconContent(icon, '🚀')}
           </div>
@@ -115,15 +116,17 @@ const LargeFeatureCard: React.FC<LargeFeatureCardProps> = ({
             position: 'absolute',
             bottom: '20px',
             left: '20px',
-            background: 'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)',
+            background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
             color: 'white',
-            padding: '8px 16px',
-            borderRadius: '20px',
-            fontSize: '0.8em',
+            padding: '10px 20px',
+            borderRadius: '25px',
+            fontSize: '0.85em',
             fontWeight: 'bold',
             textTransform: 'uppercase',
-            letterSpacing: '0.5px',
-            boxShadow: '0 4px 15px rgba(106, 27, 154, 0.3)'
+            letterSpacing: '0.8px',
+            boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4)',
+            backdropFilter: 'blur(10px)',
+            border: '2px solid rgba(255, 255, 255, 0.3)'
           }}>
             {category}
           </div>
@@ -136,7 +139,7 @@ const LargeFeatureCard: React.FC<LargeFeatureCardProps> = ({
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 100%)',
+          background: 'linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%)',
           pointerEvents: 'none'
         }} />
       </div>
