@@ -509,7 +509,11 @@ const Blogs: React.FC = () => {
               <div key={index} className="post-card" style={{
                 animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
                 transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                cursor: 'pointer'
+                cursor: 'pointer',
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: '600px',
+                height: '100%'
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-15px) rotate(1deg)';
@@ -611,10 +615,15 @@ const Blogs: React.FC = () => {
                 </div>
               </div>
                 
-                <div style={{ padding: '35px' }}>
+                <div style={{ 
+                  padding: '35px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  flex: '1'
+                }}>
                   <span style={{ 
                     color: '#6a1b9a',
-                  fontSize: '0.85em',
+                    fontSize: '0.85em',
                     fontWeight: 'bold',
                     letterSpacing: '1.5px',
                     textTransform: 'uppercase'
@@ -622,33 +631,46 @@ const Blogs: React.FC = () => {
                     {safeTextContent(post.category, 'Category')}
                   </span>
                   
-                <h3 style={{ 
+                  <h3 style={{ 
                     margin: '20px 0', 
                     fontSize: '1.6em', 
                     lineHeight: 1.3,
-                  color: '#333',
-                    fontWeight: 'bold'
-                }}>
-                  {safeTextContent(post.title, 'Blog Title')}
-                </h3>
+                    color: '#333',
+                    fontWeight: 'bold',
+                    minHeight: '65px',
+                    maxHeight: '65px',
+                    overflow: 'hidden',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical'
+                  }}>
+                    {safeTextContent(post.title, 'Blog Title')}
+                  </h3>
                   
                   <p style={{
                     color: '#666',
                     lineHeight: 1.7,
                     marginBottom: '25px',
-                    fontSize: '1.05em'
+                    fontSize: '1.05em',
+                    minHeight: '90px',
+                    maxHeight: '90px',
+                    overflow: 'hidden',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 3,
+                    WebkitBoxOrient: 'vertical'
                   }}>
-                  {safeTextContent(post.excerpt, 'Blog excerpt')}
-                </p>
+                    {safeTextContent(post.excerpt, 'Blog excerpt')}
+                  </p>
                   
-                <div style={{ 
-                  display: 'flex', 
-                  justifyContent: 'space-between', 
-                  alignItems: 'center',
+                  <div style={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between', 
+                    alignItems: 'center',
                     paddingTop: '25px',
                     borderTop: '2px solid #e8eaf6',
                     fontSize: '0.9em',
-                    color: '#666'
+                    color: '#666',
+                    marginTop: 'auto'
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                       <ImageSync
