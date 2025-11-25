@@ -17,7 +17,7 @@ const Academy: React.FC = () => {
       setIsLoading(true);
       try {
         const data = await fetchContent('academy_page');
-        console.log('🎓 Academy page data:', data);
+        console.log('Academy page data:', data);
         setAcademyData(data);
       } catch (error) {
         console.error('Error loading academy content:', error);
@@ -41,7 +41,9 @@ const Academy: React.FC = () => {
       <SEOHead seoData={academyData?.seo_metadata} />
       
         {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section" style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Coding_Thumbnail_Kickstart_NextJS.jpg')`
+      }}>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="animated-title">
@@ -63,10 +65,14 @@ const Academy: React.FC = () => {
           <h2 style={{ textAlign: 'center', fontSize: '2.5em', marginBottom: '60px' }}>
             {safeTextContent(academyData?.course_categories_section?.section_title, 'Explore Our Courses')}
           </h2>
-          <LargeFeatureGrid gap="40px">
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '40px'
+          }}>
             {((academyData?.course_categories && academyData.course_categories.length > 0) ? academyData.course_categories : [
               { 
-                icon: '🚀', 
+                icon: '', 
                 title: 'Getting Started', 
                 description: 'Learn the basics of ContentFlow and set up your first project with step-by-step guidance and hands-on tutorials.', 
                 count: '12 courses',
@@ -76,7 +82,7 @@ const Academy: React.FC = () => {
                 }
               },
               { 
-                icon: '⚙️', 
+                icon: '', 
                 title: 'Platform Fundamentals', 
                 description: 'Deep dive into core concepts, APIs, and architecture patterns for building scalable, enterprise-grade solutions.', 
                 count: '18 courses',
@@ -86,7 +92,7 @@ const Academy: React.FC = () => {
                 }
               },
               { 
-                icon: '🎨', 
+                icon: '', 
                 title: 'Content Modeling', 
                 description: 'Master content types, schemas, and data structures for flexible, future-proof content management systems.', 
                 count: '8 courses',
@@ -96,7 +102,7 @@ const Academy: React.FC = () => {
                 }
               },
               { 
-                icon: '🔄', 
+                icon: '', 
                 title: 'Integrations & Workflows', 
                 description: 'Connect ContentFlow with your favorite tools and platforms. Automate complex business processes seamlessly.', 
                 count: '15 courses',
@@ -106,7 +112,7 @@ const Academy: React.FC = () => {
                 }
               },
               { 
-                icon: '📊', 
+                icon: '', 
                 title: 'Analytics & Personalization', 
                 description: 'Leverage data insights and create personalized experiences that convert visitors into customers.', 
                 count: '10 courses',
@@ -116,7 +122,7 @@ const Academy: React.FC = () => {
                 }
               },
               { 
-                icon: '🛡️', 
+                icon: '', 
                 title: 'Security & Best Practices', 
                 description: 'Learn security fundamentals and development best practices for secure, compliant enterprise applications.', 
                 count: '6 courses',
@@ -125,41 +131,117 @@ const Academy: React.FC = () => {
                   title: 'Cybersecurity and Data Protection'
                 }
               }
-            ]).map((category: any, index: number) => {
-              const categories = ['Beginner', 'Advanced', 'Design', 'Integration', 'Analytics', 'Security'];
-              return (
-                <div key={index} style={{ position: 'relative' }}>
-                  <LargeFeatureCard
-                    title={category.title}
-                    description={category.description}
-                    featureImage={category.icon || category.feature_image}
-                    link="#course-categories"
-                    linkText={`Start Learning (${category.count}) →`}
-                    category={categories[index]}
-                    imageHeight="260px"
-                  />
-                  {/* Course Count Badge - Positioned Over Image */}
-            <div style={{
+            ]).map((category: any, index: number) => (
+              <a
+                key={index}
+                href="#course-categories"
+                style={{
+                  textDecoration: 'none',
+                  height: '400px',
+                  borderRadius: '25px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  color: 'white',
+                  transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  cursor: 'pointer',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+                  border: '3px solid white',
+                  backgroundColor: '#f5f5f5'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+                }}
+              >
+                {/* Background Image */}
+                <img
+                  src={category.feature_image?.url || category.icon?.url || category.feature_image || category.icon}
+                  alt={safeTextContent(category.title, 'Course Category')}
+                  style={{
                     position: 'absolute',
-                    top: '20px',
-                    left: '20px',
-                    background: 'rgba(255, 255, 255, 0.95)',
-                    color: '#6a1b9a',
-                    padding: '10px 18px',
-                    borderRadius: '25px',
-              fontSize: '0.9em',
-                    fontWeight: 'bold',
-                    boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
-                    backdropFilter: 'blur(10px)',
-                    border: '2px solid rgba(106, 27, 154, 0.3)',
-                    zIndex: 10
-                  }}>
-                    {category.count}
-                  </div>
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    zIndex: 1
+                  }}
+                  onError={(e) => {
+                    console.error('Category image failed to load');
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+                
+                {/* Course Count Badge */}
+                <div style={{
+                  position: 'absolute',
+                  top: '20px',
+                  left: '20px',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  color: '#6a1b9a',
+                  padding: '10px 18px',
+                  borderRadius: '25px',
+                  fontSize: '0.9em',
+                  fontWeight: 'bold',
+                  boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
+                  backdropFilter: 'blur(10px)',
+                  border: '2px solid rgba(106, 27, 154, 0.3)',
+                  zIndex: 3
+                }}>
+                  {category.count}
                 </div>
-              );
-            })}
-          </LargeFeatureGrid>
+                
+                {/* Bottom Gradient Overlay */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '70%',
+                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%)',
+                  zIndex: 2
+                }}></div>
+                
+                {/* Content */}
+                <div style={{
+                  position: 'relative',
+                  zIndex: 3,
+                  padding: '30px',
+                  width: '100%',
+                  textAlign: 'center'
+                }}>
+                  <p style={{ 
+                    fontSize: '2.2em', 
+                    fontWeight: '800',
+                    marginBottom: '15px',
+                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                    color: 'white'
+                  }}>
+                    {safeTextContent(category.title, 'Course Category')}
+                  </p>
+                  <p style={{ 
+                    fontSize: '1.15em', 
+                    textAlign: 'center', 
+                    opacity: 0.95,
+                    lineHeight: 1.6,
+                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                    color: 'white',
+                    margin: 0
+                  }}>
+                    {safeTextContent(category.description, 'Description')}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
             </div>
       </section>
 
@@ -194,35 +276,100 @@ const Academy: React.FC = () => {
           <div style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',
-            gap: '40px',
+            gap: '50px',
             alignItems: 'center',
-            maxWidth: '1000px',
+            maxWidth: '1200px',
             margin: '0 auto'
           }}>
+            {/* Video Thumbnail with Play Button */}
             <div style={{
-              height: '320px',
-              borderRadius: '25px',
+              position: 'relative',
+              height: '380px',
+              borderRadius: '30px',
               background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '7em',
-              color: 'white',
-              boxShadow: '0 15px 40px rgba(102, 126, 234, 0.4)',
-              transition: 'all 0.4s ease',
+              overflow: 'hidden',
+              boxShadow: '0 20px 60px rgba(106, 27, 154, 0.35)',
+              transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
               cursor: 'pointer',
               animation: 'fadeInLeft 1s ease-out'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.05) rotate(-3deg)';
-              e.currentTarget.style.boxShadow = '0 20px 50px rgba(102, 126, 234, 0.5)';
+              e.currentTarget.style.transform = 'scale(1.03) translateY(-5px)';
+              e.currentTarget.style.boxShadow = '0 25px 70px rgba(106, 27, 154, 0.4)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-              e.currentTarget.style.boxShadow = '0 15px 40px rgba(102, 126, 234, 0.4)';
+              e.currentTarget.style.transform = 'scale(1) translateY(0)';
+              e.currentTarget.style.boxShadow = '0 20px 60px rgba(106, 27, 154, 0.35)';
             }}>
-              <div style={{ animation: 'float 3s ease-in-out infinite' }}>
+              {/* TV Icon Background */}
+              <div style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                fontSize: '12em',
+                opacity: 0.15,
+                animation: 'float 4s ease-in-out infinite'
+              }}>
                 📺
+              </div>
+              
+              {/* Content */}
+              <div style={{
+                position: 'relative',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 1,
+                padding: '40px'
+              }}>
+                {/* Play Button */}
+                <div style={{
+                  width: '100px',
+                  height: '100px',
+                  borderRadius: '50%',
+                  background: 'rgba(255, 255, 255, 0.95)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: '30px',
+                  boxShadow: '0 10px 40px rgba(0,0,0,0.2)',
+                  transition: 'all 0.3s ease',
+                  animation: 'pulse 2s ease-in-out infinite'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'scale(1.15)';
+                  e.currentTarget.style.background = 'white';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)';
+                }}>
+                  <div style={{
+                    width: 0,
+                    height: 0,
+                    borderLeft: '30px solid #6a1b9a',
+                    borderTop: '20px solid transparent',
+                    borderBottom: '20px solid transparent',
+                    marginLeft: '8px'
+                  }}></div>
+                </div>
+                
+                {/* Tutorial Info Badge */}
+                <div style={{
+                  background: 'rgba(255, 255, 255, 0.2)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '15px 30px',
+                  borderRadius: '50px',
+                  color: 'white',
+                  fontSize: '1.1em',
+                  fontWeight: 'bold',
+                  border: '2px solid rgba(255, 255, 255, 0.3)'
+                }}>
+                  🎥 Click to Watch Tutorial
+                </div>
               </div>
             </div>
             <div style={{ animation: 'fadeInRight 1s ease-out' }}>
@@ -241,13 +388,13 @@ const Academy: React.FC = () => {
                 fontSize: '1.05em'
               }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '1.3em' }}>⏱️</span> {academyData?.featured_tutorial?.duration || '45 minutes'}
+                  Duration: {academyData?.featured_tutorial?.duration || '45 minutes'}
                 </span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '1.3em' }}>👤</span> {academyData?.featured_tutorial?.instructor || 'Sarah Johnson'}
+                  Instructor: {academyData?.featured_tutorial?.instructor || 'Sarah Johnson'}
                 </span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '1.3em' }}>⭐</span> {safeTextContent(academyData?.featured_tutorial?.rating, '4.8')}/5 ({safeTextContent(academyData?.featured_tutorial?.views, '2,341')} views)
+                  Rating: {safeTextContent(academyData?.featured_tutorial?.rating, '4.8')}/5 ({safeTextContent(academyData?.featured_tutorial?.views, '2,341')} views)
                 </span>
               </div>
               <Link to="#" className="btn start" style={{
@@ -261,26 +408,240 @@ const Academy: React.FC = () => {
           </div>
         </section>
 
-      {/* Academy Showcase */}
-      <section style={{ padding: '100px 20px', background: 'white' }}>
+      {/* Learning Resources - Case Studies & Guides */}
+      <section style={{ 
+        padding: '100px 20px', 
+        background: 'white'
+      }}>
         <div className="container">
           <h2 style={{ 
             textAlign: 'center', 
-            fontSize: '2.5em', 
+            fontSize: '2.8em', 
             marginBottom: '20px',
             background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-            animation: 'fadeInUp 0.8s ease-out'
+            animation: 'fadeInUp 0.8s ease-out',
+            fontWeight: '700'
+          }}>
+            Learning Resources
+          </h2>
+          <p style={{
+            textAlign: 'center',
+            fontSize: '1.2em',
+            color: '#666',
+            marginBottom: '60px',
+            animation: 'fadeInUp 1s ease-out'
+          }}>
+            Deep-dive into specific features and real-world use cases
+          </p>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gap: '35px',
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
+            {[
+              { 
+                category: 'Case Study',
+                title: 'Understanding Timeline',
+                description: '"Timeline" is a feature for content managers that allows you to preview how your website will appear on specific dates and times in the future',
+                link: '#',
+                icon: '',
+                image: '/images/About_Content_Models.png'
+              },
+              { 
+                category: 'Best Practices',
+                title: 'Content Modeling Strategy',
+                description: 'Learn how to design flexible, scalable content models that grow with your business needs',
+                link: '#',
+                icon: '',
+                image: '/images/headless-cms-content-hub-diagram.png'
+              },
+              { 
+                category: 'Tutorial',
+                title: 'API Integration Guide',
+                description: 'Master our REST API and SDKs to build powerful integrations with your existing tools',
+                link: '#',
+                icon: '',
+                image: '/images/headless-cms-diagram.png'
+              }
+            ].map((resource, index) => (
+              <div key={index} style={{
+                background: 'white',
+                borderRadius: '20px',
+                overflow: 'hidden',
+                boxShadow: '0 8px 25px rgba(0,0,0,0.08)',
+                border: '2px solid rgba(106, 27, 154, 0.08)',
+                transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                animation: `fadeInUp 0.6s ease-out ${index * 0.15}s both`,
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-10px) scale(1.02)';
+                e.currentTarget.style.boxShadow = '0 20px 50px rgba(106, 27, 154, 0.2)';
+                e.currentTarget.style.borderColor = '#6a1b9a';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.08)';
+                e.currentTarget.style.borderColor = 'rgba(106, 27, 154, 0.08)';
+              }}>
+                {/* Image Container */}
+                <div style={{
+                  position: 'relative',
+                  height: '220px',
+                  overflow: 'hidden',
+                  background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)'
+                }}>
+                  <ImageSync
+                    src={resource.image}
+                    alt={resource.title}
+                    fallbackSrc="/images/logo.png"
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 0.4s ease'
+                    }}
+                  />
+                  {/* Overlay */}
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(to bottom, transparent 0%, rgba(106, 27, 154, 0.7) 100%)',
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    padding: '20px'
+                  }}>
+                    <div style={{
+                      background: 'rgba(255, 255, 255, 0.95)',
+                      color: '#6a1b9a',
+                      padding: '8px 20px',
+                      borderRadius: '20px',
+                      fontSize: '0.85em',
+                      fontWeight: 'bold',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.5px'
+                    }}>
+                      {resource.category}
+                    </div>
+                  </div>
+                  {/* Icon Badge */}
+                  <div style={{
+                    position: 'absolute',
+                    top: '15px',
+                    right: '15px',
+                    width: '60px',
+                    height: '60px',
+                    background: 'white',
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: '2em',
+                    boxShadow: '0 5px 20px rgba(0,0,0,0.2)'
+                  }}>
+                    {resource.icon}
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div style={{ padding: '30px' }}>
+                  <h3 style={{
+                    fontSize: '1.5em',
+                    marginBottom: '15px',
+                    color: '#1a1a1a',
+                    fontWeight: '700',
+                    lineHeight: '1.3'
+                  }}>
+                    {resource.title}
+                  </h3>
+                  <p style={{
+                    color: '#666',
+                    lineHeight: '1.7',
+                    marginBottom: '25px',
+                    fontSize: '1.05em'
+                  }}>
+                    {resource.description}
+                  </p>
+                  <a 
+                    href={resource.link}
+                    style={{
+                      color: '#6a1b9a',
+                      fontWeight: 'bold',
+                      textDecoration: 'none',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      fontSize: '1.05em',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.gap = '12px';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.gap = '8px';
+                    }}
+                  >
+                    Read Case Study
+                    <span style={{ fontSize: '1.2em' }}>→</span>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Academy Showcase */}
+      <section style={{ 
+        padding: '120px 20px', 
+        background: 'linear-gradient(180deg, #ffffff 0%, #f8f4ff 50%, #ffffff 100%)',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Decorative Background Elements */}
+        <div style={{
+          position: 'absolute',
+          top: '15%',
+          right: '10%',
+          width: '200px',
+          height: '200px',
+          background: 'radial-gradient(circle, rgba(106, 27, 154, 0.05) 0%, transparent 70%)',
+          borderRadius: '50%',
+          animation: 'float 10s ease-in-out infinite',
+          pointerEvents: 'none'
+        }}></div>
+        
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <h2 style={{ 
+            textAlign: 'center', 
+            fontSize: '3.2em', 
+            marginBottom: '25px',
+              background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 50%, #ab47bc 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            animation: 'fadeInUp 0.8s ease-out',
+            fontWeight: '800',
+            letterSpacing: '-1px'
           }}>
             Academy in Action
             </h2>
           <p style={{
             textAlign: 'center',
-            fontSize: '1.1em',
+            fontSize: '1.3em',
             color: '#666',
-            marginBottom: '60px',
+            marginBottom: '70px',
+            maxWidth: '650px',
+            margin: '0 auto 70px',
+            lineHeight: '1.6',
             animation: 'fadeInUp 1s ease-out'
           }}>
             Real stories, real results from our community
@@ -294,74 +655,149 @@ const Academy: React.FC = () => {
             margin: '0 auto'
           }}>
             <div style={{ animation: 'fadeInLeft 1s ease-out' }}>
-              <h3 style={{ fontSize: '2.2em', marginBottom: '20px', lineHeight: 1.2 }}>
+              <h3 style={{ fontSize: '2.5em', marginBottom: '25px', lineHeight: 1.2, fontWeight: '700' }}>
                 From Novice to Expert
               </h3>
-              <p style={{ fontSize: '1.1em', color: '#666', marginBottom: '30px', lineHeight: 1.6 }}>
+              <p style={{ fontSize: '1.15em', color: '#666', marginBottom: '40px', lineHeight: 1.7 }}>
                 Watch how our academy transformed Sarah's career from a content coordinator to a certified ContentFlow architect. Learn about the hands-on projects, real-world scenarios, and expert mentorship that make our program unique.
               </p>
             <div style={{
               display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '30px',
-                marginBottom: '30px'
+                gap: '25px',
+                marginBottom: '40px'
               }}>
                 {[
-                  { value: '94%', label: 'Certification Pass Rate', delay: 0 },
-                  { value: '85%', label: 'Career Advancement', delay: 0.1 },
-                  { value: '50K+', label: 'Students Trained', delay: 0.2 }
+                  { value: '94%', label: 'Certification Pass Rate', icon: '', delay: 0 },
+                  { value: '85%', label: 'Career Advancement', icon: '', delay: 0.1 },
+                  { value: '50K+', label: 'Students Trained', icon: '', delay: 0.2 }
                 ].map((stat, index) => (
                   <div key={index} style={{ 
                     textAlign: 'center',
-                    animation: `fadeInUp 0.6s ease-out ${stat.delay}s both`
+                    background: 'white',
+                    padding: '25px 15px',
+                    borderRadius: '20px',
+                    boxShadow: '0 5px 20px rgba(106, 27, 154, 0.1)',
+                    border: '2px solid rgba(106, 27, 154, 0.08)',
+                    transition: 'all 0.3s ease',
+                    animation: `fadeInUp 0.6s ease-out ${stat.delay}s both`,
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-5px)';
+                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(106, 27, 154, 0.2)';
+                    e.currentTarget.style.borderColor = '#6a1b9a';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 5px 20px rgba(106, 27, 154, 0.1)';
+                    e.currentTarget.style.borderColor = 'rgba(106, 27, 154, 0.08)';
                   }}>
                     <div style={{ 
-                      fontSize: '2.8em', 
-                      fontWeight: 'bold', 
+                      fontSize: '3.2em', 
+                      fontWeight: '800', 
                       background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
                       backgroundClip: 'text',
-                      marginBottom: '8px'
+                      marginBottom: '10px',
+                      letterSpacing: '-1px'
                     }}>
                       {stat.value}
                     </div>
-                    <div style={{ fontSize: '0.95em', color: '#666', fontWeight: '500' }}>
+                    <div style={{ fontSize: '0.9em', color: '#666', fontWeight: '600', lineHeight: '1.4' }}>
                       {stat.label}
                     </div>
                   </div>
                 ))}
               </div>
               <Link to="/company" className="btn start" style={{
-                animation: 'pulse 2s ease-in-out infinite'
+                animation: 'pulse 2s ease-in-out infinite',
+                fontSize: '1.15em',
+                padding: '16px 40px',
+                textDecoration: 'none'
               }}>
                 View Success Stories
               </Link>
             </div>
+            
+            {/* Enhanced Graduation Cap Animation */}
             <div style={{
-              height: '450px',
-              borderRadius: '25px',
-              background: 'linear-gradient(135deg, #4a148c 0%, #6a1b9a 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '8em',
-              color: 'white',
-              boxShadow: '0 15px 40px rgba(240, 147, 251, 0.4)',
-              transition: 'all 0.4s ease',
+              position: 'relative',
+              height: '500px',
+              borderRadius: '30px',
+              background: 'linear-gradient(135deg, #4a148c 0%, #6a1b9a 50%, #8e24aa 100%)',
+              overflow: 'hidden',
+              boxShadow: '0 20px 60px rgba(106, 27, 154, 0.35)',
+              transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
               cursor: 'pointer',
               animation: 'fadeInRight 1s ease-out'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'scale(1.05) rotate(3deg)';
-              e.currentTarget.style.boxShadow = '0 20px 50px rgba(240, 147, 251, 0.5)';
+              e.currentTarget.style.transform = 'scale(1.03) rotate(2deg)';
+              e.currentTarget.style.boxShadow = '0 25px 70px rgba(106, 27, 154, 0.45)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
-              e.currentTarget.style.boxShadow = '0 15px 40px rgba(240, 147, 251, 0.4)';
+              e.currentTarget.style.boxShadow = '0 20px 60px rgba(106, 27, 154, 0.35)';
             }}>
-              <div style={{ animation: 'float 3s ease-in-out infinite' }}>
-                🎓
+              {/* Decorative Background Circles */}
+              <div style={{
+                position: 'absolute',
+                top: '20%',
+                left: '10%',
+                width: '150px',
+                height: '150px',
+                background: 'radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%)',
+                borderRadius: '50%',
+                animation: 'float 6s ease-in-out infinite'
+              }}></div>
+              <div style={{
+                position: 'absolute',
+                bottom: '15%',
+                right: '15%',
+                width: '120px',
+                height: '120px',
+                background: 'radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%)',
+                borderRadius: '50%',
+                animation: 'float 8s ease-in-out infinite reverse'
+              }}></div>
+              
+              {/* Graduation Cap */}
+              <div style={{
+                position: 'relative',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 1
+              }}>
+                <div style={{ 
+                  fontSize: '2rem',
+                  fontWeight: 'bold',
+                  animation: 'float 4s ease-in-out infinite',
+                  filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.3))'
+                }}>
+                  Certificate
+                </div>
+                
+                {/* Success Badge */}
+                <div style={{
+                  marginTop: '30px',
+                  background: 'rgba(255, 255, 255, 0.2)',
+                  backdropFilter: 'blur(10px)',
+                  padding: '18px 35px',
+                  borderRadius: '50px',
+                  color: 'white',
+                  fontSize: '1.2em',
+                  fontWeight: 'bold',
+                  border: '3px solid rgba(255, 255, 255, 0.3)',
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+                  animation: 'pulse 2.5s ease-in-out infinite'
+                }}>
+                  🏆 Excellence in Learning
+                </div>
               </div>
             </div>
             </div>
@@ -441,7 +877,7 @@ const Academy: React.FC = () => {
                     rel="noopener noreferrer"
                     style={{ color: '#6a1b9a', fontWeight: 'bold', textDecoration: 'none' }}
                   >
-                    {safeTextContent(item.link?.title, 'Learn More')} →
+                    {safeTextContent(item.link?.title, 'Learn More')}
                   </a>
         </div>
       </div>
@@ -545,7 +981,7 @@ const Academy: React.FC = () => {
             <p style={{ fontSize: '1.1em', color: '#666', marginBottom: '20px' }}>
               Still have questions?
             </p>
-              <Link to="/contact" className="btn talk">Contact Support →</Link>
+              <Link to="/contact" className="btn talk" style={{ textDecoration: 'none' }}>Contact Support</Link>
           </div>
         </div>
       </section>

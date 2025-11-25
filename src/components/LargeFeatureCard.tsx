@@ -36,7 +36,7 @@ const LargeFeatureCard: React.FC<LargeFeatureCardProps> = ({
   featureImage,
   image,
   link,
-  linkText = 'Learn More →',
+  linkText = 'Learn More',
   category = 'Feature',
   gradient,
   style = {},
@@ -115,7 +115,7 @@ const LargeFeatureCard: React.FC<LargeFeatureCardProps> = ({
             position: 'absolute',
             bottom: '20px',
             left: '20px',
-            background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+            background: 'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)',
             color: 'white',
             padding: '8px 16px',
             borderRadius: '20px',
@@ -167,7 +167,7 @@ const LargeFeatureCard: React.FC<LargeFeatureCardProps> = ({
           <Link 
             to={link} 
             style={{
-              color: '#6a1b9a',
+              color: '#2563eb',
               fontWeight: 'bold',
               textDecoration: 'none',
               fontSize: '1em',
@@ -177,17 +177,17 @@ const LargeFeatureCard: React.FC<LargeFeatureCardProps> = ({
               transition: 'color 0.3s ease'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#8e24aa';
+              e.currentTarget.style.color = '#3b82f6';
               const arrow = e.currentTarget.querySelector('span');
               if (arrow) (arrow as HTMLElement).style.transform = 'translateX(5px)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = '#6a1b9a';
+              e.currentTarget.style.color = '#2563eb';
               const arrow = e.currentTarget.querySelector('span');
               if (arrow) (arrow as HTMLElement).style.transform = 'translateX(0)';
             }}
           >
-            {linkText} <span style={{ transition: 'transform 0.3s ease' }}>→</span>
+            {linkText}
           </Link>
         )}
       </div>

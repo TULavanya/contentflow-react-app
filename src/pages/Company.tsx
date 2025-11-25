@@ -96,14 +96,14 @@ const Company: React.FC = () => {
 
   // Fallback data for milestones
   const milestones = [
-    { year: '2018', event: 'ContentFlow Founded', description: 'Started with a vision to revolutionize digital experiences', icon: '🚀' },
-    { year: '2019', event: 'Series A Funding', description: '$15M raised to accelerate product development', icon: '💰' },
-    { year: '2020', event: '100 Customers', description: 'Reached our first major customer milestone', icon: '🎯' },
-    { year: '2021', event: 'Series B Funding', description: '$50M raised, valued at $250M', icon: '📈' },
-    { year: '2022', event: 'Global Expansion', description: 'Opened offices in London, Berlin, and Singapore', icon: '🌍' },
-    { year: '2023', event: 'AI Launch', description: 'Introduced AI-powered content intelligence', icon: '🤖' },
-    { year: '2024', event: 'Series C Funding', description: '$100M raised, valued at $1B (Unicorn status)', icon: '🦄' },
-    { year: '2025', event: 'AI Agents', description: 'Launched revolutionary AI agent platform', icon: '✨' }
+    { year: '2018', event: 'ContentFlow Founded', description: 'Started with a vision to revolutionize digital experiences', icon: '' },
+    { year: '2019', event: 'Series A Funding', description: '$15M raised to accelerate product development', icon: '' },
+    { year: '2020', event: '100 Customers', description: 'Reached our first major customer milestone', icon: '' },
+    { year: '2021', event: 'Series B Funding', description: '$50M raised, valued at $250M', icon: '' },
+    { year: '2022', event: 'Global Expansion', description: 'Opened offices in London, Berlin, and Singapore', icon: '' },
+    { year: '2023', event: 'AI Launch', description: 'Introduced AI-powered content intelligence', icon: '' },
+    { year: '2024', event: 'Series C Funding', description: '$100M raised, valued at $1B (Unicorn status)', icon: '' },
+    { year: '2025', event: 'AI Agents', description: 'Launched revolutionary AI agent platform', icon: '' }
   ];
 
   const awards = [
@@ -410,7 +410,9 @@ const Company: React.FC = () => {
       )}
       
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section" style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Innovation.jpg')`
+      }}>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="animated-title">
@@ -457,57 +459,100 @@ const Company: React.FC = () => {
 
           <div style={{
             display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
               gap: '40px',
               marginTop: '60px'
           }}>
             {(companyData?.mission_section?.values || [
-                { icon: '🎯', value_title: 'Customer First', value_text: 'Every decision we make starts with how it benefits our customers.', gradient: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)' },
-                { icon: '💡', value_title: 'Innovation', value_text: 'We push boundaries and embrace new technologies to stay ahead.', gradient: 'linear-gradient(135deg, #4a148c 0%, #6a1b9a 100%)' },
-                { icon: '🤝', value_title: 'Partnership', value_text: 'We succeed when our customers succeed. Their growth is our growth.', gradient: 'linear-gradient(135deg, #8e24aa 0%, #ab47bc 100%)' }
+                { icon: '', value_title: 'Customer First', value_text: 'Every decision we make starts with how it benefits our customers.', gradient: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)' },
+                { icon: '', value_title: 'Innovation', value_text: 'We push boundaries and embrace new technologies to stay ahead.', gradient: 'linear-gradient(135deg, #4a148c 0%, #6a1b9a 100%)' },
+                { icon: '', value_title: 'Partnership', value_text: 'We succeed when our customers succeed. Their growth is our growth.', gradient: 'linear-gradient(135deg, #8e24aa 0%, #ab47bc 100%)' }
               ]).map((item: any, index: number) => (
               <div key={index} style={{
-              background: 'white',
-                  padding: '40px 30px',
-                  borderRadius: '20px',
-                  boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
-                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                  animation: `fadeInUp 0.8s ease-out ${index * 0.2}s both`
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-10px) rotate(2deg)';
-                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(106, 27, 154, 0.3)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) rotate(0deg)';
-                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+                height: '400px',
+                borderRadius: '25px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                color: 'white',
+                transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                animation: `fadeInUp 0.6s ease-out ${0.1 * (index + 1)}s both`,
+                cursor: 'pointer',
+                position: 'relative',
+                overflow: 'hidden',
+                boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+                border: '3px solid white',
+                backgroundColor: '#f5f5f5'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
+                e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+              }}>
+                {/* Background Image from Contentstack */}
+                <img
+                  src={item.icon?.url || item.icon}
+                  alt={safeTextContent(item.value_title || item.title, 'Company Value')}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    zIndex: 1
+                  }}
+                  onError={(e) => {
+                    console.error('Value image failed to load:', item.icon);
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+                
+                {/* Bottom Gradient Overlay for Text Readability */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '70%',
+                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%)',
+                  zIndex: 2
+                }}></div>
+                
+                {/* Content */}
+                <div style={{
+                  position: 'relative',
+                  zIndex: 3,
+                  padding: '30px',
+                  width: '100%',
+                  textAlign: 'center'
                 }}>
-                  <div style={{
-                    width: '120px',
-                    height: '120px',
-                    margin: '0 auto 20px',
-                    borderRadius: '15px',
-                    overflow: 'hidden',
-                    boxShadow: '0 8px 20px rgba(0,0,0,0.1)',
-                    animation: 'float 3s ease-in-out infinite',
-                    animationDelay: `${index * 0.3}s`
+                  <p style={{ 
+                    fontSize: '2.2em', 
+                    fontWeight: '800',
+                    marginBottom: '15px',
+                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                    color: 'white'
                   }}>
-                    <ImageSync
-                      src={item.icon}
-                      alt={safeTextContent(item.value_title || item.title, 'Company Value')}
-                      fallbackSrc="/images/logo.png"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover'
-                      }}
-                    />
-                  </div>
-                  <h3 style={{ marginBottom: '10px' }}>{safeTextContent(item.value_title || item.title, 'Company Value')}</h3>
-                  <p style={{ color: '#666', lineHeight: 1.6 }}>
+                    {safeTextContent(item.value_title || item.title, 'Company Value')}
+                  </p>
+                  <p style={{ 
+                    fontSize: '1.15em', 
+                    textAlign: 'center', 
+                    opacity: 0.95,
+                    lineHeight: 1.6,
+                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                    color: 'white',
+                    margin: 0
+                  }}>
                     {safeTextContent(item.value_text || item.text, 'Value description')}
                   </p>
                 </div>
+              </div>
               ))}
             </div>
           </div>
@@ -516,84 +561,117 @@ const Company: React.FC = () => {
 
       {/* Our Journey */}
       <section id="story" style={{ 
-        padding: '60px 20px', 
-        background: 'white'
+        padding: '120px 20px', 
+        background: 'linear-gradient(180deg, #ffffff 0%, #f8f4ff 50%, #ffffff 100%)',
+        position: 'relative',
+        overflow: 'hidden'
       }}>
-        <div className="container">
-          <h2 style={{ 
-            textAlign: 'center', 
-            fontSize: '1.6em', 
-            marginBottom: '10px',
-            background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            animation: 'fadeInUp 0.8s ease-out'
-          }}>
-            {safeTextContent(companyData?.company_timeline?.section_title, 'Our Journey')}
-          </h2>
-          <p style={{
-            textAlign: 'center',
-            fontSize: '0.9em',
-            color: '#666',
-            marginBottom: '30px',
-            animation: 'fadeInUp 1s ease-out'
-          }}>
-            {safeTextContent(companyData?.company_timeline?.section_subtitle, 'From startup to unicorn - Our story of innovation and growth')}
-          </p>
+        {/* Decorative Background Elements */}
+        <div style={{
+          position: 'absolute',
+          top: '15%',
+          left: '10%',
+          width: '250px',
+          height: '250px',
+          background: 'radial-gradient(circle, rgba(106, 27, 154, 0.05) 0%, transparent 70%)',
+          borderRadius: '50%',
+          animation: 'float 10s ease-in-out infinite',
+          pointerEvents: 'none'
+        }}></div>
+        <div style={{
+          position: 'absolute',
+          bottom: '20%',
+          right: '8%',
+          width: '300px',
+          height: '300px',
+          background: 'radial-gradient(circle, rgba(142, 36, 170, 0.06) 0%, transparent 70%)',
+          borderRadius: '50%',
+          animation: 'float 12s ease-in-out infinite reverse',
+          pointerEvents: 'none'
+        }}></div>
+        
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <h2 style={{ 
+              fontSize: '3.5em', 
+              marginBottom: '20px',
+              background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 50%, #ab47bc 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              animation: 'fadeInUp 0.8s ease-out',
+              fontWeight: '800',
+              letterSpacing: '-1px'
+            }}>
+              {safeTextContent(companyData?.company_timeline?.section_title, 'Our Journey')}
+            </h2>
+            <p style={{
+              fontSize: '1.35em',
+              color: '#666',
+              maxWidth: '750px',
+              margin: '0 auto',
+              lineHeight: '1.7',
+              animation: 'fadeInUp 1s ease-out'
+            }}>
+              {safeTextContent(companyData?.company_timeline?.section_subtitle, 'From startup to unicorn - Our story of innovation and growth')}
+            </p>
+          </div>
 
-          <div style={{ maxWidth: '700px', margin: '0 auto', position: 'relative' }}>
+          <div style={{ maxWidth: '900px', margin: '0 auto', position: 'relative' }}>
             {/* Vertical Timeline Line */}
             <div style={{
               position: 'absolute',
               left: '50%',
               top: '0',
               bottom: '0',
-              width: '2px',
-              background: 'linear-gradient(180deg, #6a1b9a 0%, #8e24aa 100%)',
-              transform: 'translateX(-50%)'
+              width: '4px',
+              background: 'linear-gradient(180deg, #6a1b9a 0%, #8e24aa 50%, #d946ef 100%)',
+              transform: 'translateX(-50%)',
+              borderRadius: '10px',
+              boxShadow: '0 0 20px rgba(106, 27, 154, 0.3)'
             }}></div>
 
             {(companyData?.company_timeline?.milestones || milestones).map((milestone: any, index: number) => (
               <div key={index} style={{
                 display: 'flex',
                 justifyContent: index % 2 === 0 ? 'flex-start' : 'flex-end',
-                marginBottom: '25px',
+                marginBottom: '45px',
                 position: 'relative',
-                animation: `fadeIn${index % 2 === 0 ? 'Left' : 'Right'} 0.8s ease-out ${index * 0.2}s both`
+                animation: `fadeIn${index % 2 === 0 ? 'Left' : 'Right'} 0.8s ease-out ${index * 0.15}s both`
               }}>
                 <div 
                   className="journey-card"
                   style={{ 
-                    width: '42%',
-                    background: 'white',
-                    padding: '15px',
-                    borderRadius: '12px',
-                    boxShadow: '0 4px 15px rgba(106, 27, 154, 0.1)',
-                    border: '2px solid #e8eaf6',
-                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                    width: '45%',
+                    background: 'linear-gradient(135deg, #ffffff 0%, #faf8ff 100%)',
+                    padding: '28px',
+                    borderRadius: '20px',
+                    boxShadow: '0 8px 30px rgba(106, 27, 154, 0.12)',
+                    border: '2px solid rgba(106, 27, 154, 0.1)',
+                    transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
                     cursor: 'pointer',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    position: 'relative'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(106, 27, 154, 0.3)';
+                    e.currentTarget.style.transform = 'scale(1.08) translateY(-5px)';
+                    e.currentTarget.style.boxShadow = '0 20px 50px rgba(106, 27, 154, 0.25)';
                     e.currentTarget.style.borderColor = '#6a1b9a';
-                    e.currentTarget.style.background = 'linear-gradient(135deg, #ffffff 0%, #f8f4ff 100%)';
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #ffffff 0%, #f3e8ff 100%)';
                     
                     // Show content
                     const content = e.currentTarget.querySelector('.journey-content') as HTMLElement;
                     if (content) {
                       content.style.maxHeight = '500px';
                       content.style.opacity = '1';
-                      content.style.marginTop = '15px';
+                      content.style.marginTop = '20px';
                     }
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.boxShadow = '0 4px 15px rgba(106, 27, 154, 0.1)';
-                    e.currentTarget.style.borderColor = '#e8eaf6';
-                    e.currentTarget.style.background = 'white';
+                    e.currentTarget.style.transform = 'scale(1) translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 8px 30px rgba(106, 27, 154, 0.12)';
+                    e.currentTarget.style.borderColor = 'rgba(106, 27, 154, 0.1)';
+                    e.currentTarget.style.background = 'linear-gradient(135deg, #ffffff 0%, #faf8ff 100%)';
                     
                     // Hide content
                     const content = e.currentTarget.querySelector('.journey-content') as HTMLElement;
@@ -604,25 +682,57 @@ const Company: React.FC = () => {
                     }
                   }}
                 >
+                  {/* Decorative Corner Accent */}
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '80px',
+                    height: '80px',
+                    background: 'linear-gradient(135deg, rgba(106, 27, 154, 0.08) 0%, transparent 100%)',
+                    borderRadius: '20px 0 50% 0'
+                  }}></div>
+                  
                   <div style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '8px'
-              }}>
-                <div style={{ 
-                      fontSize: '1.2em',
+                    gap: '15px',
+                    position: 'relative',
+                    zIndex: 1
+                  }}>
+                    {/* Icon Circle */}
+                    <div style={{
+                      width: '60px',
+                      height: '60px',
+                      borderRadius: '50%',
                       background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                      fontWeight: 'bold'
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '2em',
+                      boxShadow: '0 5px 15px rgba(106, 27, 154, 0.3)',
+                      flexShrink: 0
                     }}>
-                      {safeTextContent(milestone.year, '2024')}
+                      {safeIconContent(milestone.icon, '📅')}
                     </div>
-                    <div style={{ fontSize: '1.3em' }}>{safeIconContent(milestone.icon, '📅')}</div>
+                    
+                    <div>
+                      <div style={{ 
+                        fontSize: '2em',
+                        background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent',
+                        backgroundClip: 'text',
+                        fontWeight: '800',
+                        letterSpacing: '-0.5px',
+                        lineHeight: '1'
+                      }}>
+                        {safeTextContent(milestone.year, '2024')}
+                      </div>
+                    </div>
                   </div>
                   
-                  {/* Hidden content that reveals on hover */}
+                  {/* Expandable content */}
                   <div 
                     className="journey-content"
                     style={{ 
@@ -630,30 +740,44 @@ const Company: React.FC = () => {
                       opacity: '0',
                       overflow: 'hidden',
                       transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                      marginTop: '0'
+                      marginTop: '0',
+                      position: 'relative',
+                      zIndex: 1
                     }}
                   >
-                    <h3 style={{ fontSize: '1.1em', marginBottom: '8px', color: '#333', fontWeight: 'bold' }}>
+                    <h3 style={{ 
+                      fontSize: '1.4em', 
+                      marginBottom: '12px', 
+                      color: '#1a1a1a', 
+                      fontWeight: '700',
+                      lineHeight: '1.3'
+                    }}>
                       {milestone.event_title || milestone.event}
                     </h3>
-                    <p style={{ color: '#666', lineHeight: 1.5, fontSize: '0.9em' }}>
+                    <p style={{ 
+                      color: '#666', 
+                      lineHeight: 1.7, 
+                      fontSize: '1.05em'
+                    }}>
                       {milestone.event_description || milestone.description}
                     </p>
                   </div>
             </div>
 
-                {/* Timeline Dot */}
+                {/* Enhanced Timeline Dot */}
                 <div style={{
                   position: 'absolute',
                   left: '50%',
-                  top: '20px',
+                  top: '30px',
                   transform: 'translateX(-50%)',
-                  width: '16px',
-                  height: '16px',
+                  width: '24px',
+                  height: '24px',
                   borderRadius: '50%',
                   background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
-                  boxShadow: '0 0 0 6px rgba(106, 27, 154, 0.2)',
-                  zIndex: 1
+                  boxShadow: '0 0 0 8px rgba(106, 27, 154, 0.15), 0 0 20px rgba(106, 27, 154, 0.3)',
+                  zIndex: 2,
+                  animation: `pulse 3s ease-in-out infinite ${index * 0.5}s`,
+                  border: '4px solid white'
                 }}></div>
             </div>
             ))}
@@ -888,7 +1012,7 @@ const Company: React.FC = () => {
               color: '#6a1b9a',
               animation: 'pulse 2s ease-in-out infinite'
             }}>
-              Learn About Our Impact →
+              Learn About Our Impact
             </Link>
           </div>
         </div>

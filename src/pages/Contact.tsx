@@ -58,7 +58,9 @@ const Contact: React.FC = () => {
       <SEOHead seoData={contactData?.seo_metadata} />
       
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section" style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Global.jpg')`
+      }}>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="animated-title">{safeTextContent(contactData?.hero_section?.hero_title, 'Let\'s Connect')}</h1>
@@ -73,52 +75,108 @@ const Contact: React.FC = () => {
         <div className="container">
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-            gap: '30px',
-            maxWidth: '1000px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '40px',
+            maxWidth: '1200px',
             margin: '0 auto'
           }}>
-            {(contactData?.contact_methods?.methods || []).map((item: any, index: number) => (
-              <div key={index} className="feature-card" style={{ 
-                textAlign: 'center',
-                animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
-              }}>
-                <div style={{ 
-                  width: '120px',
-                  height: '120px',
-                  margin: '0 auto 20px',
-                  borderRadius: '15px',
-                  overflow: 'hidden',
-                  boxShadow: '0 8px 20px rgba(0,0,0,0.1)',
-                  animation: 'float 3s ease-in-out infinite'
-                }}>
-                  <ImageSync
-                    src={item.method_icon || item.icon}
-                    alt={safeTextContent(item.method_title || item.title, 'Contact Method')}
-                    fallbackSrc="/images/logo.png"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
-                    }}
-                  />
+            {(contactData?.contact_methods?.methods || []).map((item: any, index: number) => {
+              const linkHref = item.method_link?.href || item.link;
+              const linkText = item.link_text || item.text;
+              const isInternalLink = linkHref === '/academy';
+              
+              const CardContent = (
+                <div style={{
+                  textDecoration: 'none',
+                  background: 'white',
+                  padding: '30px',
+                  borderRadius: '20px',
+                  boxShadow: '0 8px 25px rgba(0,0,0,0.1)',
+                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                  cursor: 'pointer',
+                  animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-10px)';
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(106, 27, 154, 0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+                }}
+                >
+                  {/* Image at Top */}
+                  <div style={{
+                    width: '100%',
+                    height: '200px',
+                    marginBottom: '20px',
+                    borderRadius: '15px',
+                    overflow: 'hidden',
+                    boxShadow: '0 8px 20px rgba(0,0,0,0.1)'
+                  }}>
+                    <img
+                      src={(item.method_icon?.url || item.icon?.url || item.method_icon || item.icon)}
+                      alt={safeTextContent(item.method_title || item.title, 'Contact Method')}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        console.error('Contact method image failed to load');
+                        e.currentTarget.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                  
+                  {/* Content */}
+                  <h3 style={{ 
+                    fontSize: '1.8em', 
+                    fontWeight: '800',
+                    marginBottom: '10px',
+                    color: '#333',
+                    textAlign: 'center'
+                  }}>
+                    {safeTextContent(item.method_title || item.title, 'Contact Method')}
+                  </h3>
+                  <p style={{ 
+                    fontSize: '1em', 
+                    textAlign: 'center', 
+                    color: '#666',
+                    lineHeight: 1.6,
+                    marginBottom: '20px'
+                  }}>
+                    {safeTextContent(item.method_description || item.desc, 'Contact description')}
+                  </p>
+                  <div style={{ textAlign: 'center' }}>
+                    <span style={{
+                      display: 'inline-block',
+                      padding: '10px 20px',
+                      background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                      borderRadius: '20px',
+                      color: 'white',
+                      fontWeight: 'bold',
+                      fontSize: '0.9em'
+                    }}>
+                      {linkText}
+                    </span>
+                  </div>
                 </div>
-                <h3>{safeTextContent(item.method_title || item.title, 'Contact Method')}</h3>
-                <p style={{ color: '#666', marginBottom: '15px' }}>{safeTextContent(item.method_description || item.desc, 'Contact description')}</p>
-                {(item.method_link?.href || item.link) === '/academy' ? (
-                  <Link to={item.method_link?.href || item.link} style={{ color: '#6a1b9a', fontWeight: 'bold', textDecoration: 'none' }}>
-                    {item.link_text || item.text}
-                  </Link>
-                ) : (
-                  <a href={item.method_link?.href || item.link} style={{ color: '#6a1b9a', fontWeight: 'bold', textDecoration: 'none' }}>
-                    {item.link_text || item.text}
-                  </a>
-                )}
-              </div>
-            ))}
+              );
+
+              return isInternalLink ? (
+                <Link key={index} to={linkHref} style={{ textDecoration: 'none' }}>
+                  {CardContent}
+                </Link>
+              ) : (
+                <a key={index} href={linkHref} style={{ textDecoration: 'none' }}>
+                  {CardContent}
+                </a>
+              );
+            })}
           </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
       {/* Contact Form */}
       <section style={{ padding: '80px 20px', background: '#f8f9fa' }}>
@@ -137,10 +195,10 @@ const Contact: React.FC = () => {
               }}>{safeTextContent(contactData?.office_locations?.section_title, 'Our Offices')}</h2>
               
               {(contactData?.office_locations?.offices || [
-                { country: '🇺🇸 United States', city: 'San Francisco (HQ)', address: '123 Market Street\nSan Francisco, CA 94103' },
-                { country: '🇬🇧 United Kingdom', city: 'London', address: '45 King Street\nLondon EC2V 8AS' },
-                { country: '🇩🇪 Germany', city: 'Berlin', address: 'Friedrichstraße 123\n10117 Berlin' },
-                { country: '🇸🇬 Singapore', city: 'Singapore', address: '1 Marina Boulevard\nSingapore 018989' }
+                { country: 'United States', city: 'San Francisco (HQ)', address: '123 Market Street\nSan Francisco, CA 94103' },
+                { country: 'United Kingdom', city: 'London', address: '45 King Street\nLondon EC2V 8AS' },
+                { country: 'Germany', city: 'Berlin', address: 'Friedrichstraße 123\n10117 Berlin' },
+                { country: 'Singapore', city: 'Singapore', address: '1 Marina Boulevard\nSingapore 018989' }
               ]).map((office: any, index: number) => (
                 <div key={index} style={{
                   marginBottom: '15px',

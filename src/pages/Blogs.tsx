@@ -51,15 +51,117 @@ const Blogs: React.FC = () => {
             console.warn('⚠️ These posts are missing images:', postsWithoutImages.map((p: any) => p.title));
           }
         }
-        setBlogPosts(posts || []);
+        // If no posts from Contentstack, use fallback
+        if (!posts || posts.length === 0) {
+          console.warn('⚠️ No blog posts in Contentstack, using fallback data');
+          setBlogPosts(fallbackBlogPosts);
+        } else {
+          setBlogPosts(posts);
+        }
       } catch (error) {
-        console.error('Error loading blogs content:', error);
+        console.error('❌ Error loading blogs content:', error);
+        console.log('📝 Using fallback blog posts');
+        setBlogPosts(fallbackBlogPosts);
       } finally {
         setIsLoading(false);
       }
     };
     loadContent();
   }, [fetchContent]);
+  
+  // Comprehensive fallback blog posts
+  const fallbackBlogPosts = [
+    {
+      title: 'How We Use AI to Speed Up Manual Penetration Testing at Contentstack',
+      url: 'engineering/how-we-use-ai-to-speed-up-manual-penetration-testing-at-contentstack',
+      excerpt: 'Contentstack is more than just a headless CMS today. It\'s a composable DXP with Marketplace, Automation Hub, Brand Kit, Launch, Personalization and Lytics. That composability is powerful for builders, but it expands the attack surface.',
+      category: 'ENGINEERING',
+      publish_date: '2025-10-15',
+      reading_time_minute: 10,
+      featured_image: { url: '/images/Security.jpg' },
+      author: {
+        name: 'Kaustubh Rai',
+        title: 'Security Engineer',
+        profile_picture: { url: '/images/Nishant.jpg' }
+      },
+      icon: '🔒'
+    },
+    {
+      title: 'Understanding Customer Behavior with Real-Time Analytics',
+      url: 'marketing/understanding-customer-behavior-analytics',
+      excerpt: 'Customer AI is the key they believe is to visit your site on a given day. When you have context, you can stop guessing at what your customers want and start adapting to them.',
+      category: 'MARKETING',
+      publish_date: '2025-10-22',
+      reading_time_minute: 25,
+      featured_image: { url: '/images/Customer Analytics.jpg' },
+      author: {
+        name: 'Ben Goldstein',
+        title: 'Product Marketing Lead',
+        profile_picture: { url: '/images/Conor.jpg' }
+      },
+      icon: '📊'
+    },
+    {
+      title: 'Discover How AI Agents Accelerate Content Creation',
+      url: 'product/ai-agents-content-creation',
+      excerpt: 'Discover how our new AI agents can accelerate content creation, optimization, and personalization while maintaining your brand voice.',
+      category: 'PRODUCT',
+      publish_date: '2025-10-01',
+      reading_time_minute: 8,
+      featured_image: { url: '/images/AI-Powered Agents.png' },
+      author: {
+        name: 'Lo Etheridge',
+        title: 'Head of Product',
+        profile_picture: { url: '/images/lo-etheridge-headshot.PNG' }
+      },
+      icon: '🤖'
+    },
+    {
+      title: 'Building Scalable Headless CMS Architecture',
+      url: 'engineering/scalable-headless-cms-architecture',
+      excerpt: 'Learn how to design and implement a scalable, performant headless CMS architecture that grows with your business needs.',
+      category: 'ENGINEERING',
+      publish_date: '2025-09-28',
+      reading_time_minute: 15,
+      featured_image: { url: '/images/Headless CMS.png' },
+      author: {
+        name: 'Sarah Chen',
+        title: 'Principal Engineer',
+        profile_picture: { url: '/images/Jessica.png' }
+      },
+      icon: '⚙️'
+    },
+    {
+      title: 'The Future of Digital Experience Platforms',
+      url: 'thought-leadership/future-of-dxp',
+      excerpt: 'Exploring the trends shaping the future of digital experiences, from AI personalization to composable architecture.',
+      category: 'THOUGHT LEADERSHIP',
+      publish_date: '2025-09-20',
+      reading_time_minute: 12,
+      featured_image: { url: '/images/Innovation.jpg' },
+      author: {
+        name: 'Michael Torres',
+        title: 'CTO',
+        profile_picture: { url: '/images/Mike.png' }
+      },
+      icon: '🚀'
+    },
+    {
+      title: 'Personalization at Scale: Best Practices',
+      url: 'guides/personalization-best-practices',
+      excerpt: 'A comprehensive guide to implementing effective personalization strategies that deliver measurable business results.',
+      category: 'GUIDE',
+      publish_date: '2025-09-15',
+      reading_time_minute: 18,
+      featured_image: { url: '/images/AI Personalization.jpg' },
+      author: {
+        name: 'Emily Rodriguez',
+        title: 'Solutions Architect',
+        profile_picture: { url: '/images/Renee.jpg' }
+      },
+      icon: '🎯'
+    }
+  ];
   
   // Helper function to format date
   const formatDate = (dateString: string) => {

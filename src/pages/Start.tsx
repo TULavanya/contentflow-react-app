@@ -49,7 +49,7 @@ const Start: React.FC = () => {
       setIsLoading(true);
       try {
         const data = await fetchContent('start_page');
-        console.log('🚀 Start page data:', data);
+        console.log('Start page data:', data);
         setStartData(data);
       } catch (error) {
         console.error('Error loading start content:', error);
@@ -72,7 +72,10 @@ const Start: React.FC = () => {
       <SEOHead seoData={startData?.seo_metadata} />
       
       {/* Hero Section */}
-      <section className="hero-section" style={{ paddingBottom: '60px' }}>
+      <section className="hero-section" style={{ 
+        paddingBottom: '60px',
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Lightning fast.jpg')`
+      }}>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="animated-title">{safeTextContent(startData?.hero_section?.hero_title, 'Start Your Free 30-Day Trial')}</h1>
@@ -335,7 +338,13 @@ const Start: React.FC = () => {
             {startData?.trial_features?.section_title || 'What\'s Included in Your Trial'}
           </h2>
 
-          <LargeFeatureGrid gap="40px" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '40px',
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
             {(startData?.trial_features?.features || [
               { 
                 feature_icon: '🚀', 
@@ -369,25 +378,63 @@ const Start: React.FC = () => {
               }
             ]).map((feature: any, index: number) => {
               const trialImages = [
-                { url: '/images/Customer First.jpg', title: 'Customer Support' },
-                { url: '/images/Innovation.jpg', title: 'Online Academy Learning' },
+                { url: '/images/Headless CMS.png', title: 'Full Platform Access' },
+                { url: '/images/About_Content_Models.png', title: 'Comprehensive Documentation' },
+                { url: '/images/Customer First.jpg', title: 'Free Support' },
+                { url: '/images/Innovation.jpg', title: 'Academy Access' },
                 { url: '/images/Visual-Builder-4.gif', title: 'Sample Projects' },
                 { url: '/images/Global.jpg', title: 'Onboarding Session' }
               ];
-              const categories = ['Support', 'Academy', 'Templates', 'Onboarding'];
               
               return (
-                <div key={index} style={{ position: 'relative' }}>
-                  <LargeFeatureCard
-                    title={feature.feature_title}
-                    description={feature.feature_description}
-                    icon={feature.feature_icon}
-                    featureImage={trialImages[index]}
-                    link="/contact"
-                    linkText="Start Free Trial →"
-                    category={categories[index]}
-                    imageHeight="240px"
+                <Link
+                  key={index}
+                  to="/contact"
+                  style={{
+                    textDecoration: 'none',
+                    height: '400px',
+                    borderRadius: '25px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                    color: 'white',
+                    transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    cursor: 'pointer',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+                    border: '3px solid white',
+                    backgroundColor: '#f5f5f5'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+                  }}
+                >
+                  {/* Background Image */}
+                  <img
+                    src={trialImages[index].url}
+                    alt={safeTextContent(feature.feature_title, 'Trial Feature')}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      zIndex: 1
+                    }}
+                    onError={(e) => {
+                      console.error('Feature image failed to load');
+                      e.currentTarget.style.display = 'none';
+                    }}
                   />
+                  
                   {/* Included in Trial Badge */}
                   <div style={{
                     position: 'absolute',
@@ -402,17 +449,58 @@ const Start: React.FC = () => {
                     boxShadow: '0 6px 20px rgba(76, 175, 80, 0.3)',
                     backdropFilter: 'blur(10px)',
                     border: '2px solid rgba(76, 175, 80, 0.3)',
-                    zIndex: 10,
-                display: 'flex', 
+                    zIndex: 3,
+                    display: 'flex', 
                     alignItems: 'center',
                     gap: '6px'
                   }}>
                     ✓ Included in Trial
                   </div>
-                </div>
+                  
+                  {/* Bottom Gradient Overlay */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '70%',
+                    background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%)',
+                    zIndex: 2
+                  }}></div>
+                  
+                  {/* Content */}
+                  <div style={{
+                    position: 'relative',
+                    zIndex: 3,
+                    padding: '30px',
+                    width: '100%',
+                    textAlign: 'center'
+                  }}>
+                    <p style={{ 
+                      fontSize: '2.2em', 
+                      fontWeight: '800',
+                      marginBottom: '15px',
+                      textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                      color: 'white'
+                    }}>
+                      {safeTextContent(feature.feature_title, 'Trial Feature')}
+                    </p>
+                    <p style={{ 
+                      fontSize: '1.15em', 
+                      textAlign: 'center', 
+                      opacity: 0.95,
+                      lineHeight: 1.6,
+                      textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                      color: 'white',
+                      margin: 0
+                    }}>
+                      {safeTextContent(feature.feature_description, 'Description')}
+                    </p>
+                  </div>
+                </Link>
               );
             })}
-          </LargeFeatureGrid>
+          </div>
         </div>
       </section>
 
@@ -531,7 +619,7 @@ const Start: React.FC = () => {
               <p style={{ fontSize: '1.1em', color: '#666', marginBottom: '20px' }}>
                 Have more questions?
               </p>
-              <Link to="/contact" className="btn talk">Contact Us →</Link>
+              <Link to="/contact" className="btn talk" style={{ textDecoration: 'none' }}>Contact Us</Link>
             </div>
           </div>
         </div>
@@ -563,45 +651,61 @@ const Start: React.FC = () => {
           </p>
 
           {/* Scrolling Brand Logos Marquee */}
-          <div className="marquee-container" style={{
+          <style>{`
+            @keyframes scrollStart {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .start-logo-track {
+              display: flex;
+              animation: scrollStart 20s linear infinite;
+              width: fit-content;
+            }
+            .start-logo-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+          
+          <div style={{
             overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            position: 'relative',
-            width: '100%',
-            padding: '20px 0',
-            marginBottom: '60px'
+            marginBottom: '60px',
+            maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
           }}>
-            <div className="marquee-content" style={{
-              display: 'inline-block',
-              paddingLeft: '100%',
-            }}>
-              {[...(startData?.social_proof?.brand_names || ['ASICS', 'Walmart', 'Mattel', 'Crocs', 'Alaska Airlines', 'MongoDB', 
-              'Glassdoor', 'TopGolf', 'Callaway', 'Steve Madden']),
-              ...(startData?.social_proof?.brand_names || ['ASICS', 'Walmart', 'Mattel', 'Crocs', 'Alaska Airlines', 'MongoDB', 
-              'Glassdoor', 'TopGolf', 'Callaway', 'Steve Madden'])].map((brand, index) => (
-              <div key={index} style={{
-                display: 'inline-block',
-                fontSize: '1.3em',
-                fontWeight: 'bold',
-                color: '#333',
-                padding: '15px 30px',
-                background: 'white',
-                borderRadius: '12px',
-                boxShadow: '0 4px 15px rgba(106, 27, 154, 0.1)',
-                marginRight: '40px',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px) scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(106, 27, 154, 0.2)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(106, 27, 154, 0.1)';
-              }}>
-                {brand}
-              </div>
+            <div className="start-logo-track">
+              {/* First set of logos */}
+              {(startData?.social_proof?.brand_names || ['ASICS', 'Walmart', 'Mattel', 'Crocs', 'Alaska Airlines', 'MongoDB', 
+              'Glassdoor', 'TopGolf', 'Callaway', 'Steve Madden']).map((brand: string, index: number) => (
+                <div key={`logo-${index}`} style={{
+                  padding: '0 40px',
+                  fontSize: '1.8rem',
+                  fontWeight: '700',
+                  color: '#000',
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  minWidth: '200px',
+                  justifyContent: 'center'
+                }}>
+                  {brand}
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {(startData?.social_proof?.brand_names || ['ASICS', 'Walmart', 'Mattel', 'Crocs', 'Alaska Airlines', 'MongoDB', 
+              'Glassdoor', 'TopGolf', 'Callaway', 'Steve Madden']).map((brand: string, index: number) => (
+                <div key={`logo-dup-${index}`} style={{
+                  padding: '0 40px',
+                  fontSize: '1.8rem',
+                  fontWeight: '700',
+                  color: '#000',
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  minWidth: '200px',
+                  justifyContent: 'center'
+                }}>
+                  {brand}
+                </div>
               ))}
             </div>
           </div>
@@ -610,7 +714,7 @@ const Start: React.FC = () => {
             <Link to="/company" className="btn talk" style={{
               animation: 'pulse 2s ease-in-out infinite'
             }}>
-              Read Customer Stories →
+              Read Customer Stories
             </Link>
           </div>
         </div>

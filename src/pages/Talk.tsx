@@ -77,7 +77,10 @@ const Talk: React.FC = () => {
       <SEOHead seoData={talkData?.seo_metadata} />
       
       {/* Hero Section */}
-      <section className="hero-section" style={{ paddingBottom: '60px' }}>
+      <section className="hero-section" style={{ 
+        paddingBottom: '60px',
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Customer Analytics.jpg')`
+      }}>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="animated-title">{safeTextContent(talkData?.hero_section?.hero_title, 'See ContentFlow in Action')}</h1>
@@ -594,7 +597,13 @@ const Talk: React.FC = () => {
             {safeTextContent(talkData?.what_to_expect?.section_title, 'What to Expect from Your Demo')}
           </h2>
 
-          <LargeFeatureGrid gap="40px" style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '40px',
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
             {(talkData?.what_to_expect?.expectation_items || [
               { 
                 icon: '📋', 
@@ -635,20 +644,56 @@ const Talk: React.FC = () => {
                 { url: '/images/Customer First.jpg', title: 'Questions and Answers' },
                 { url: '/images/Customer Analytics.jpg', title: 'Business ROI Analysis' }
               ];
-              const categories = ['Demo', 'Examples', 'Strategy', 'Planning', 'Support', 'Analysis'];
               
               return (
-                <div key={index} style={{ position: 'relative' }}>
-                  <LargeFeatureCard
-                    title={item.item_title}
-                    description={item.item_description}
-                    icon={item.icon}
-                    featureImage={demoImages[index]}
-                    link="/contact"
-                    linkText="Book Demo Now →"
-                    category={categories[index]}
-                    imageHeight="240px"
+                <Link
+                  key={index}
+                  to="/contact"
+                  style={{
+                    textDecoration: 'none',
+                    height: '400px',
+                    borderRadius: '25px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                    color: 'white',
+                    transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                    cursor: 'pointer',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+                    border: '3px solid white',
+                    backgroundColor: '#f5f5f5'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                    e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+                  }}
+                >
+                  {/* Background Image */}
+                  <img
+                    src={demoImages[index].url}
+                    alt={safeTextContent(item.item_title, 'Demo Feature')}
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      zIndex: 1
+                    }}
+                    onError={(e) => {
+                      console.error('Demo image failed to load');
+                      e.currentTarget.style.display = 'none';
+                    }}
                   />
+                  
                   {/* Demo Duration Badge */}
                   <div style={{
                     position: 'absolute',
@@ -663,17 +708,58 @@ const Talk: React.FC = () => {
                     boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
                     backdropFilter: 'blur(10px)',
                     border: '2px solid rgba(106, 27, 154, 0.3)',
-                    zIndex: 10,
+                    zIndex: 3,
                     display: 'flex',
                     alignItems: 'center',
                     gap: '6px'
                   }}>
-                    ⏱️ {index < 2 ? '10 mins' : index < 4 ? '15 mins' : '5 mins'}
+                    {index < 2 ? '10 mins' : index < 4 ? '15 mins' : '5 mins'}
                   </div>
-                </div>
+                  
+                  {/* Bottom Gradient Overlay */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '70%',
+                    background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%)',
+                    zIndex: 2
+                  }}></div>
+                  
+                  {/* Content */}
+                  <div style={{
+                    position: 'relative',
+                    zIndex: 3,
+                    padding: '30px',
+                    width: '100%',
+                    textAlign: 'center'
+                  }}>
+                    <p style={{ 
+                      fontSize: '2.2em', 
+                      fontWeight: '800',
+                      marginBottom: '15px',
+                      textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                      color: 'white'
+                    }}>
+                      {safeTextContent(item.item_title, 'Demo Feature')}
+                    </p>
+                    <p style={{ 
+                      fontSize: '1.15em', 
+                      textAlign: 'center', 
+                      opacity: 0.95,
+                      lineHeight: 1.6,
+                      textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                      color: 'white',
+                      margin: 0
+                    }}>
+                      {safeTextContent(item.item_description, 'Description')}
+                    </p>
+                  </div>
+                </Link>
               );
             })}
-          </LargeFeatureGrid>
+          </div>
         </div>
       </section>
 
@@ -686,12 +772,14 @@ const Talk: React.FC = () => {
 
           <div className="testimonials-grid">
             {(talkData?.testimonials_section?.testimonials || [
-              { rating: '⭐⭐⭐⭐⭐', quote: 'The demo completely sold us. Seeing the platform in action and understanding how it could solve our specific challenges made the decision easy.', customer_name: 'Jennifer Taylor', customer_title: 'CTO, RetailCorp', customer_photo: '/images/Jessica.png' },
-              { rating: '⭐⭐⭐⭐⭐', quote: 'The solutions team was incredibly knowledgeable and patient. They took the time to understand our needs and showed us exactly how ContentFlow would work for us.', customer_name: 'Marcus Johnson', customer_title: 'VP Digital, FinanceHub', customer_photo: '/images/Mike.png' },
-              { rating: '⭐⭐⭐⭐⭐', quote: 'Best demo experience we\'ve had. They didn\'t just show us features—they showed us solutions to our actual problems. We signed up immediately after.', customer_name: 'Sarah Mitchell', customer_title: 'Head of Marketing, TechGlobal', customer_photo: '/images/Renee.jpg' }
+              { rating: '★★★★★', quote: 'The demo completely sold us. Seeing the platform in action and understanding how it could solve our specific challenges made the decision easy.', customer_name: 'Jennifer Taylor', customer_title: 'CTO, RetailCorp', customer_photo: '/images/Jessica.png' },
+              { rating: '★★★★★', quote: 'The solutions team was incredibly knowledgeable and patient. They took the time to understand our needs and showed us exactly how ContentFlow would work for us.', customer_name: 'Marcus Johnson', customer_title: 'VP Digital, FinanceHub', customer_photo: '/images/Mike.png' },
+              { rating: '★★★★★', quote: 'Best demo experience we\'ve had. They didn\'t just show us features—they showed us solutions to our actual problems. We signed up immediately after.', customer_name: 'Sarah Mitchell', customer_title: 'Head of Marketing, TechGlobal', customer_photo: '/images/Renee.jpg' }
             ]).map((testimonial: any, index: number) => (
               <div key={index} className="testimonial-card">
-                <div className="rating">{safeTextContent(testimonial.rating, '⭐⭐⭐⭐⭐')}</div>
+                <div className="rating">
+                  {testimonial.rating === '5' || testimonial.rating === 5 ? '★★★★★' : (testimonial.rating || '★★★★★')}
+                </div>
               <div className="testimonial-content">
                   <p>"{safeTextContent(testimonial.quote, 'Great experience!')}"</p>
               </div>

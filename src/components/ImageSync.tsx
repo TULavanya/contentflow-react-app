@@ -136,7 +136,7 @@ const ImageSync: React.FC<ImageSyncProps> = ({
             style={{
               width: '20px',
               height: '20px',
-              border: '2px solid #6a1b9a',
+              border: '2px solid #2563eb',
               borderTop: '2px solid transparent',
               borderRadius: '50%',
               animation: 'spin 1s linear infinite'

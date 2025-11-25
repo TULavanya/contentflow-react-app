@@ -57,7 +57,7 @@ class ErrorBoundary extends Component<Props, State> {
           <h1 style={{ 
             fontSize: '2.5em', 
             marginBottom: '15px',
-            background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+            background: 'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text'
@@ -87,7 +87,7 @@ class ErrorBoundary extends Component<Props, State> {
                 cursor: 'pointer',
                 fontWeight: 'bold',
                 marginBottom: '15px',
-                color: '#6a1b9a',
+                color: '#2563eb',
                 fontSize: '1.1em'
               }}>
                 🔍 Error Details (Development Mode)
@@ -113,7 +113,7 @@ class ErrorBoundary extends Component<Props, State> {
                 window.location.reload();
               }}
               style={{
-                background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                background: 'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)',
                 color: 'white',
                 padding: '14px 28px',
                 border: 'none',
@@ -132,14 +132,14 @@ class ErrorBoundary extends Component<Props, State> {
               onClick={() => this.setState({ hasError: false, error: null })}
               style={{
                 background: 'rgba(106, 27, 154, 0.1)',
-                color: '#6a1b9a',
+                color: '#2563eb',
                 padding: '14px 28px',
                 borderRadius: '50px',
                 textDecoration: 'none',
                 fontSize: '1.1em',
                 fontWeight: '600',
                 transition: 'all 0.3s ease',
-                border: '2px solid #6a1b9a',
+                border: '2px solid #2563eb',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px'

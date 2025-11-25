@@ -16,7 +16,7 @@ const Partners: React.FC = () => {
       setIsLoading(true);
       try {
         const data = await fetchContent('partners_page');
-        console.log('🤝 Partners page data:', data);
+        console.log('Partners page data:', data);
         setPartnersData(data);
       } catch (error) {
         console.error('Error loading partners content:', error);
@@ -76,12 +76,12 @@ const Partners: React.FC = () => {
       title: 'Agency Partners',
       description: 'Certified agencies to help you succeed',
       partners: [
-        { name: 'Digital Excellence', type: 'Full Service', icon: '⭐' },
-        { name: 'CreativeWorks', type: 'Design', icon: '🎨' },
-        { name: 'TechBuild', type: 'Development', icon: '💻' },
-        { name: 'Strategy Plus', type: 'Consulting', icon: '📈' },
-        { name: 'Growth Labs', type: 'Marketing', icon: '📊' },
-        { name: 'Innovate Co', type: 'Full Service', icon: '🚀' }
+        { name: 'Digital Excellence', type: 'Full Service', icon: '' },
+        { name: 'CreativeWorks', type: 'Design', icon: '' },
+        { name: 'TechBuild', type: 'Development', icon: '' },
+        { name: 'Strategy Plus', type: 'Consulting', icon: '' },
+        { name: 'Growth Labs', type: 'Marketing', icon: '' },
+        { name: 'Innovate Co', type: 'Full Service', icon: '' }
       ]
     }
   ];
@@ -148,7 +148,9 @@ const Partners: React.FC = () => {
       <SEOHead seoData={partnersData?.seo_metadata} />
       
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section" style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Partnership.jpg')`
+      }}>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="animated-title">{safeTextContent(partnersData?.hero_section?.hero_title, 'Partner with ContentFlow')}</h1>
@@ -189,57 +191,70 @@ const Partners: React.FC = () => {
           </div>
 
           {/* Scrolling Partner Marquee */}
-          <div className="marquee-container" style={{
+          <style>{`
+            @keyframes scrollPartners {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .partners-logo-track {
+              display: flex;
+              animation: scrollPartners 20s linear infinite;
+              width: fit-content;
+            }
+            .partners-logo-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+          
+          <div style={{
             overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            position: 'relative',
-            width: '100%',
-            padding: '20px 0',
-            marginBottom: '60px'
+            marginBottom: '60px',
+            maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
           }}>
-            <div className="marquee-content" style={{
-              display: 'inline-block',
-              paddingLeft: '100%',
-            }}>
-              {[...(partnersData?.partner_ecosystem?.marquee_brands || ['Salesforce', 'Shopify', 'AWS', 'HubSpot', 'Stripe', 'GitHub', 
+            <div className="partners-logo-track">
+              {/* First set of partners */}
+              {(partnersData?.partner_ecosystem?.marquee_brands || ['Salesforce', 'Shopify', 'AWS', 'HubSpot', 'Stripe', 'GitHub', 
               'Vercel', 'Slack', 'Figma', 'Google Cloud', 'Azure', 'Netlify',
-              'MongoDB', 'Segment', 'Cloudflare', 'GitLab']),
-              ...(partnersData?.partner_ecosystem?.marquee_brands || ['Salesforce', 'Shopify', 'AWS', 'HubSpot', 'Stripe', 'GitHub', 
+              'MongoDB', 'Segment', 'Cloudflare', 'GitLab']).map((name: string, index: number) => (
+                <div key={`partner-${index}`} style={{
+                  padding: '0 40px',
+                  fontSize: '1.8rem',
+                  fontWeight: '700',
+                  color: '#000',
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  minWidth: '200px',
+                  justifyContent: 'center'
+                }}>
+                  {name}
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {(partnersData?.partner_ecosystem?.marquee_brands || ['Salesforce', 'Shopify', 'AWS', 'HubSpot', 'Stripe', 'GitHub', 
               'Vercel', 'Slack', 'Figma', 'Google Cloud', 'Azure', 'Netlify',
-              'MongoDB', 'Segment', 'Cloudflare', 'GitLab'])].map((name, index) => (
-              <div key={index} style={{
-                display: 'inline-block',
-                background: 'white',
-                padding: '30px 40px',
-                borderRadius: '12px',
-                border: '2px solid #e8eaf6',
-                fontWeight: 'bold',
-                color: '#333',
-                fontSize: '1.1em',
-                boxShadow: '0 4px 15px rgba(106, 27, 154, 0.1)',
-                marginRight: '30px',
-                  cursor: 'pointer',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-8px) scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 8px 25px rgba(106, 27, 154, 0.2)';
-                e.currentTarget.style.borderColor = '#6a1b9a';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(106, 27, 154, 0.1)';
-                e.currentTarget.style.borderColor = '#e8eaf6';
-              }}>
-                {name}
-              </div>
+              'MongoDB', 'Segment', 'Cloudflare', 'GitLab']).map((name: string, index: number) => (
+                <div key={`partner-dup-${index}`} style={{
+                  padding: '0 40px',
+                  fontSize: '1.8rem',
+                  fontWeight: '700',
+                  color: '#000',
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  minWidth: '200px',
+                  justifyContent: 'center'
+                }}>
+                  {name}
+                </div>
               ))}
             </div>
-                </div>
+          </div>
                 
           <div style={{ textAlign: 'center' }}>
             <Link to="/platform" className="btn talk" style={{ animation: 'pulse 2s ease-in-out infinite' }}>
-              View All Integrations →
+              View All Integrations
             </Link>
           </div>
                 </div>
@@ -331,23 +346,104 @@ const Partners: React.FC = () => {
                   </p>
                 </div>
                 
-                <LargeFeatureGrid gap="40px" style={{ marginBottom: '60px' }}>
-            {(partnersData?.partner_benefits?.benefits || partnerBenefits).map((benefit: any, index: number) => {
-              const categories = ['Partnership', 'Training', 'Revenue', 'Support', 'Growth', 'Recognition'];
-              return (
-                <LargeFeatureCard
-                  key={index}
-                  title={benefit.benefit_title || benefit.title}
-                  description={benefit.benefit_description || benefit.description}
-                  featureImage={benefit.icon || benefit.feature_image}
-                  link="/contact"
-                  linkText="Become a Partner →"
-                  category={categories[index]}
-                  imageHeight="260px"
+                <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '40px',
+            marginBottom: '60px'
+          }}>
+            {(partnersData?.partner_benefits?.benefits || partnerBenefits).map((benefit: any, index: number) => (
+              <Link
+                key={index}
+                to="/contact"
+                style={{
+                  textDecoration: 'none',
+                  height: '400px',
+                  borderRadius: '25px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  color: 'white',
+                  transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  cursor: 'pointer',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+                  border: '3px solid white',
+                  backgroundColor: '#f5f5f5'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+                }}
+              >
+                {/* Background Image */}
+                <img
+                  src={benefit.feature_image?.url || benefit.icon?.url || benefit.feature_image || benefit.icon}
+                  alt={safeTextContent(benefit.benefit_title || benefit.title, 'Partner Benefit')}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    zIndex: 1
+                  }}
+                  onError={(e) => {
+                    console.error('Benefit image failed to load');
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
-              );
-            })}
-          </LargeFeatureGrid>
+                
+                {/* Bottom Gradient Overlay */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '70%',
+                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%)',
+                  zIndex: 2
+                }}></div>
+                
+                {/* Content */}
+                <div style={{
+                  position: 'relative',
+                  zIndex: 3,
+                  padding: '30px',
+                  width: '100%',
+                  textAlign: 'center'
+                }}>
+                  <p style={{ 
+                    fontSize: '2.2em', 
+                    fontWeight: '800',
+                    marginBottom: '15px',
+                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                    color: 'white'
+                  }}>
+                    {safeTextContent(benefit.benefit_title || benefit.title, 'Partner Benefit')}
+                  </p>
+                  <p style={{ 
+                    fontSize: '1.15em', 
+                    textAlign: 'center', 
+                    opacity: 0.95,
+                    lineHeight: 1.6,
+                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                    color: 'white',
+                    margin: 0
+                  }}>
+                    {safeTextContent(benefit.benefit_description || benefit.description, 'Description')}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
 
           <div style={{ textAlign: 'center' }}>
             <Link to="/contact" className="btn start" style={{ fontSize: '1.1em' }}>
@@ -358,113 +454,228 @@ const Partners: React.FC = () => {
       </section>
 
       {/* Partner Tiers */}
-      <section style={{ padding: '100px 20px', background: '#f8f9fa' }}>
-        <div className="container">
+      <section style={{ 
+        padding: '120px 20px', 
+        background: 'linear-gradient(180deg, #f8f9fa 0%, #e8eaf6 50%, #f8f9fa 100%)',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Decorative Background */}
+        <div style={{
+          position: 'absolute',
+          top: '10%',
+          left: '5%',
+          width: '300px',
+          height: '300px',
+          background: 'radial-gradient(circle, rgba(106, 27, 154, 0.05) 0%, transparent 70%)',
+          borderRadius: '50%',
+          animation: 'float 12s ease-in-out infinite',
+          pointerEvents: 'none'
+        }}></div>
+        
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <h2 style={{ 
             textAlign: 'center', 
-            fontSize: '2.5em', 
-            marginBottom: '20px',
-            background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+            fontSize: '3.5em', 
+            marginBottom: '25px',
+              background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 50%, #ab47bc 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-            animation: 'fadeInUp 0.8s ease-out'
+            animation: 'fadeInUp 0.8s ease-out',
+            fontWeight: '800',
+            letterSpacing: '-1px'
           }}>
             Partner Program Tiers
           </h2>
-        <p style={{
+          <p style={{
             textAlign: 'center',
-            fontSize: '1.1em',
+            fontSize: '1.3em',
             color: '#666',
-            marginBottom: '60px',
+            marginBottom: '80px',
+            maxWidth: '700px',
+            margin: '0 auto 80px',
+            lineHeight: '1.6',
             animation: 'fadeInUp 1s ease-out'
           }}>
             Choose the partnership level that fits your business goals
           </p>
 
           <div style={{
-          display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '40px',
-          maxWidth: '1200px',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '40px',
+            maxWidth: '1300px',
             margin: '0 auto'
           }}>
+            {/* Silver Partner */}
             <div style={{
-              background: 'white',
-              padding: '40px',
-              borderRadius: '15px',
-              boxShadow: '0 5px 15px rgba(0,0,0,0.1)',
-            textAlign: 'center',
-              transition: 'all 0.3s ease',
-              animation: 'fadeInUp 0.6s ease-out 0.2s both'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-10px)';
-              e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-            }}>
-              <div style={{ fontSize: '3em', marginBottom: '15px', animation: 'float 3s ease-in-out infinite' }}>🥉</div>
-              <h3 style={{ fontSize: '1.8em', marginBottom: '15px' }}>Silver Partner</h3>
-              <ul style={{ textAlign: 'left', color: '#666', lineHeight: 2, listStyle: 'none', paddingLeft: 0 }}>
-                <li>✓ Partner directory listing</li>
-                <li>✓ Basic training access</li>
-                <li>✓ 10% revenue share</li>
-                <li>✓ Email support</li>
-            </ul>
-          </div>
-
-            <div style={{
-                background: 'white',
-              padding: '40px',
-                borderRadius: '15px',
-              boxShadow: '0 5px 20px rgba(106, 27, 154, 0.2)',
-              border: '3px solid #6a1b9a',
-            textAlign: 'center',
+              background: 'linear-gradient(135deg, #ffffff 0%, #f8f8f8 100%)',
+              padding: '45px 35px',
+              borderRadius: '25px',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.08)',
+              border: '2px solid rgba(192, 192, 192, 0.3)',
+              textAlign: 'center',
+              transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              animation: 'fadeInUp 0.6s ease-out 0.1s both',
               position: 'relative',
-              transition: 'all 0.3s ease',
-              animation: 'fadeInUp 0.6s ease-out 0.3s both'
+              overflow: 'hidden'
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-10px) scale(1.02)';
-              e.currentTarget.style.boxShadow = '0 15px 40px rgba(106, 27, 154, 0.3)';
+              e.currentTarget.style.transform = 'translateY(-15px) scale(1.03)';
+              e.currentTarget.style.boxShadow = '0 20px 50px rgba(192, 192, 192, 0.25)';
+              e.currentTarget.style.borderColor = '#c0c0c0';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.transform = 'translateY(0) scale(1)';
-              e.currentTarget.style.boxShadow = '0 5px 20px rgba(106, 27, 154, 0.2)';
+              e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.08)';
+              e.currentTarget.style.borderColor = 'rgba(192, 192, 192, 0.3)';
             }}>
+              {/* Background Accent */}
               <div style={{
                 position: 'absolute',
-                top: '-15px',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '5px',
+                background: 'linear-gradient(90deg, #c0c0c0 0%, #d3d3d3 100%)'
+              }}></div>
+              
+              <div style={{ 
+                fontSize: '4.5em', 
+                marginBottom: '20px', 
+                animation: 'float 3s ease-in-out infinite',
+                filter: 'drop-shadow(0 5px 15px rgba(192, 192, 192, 0.3))'
+              }}>🥉</div>
+              
+              <h3 style={{ 
+                fontSize: '2em', 
+                marginBottom: '20px',
+                fontWeight: '700',
+                color: '#333'
+              }}>Silver Partner</h3>
+              
+              <ul style={{ 
+                textAlign: 'left', 
+                color: '#666', 
+                lineHeight: 2.2, 
+                listStyle: 'none', 
+                paddingLeft: 0,
+                fontSize: '1.05em'
+              }}>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}>✓</span> Partner directory listing
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}>✓</span> Basic training access
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}>✓</span> 10% revenue share
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}>✓</span> Email support
+                </li>
+              </ul>
+            </div>
+
+            {/* Gold Partner - Popular */}
+            <div style={{
+              background: 'linear-gradient(135deg, #ffffff 0%, #fff9e6 100%)',
+              padding: '45px 35px',
+              borderRadius: '25px',
+              boxShadow: '0 15px 50px rgba(106, 27, 154, 0.25)',
+              border: '3px solid #6a1b9a',
+              textAlign: 'center',
+              position: 'relative',
+              transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              animation: 'fadeInUp 0.6s ease-out 0.2s both',
+              transform: 'scale(1.05)',
+              overflow: 'hidden'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-15px) scale(1.08)';
+              e.currentTarget.style.boxShadow = '0 25px 60px rgba(106, 27, 154, 0.35)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0) scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 15px 50px rgba(106, 27, 154, 0.25)';
+            }}>
+              {/* Popular Badge */}
+              <div style={{
+                position: 'absolute',
+                top: '-18px',
                 left: '50%',
                 transform: 'translateX(-50%)',
-                background: '#6a1b9a',
+                background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
                 color: 'white',
-                padding: '8px 20px',
-                borderRadius: '20px',
-                fontSize: '0.9em',
-          fontWeight: 'bold',
-                animation: 'pulse 2s ease-in-out infinite'
+                padding: '12px 30px',
+                borderRadius: '30px',
+                fontSize: '0.95em',
+                fontWeight: 'bold',
+                animation: 'pulse 2s ease-in-out infinite',
+                boxShadow: '0 8px 25px rgba(106, 27, 154, 0.4)',
+                border: '3px solid white',
+                zIndex: 10
               }}>
                 Popular
               </div>
-              <div style={{ fontSize: '3em', marginBottom: '15px', animation: 'float 3s ease-in-out infinite 0.5s' }}>🥈</div>
-              <h3 style={{ fontSize: '1.8em', marginBottom: '15px', color: '#6a1b9a' }}>Gold Partner</h3>
-              <ul style={{ textAlign: 'left', color: '#666', lineHeight: 2, listStyle: 'none', paddingLeft: 0 }}>
-                <li>✓ Featured directory placement</li>
-                <li>✓ Advanced training & certification</li>
-                <li>✓ 15% revenue share</li>
-                <li>✓ Priority support</li>
-                <li>✓ Co-marketing opportunities</li>
-            </ul>
-          </div>
+              
+              {/* Background Accent */}
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '5px',
+                background: 'linear-gradient(90deg, #ffd700 0%, #ffed4e 100%)'
+              }}></div>
+              
+              <div style={{ 
+                fontSize: '4.5em', 
+                marginBottom: '20px', 
+                animation: 'float 3s ease-in-out infinite 0.3s',
+                filter: 'drop-shadow(0 5px 15px rgba(255, 215, 0, 0.4))'
+              }}>🥈</div>
+              <h3 style={{ 
+                fontSize: '2em', 
+                marginBottom: '20px',
+                fontWeight: '700',
+                background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
+              }}>Gold Partner</h3>
+              
+              <ul style={{ 
+                textAlign: 'left', 
+                color: '#666', 
+                lineHeight: 2.2, 
+                listStyle: 'none', 
+                paddingLeft: 0,
+                fontSize: '1.05em'
+              }}>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}>✓</span> Featured directory placement
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}>✓</span> Advanced training & certification
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}>✓</span> 15% revenue share</li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}>✓</span> Priority support (4hr response)
+                </li>
+                <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}>✓</span> Co-marketing opportunities
+                </li>
+              </ul>
+            </div>
 
+            {/* Platinum Partner */}
             <div style={{
-              background: 'white',
-              padding: '40px',
-              borderRadius: '15px',
+              background: 'linear-gradient(135deg, #ffffff 0%, #fff5e6 100%)',
+              padding: '45px 35px',
+              borderRadius: '25px',
               boxShadow: '0 5px 15px rgba(0,0,0,0.1)',
             textAlign: 'center',
               transition: 'all 0.3s ease',
@@ -506,7 +717,7 @@ const Partners: React.FC = () => {
             gap: '40px'
           }}>
             <div className="testimonial-card">
-              <div className="rating">⭐⭐⭐⭐⭐</div>
+              <div className="rating">★★★★★</div>
               <div className="testimonial-content">
                 <p>"Partnering with ContentFlow has been transformational for our agency. We've doubled our revenue and landed enterprise clients we never thought possible."</p>
               </div>
@@ -520,7 +731,7 @@ const Partners: React.FC = () => {
             </div>
 
             <div className="testimonial-card">
-              <div className="rating">⭐⭐⭐⭐⭐</div>
+              <div className="rating">★★★★★</div>
               <div className="testimonial-content">
                 <p>"The technical support and training have been outstanding. ContentFlow truly invests in their partners' success."</p>
               </div>
@@ -534,7 +745,7 @@ const Partners: React.FC = () => {
             </div>
 
             <div className="testimonial-card">
-              <div className="rating">⭐⭐⭐⭐⭐</div>
+              <div className="rating">★★★★★</div>
               <div className="testimonial-content">
                 <p>"The revenue sharing model is generous and the lead quality is exceptional. Best partnership decision we've made."</p>
               </div>

@@ -20,8 +20,8 @@ import { ContentstackProvider } from './context/ContentstackContext';
 import './styles/global.css';
 
 function App() {
-  console.log('🏗️ App component rendering...');
-  console.log('🔴 NEW VERSION 2.0 LOADED!');
+  console.log('App component rendering...');
+  console.log('NEW VERSION 2.0 LOADED!');
   
   try {
     return (
@@ -39,7 +39,7 @@ function App() {
                         <Route path="/platform" element={<ErrorBoundary><Platform /></ErrorBoundary>} />
                         <Route path="/company" element={<ErrorBoundary><Company /></ErrorBoundary>} />
                         <Route path="/blogs" element={<ErrorBoundary><Blogs /></ErrorBoundary>} />
-                        <Route path="/blog/:slug" element={<ErrorBoundary><BlogPost /></ErrorBoundary>} />
+                        <Route path="/blog/*" element={<ErrorBoundary><BlogPost /></ErrorBoundary>} />
                         <Route path="/academy" element={<ErrorBoundary><Academy /></ErrorBoundary>} />
                         <Route path="/plans" element={<ErrorBoundary><Plans /></ErrorBoundary>} />
                         <Route path="/partners" element={<ErrorBoundary><Partners /></ErrorBoundary>} />

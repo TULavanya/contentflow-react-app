@@ -40,7 +40,7 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
   const [hasError, setHasError] = useState(false);
 
   // Default fallback background
-  const defaultFallback = 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)';
+  const defaultFallback = 'linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)';
 
   useEffect(() => {
     setIsLoading(true);
@@ -136,14 +136,14 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
             display: 'flex',
             alignItems: 'center',
             gap: '10px',
-            color: '#6a1b9a',
+            color: '#2563eb',
             fontWeight: 'bold'
           }}>
             <div
               style={{
                 width: '20px',
                 height: '20px',
-                border: '2px solid #6a1b9a',
+                border: '2px solid #2563eb',
                 borderTop: '2px solid transparent',
                 borderRadius: '50%',
                 animation: 'spin 1s linear infinite'
@@ -188,13 +188,13 @@ export const useBackgroundImage = (src: string | { url?: string } | null | undef
         setHasError(false);
       };
       img.onerror = () => {
-        setBackgroundImage('linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)');
+        setBackgroundImage('linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)');
         setIsLoading(false);
         setHasError(true);
       };
       img.src = resolvedSrc;
     } else {
-      setBackgroundImage('linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)');
+      setBackgroundImage('linear-gradient(135deg, #2563eb 0%, #3b82f6 100%)');
       setIsLoading(false);
     }
   }, [src, fallback]);

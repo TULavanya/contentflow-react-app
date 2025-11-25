@@ -14,7 +14,7 @@ const LoadingSpinner: React.FC = () => {
         width: '60px',
         height: '60px',
         border: '4px solid #f3f3f3',
-        borderTop: '4px solid #6a1b9a',
+        borderTop: '4px solid #2563eb',
         borderRadius: '50%',
         animation: 'spin 1s linear infinite',
         marginBottom: '20px'

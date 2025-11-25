@@ -129,12 +129,12 @@ export const ContentstackProvider: React.FC<ContentstackProviderProps> = ({ chil
         ...(options.limit && { limit: options.limit.toString() })
       });
       
-      // Include all references by default (resolves reference fields)
+      // Include references - use options.include if provided, otherwise use defaults
       if (!options.skipReferences) {
-        params.append('include[]', 'testimonials');
-        params.append('include[]', 'featured_case_studies');
-        params.append('include[]', 'author');
-        params.append('include[]', 'featured_blog_posts');
+        const referencesToInclude = options.include || ['testimonials', 'featured_case_studies', 'author', 'featured_blog_posts'];
+        referencesToInclude.forEach((ref: string) => {
+          params.append('include[]', ref);
+        });
       }
 
       // Add query filters if any
@@ -157,7 +157,8 @@ export const ContentstackProvider: React.FC<ContentstackProviderProps> = ({ chil
           'api_key': contentstackConfig.apiKey,
           'access_token': contentstackConfig.deliveryToken,
           'Content-Type': 'application/json'
-        }
+        },
+        cache: 'no-store' // Force fresh data, no caching
       });
 
       if (!response.ok) {

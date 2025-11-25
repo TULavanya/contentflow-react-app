@@ -53,7 +53,7 @@ const Header: React.FC = () => {
       </style>
         {/* Top Utility Bar */}
       <div style={{
-        background: 'linear-gradient(90deg, #4b2e83 0%, #6a1b9a 100%)',
+        background: 'linear-gradient(90deg, #6a1b9a 0%, #8e24aa 100%)',
         color: 'white',
         padding: '8px 0',
         fontSize: '0.85em',
@@ -69,20 +69,20 @@ const Header: React.FC = () => {
           alignItems: 'center'
         }}>
           <div style={{ opacity: 0.95 }}>
-            ✨ Notice something different? <a href="#" style={{ color: '#ffffff', textDecoration: 'underline', fontWeight: 'bold' }}>We're showing off our exciting new brand →</a>
+            Notice something different? <a href="#" style={{ color: '#ffffff', textDecoration: 'underline', fontWeight: 'bold' }}>We're showing off our exciting new brand</a>
             </div>
           <div style={{ display: 'flex', gap: '20px' }}>
-            <a href="#" style={{ color: 'white', textDecoration: 'none', opacity: 0.9, transition: 'opacity 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}>📚 Docs</a>
-            <a href="#" style={{ color: 'white', textDecoration: 'none', opacity: 0.9, transition: 'opacity 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}>🔐 Login</a>
+            <a href="#" style={{ color: 'white', textDecoration: 'none', opacity: 0.9, transition: 'opacity 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}>Docs</a>
+            <a href="#" style={{ color: 'white', textDecoration: 'none', opacity: 0.9, transition: 'opacity 0.3s ease' }} onMouseEnter={(e) => e.currentTarget.style.opacity = '1'} onMouseLeave={(e) => e.currentTarget.style.opacity = '0.9'}>Login</a>
             </div>
           </div>
         </div>
 
         {/* Main Navigation Header */}
       <header style={{
-        background: 'linear-gradient(135deg, #4b2e83 0%, #6a1b9a 100%)',
+        background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
         borderBottom: '4px solid transparent',
-        borderImage: 'linear-gradient(90deg, #4b2e83, #6a1b9a) 1',
+        borderImage: 'linear-gradient(90deg, #6a1b9a, #8e24aa) 1',
         boxShadow: '0 8px 32px rgba(75, 46, 131, 0.3), 0 4px 16px rgba(106, 27, 154, 0.2), 0 2px 8px rgba(75, 46, 131, 0.15)',
         position: 'sticky',
         top: 0,
@@ -114,7 +114,7 @@ const Header: React.FC = () => {
               width: '35px',
               height: '35px',
               borderRadius: '8px',
-              background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+              background: 'linear-gradient(135deg, #8e24aa 0%, #ab47bc 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -206,7 +206,7 @@ const Header: React.FC = () => {
             transition: 'all 0.4s ease'
           }} 
           onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'linear-gradient(135deg, #4b2e83 0%, #6a1b9a 100%)';
+            e.currentTarget.style.background = 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)';
             e.currentTarget.style.color = 'white';
             e.currentTarget.style.textShadow = '0 1px 3px rgba(0,0,0,0.3)';
             e.currentTarget.style.transform = 'translateY(-2px)';
@@ -219,7 +219,7 @@ const Header: React.FC = () => {
           }}
           >Talk to Sales</Link>
           <Link to="/start" style={{
-            background: 'linear-gradient(135deg, #4b2e83 0%, #6a1b9a 100%)',
+            background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
             color: 'white',
             padding: '10px 20px',
             borderRadius: '25px',
@@ -236,7 +236,7 @@ const Header: React.FC = () => {
             e.currentTarget.style.transform = 'translateY(-2px)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'linear-gradient(135deg, #4b2e83 0%, #6a1b9a 100%)';
+            e.currentTarget.style.background = 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)';
             e.currentTarget.style.color = 'white';
             e.currentTarget.style.textShadow = '0 1px 3px rgba(0,0,0,0.3)';
             e.currentTarget.style.transform = 'translateY(0)';

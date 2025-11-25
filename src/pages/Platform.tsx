@@ -16,9 +16,9 @@ const Platform: React.FC = () => {
       setIsLoading(true);
       try {
         const data = await fetchContent('platform_page');
-        console.log('🚀 Platform page data:', data);
-        console.log('🔍 Platform features:', data?.platform_features);
-        console.log('🔍 Page header:', data?.page_header);
+        console.log('Platform page data:', data);
+        console.log('Platform features:', data?.platform_features);
+        console.log('Page header:', data?.page_header);
         setPlatformData(data);
       } catch (error) {
         console.error('❌ Error loading platform content:', error);
@@ -67,7 +67,9 @@ const Platform: React.FC = () => {
         <SEOHead seoData={platformData?.seo_metadata} />
         
         {/* Hero Section */}
-        <section className="hero-section">
+        <section className="hero-section" style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Headless CMS.png')`
+        }}>
           <div className="hero-overlay"></div>
           <div className="hero-content">
             <h1 className="animated-title">
@@ -96,7 +98,12 @@ const Platform: React.FC = () => {
         </div>
 
           {/* Enhanced Large Capability Cards */}
-          <LargeFeatureGrid gap="40px" style={{ marginBottom: '80px' }}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '40px',
+            marginBottom: '80px'
+          }}>
             {(platformData?.platform_features || [
               {
                 feature_name: 'Composable Architecture',
@@ -146,25 +153,98 @@ const Platform: React.FC = () => {
                   title: 'Artificial Intelligence and Machine Learning'
                 }
               }
-            ]).slice(0, 6).map((feature: any, index: number) => {
-              const icons = ['🏗️', '🎨', '🔄', '📊', '⚙️', '🤖'];
-              const categories = ['Architecture', 'Content', 'Automation', 'Analytics', 'Development', 'AI/ML'];
-              
-              return (
-                <LargeFeatureCard
-                  key={index}
-                  title={safeTextContent(feature.feature_name, 'Platform Feature')}
-                  description={safeTextContent(feature.feature_description, 'Explore this powerful capability')}
-                  icon={safeIconContent(icons[index], '🚀')}
-                  featureImage={feature.feature_icon || feature.feature_image}
-                  link="/start"
-                  linkText="Try This Feature →"
-                  category={categories[index]}
-                  imageHeight="280px"
+            ]).slice(0, 6).map((feature: any, index: number) => (
+              <Link
+                key={index}
+                to="/start"
+                style={{
+                  textDecoration: 'none',
+                  height: '400px',
+                  borderRadius: '25px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  color: 'white',
+                  transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  cursor: 'pointer',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+                  border: '3px solid white',
+                  backgroundColor: '#f5f5f5'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+                }}
+              >
+                {/* Background Image */}
+                <img
+                  src={feature.feature_image?.url || feature.feature_icon?.url || feature.feature_image || feature.feature_icon}
+                  alt={safeTextContent(feature.feature_name, 'Platform Feature')}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    zIndex: 1
+                  }}
+                  onError={(e) => {
+                    console.error('Feature image failed to load');
+                    e.currentTarget.style.display = 'none';
+                  }}
                 />
-              );
-            })}
-          </LargeFeatureGrid>
+                
+                {/* Bottom Gradient Overlay */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '70%',
+                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%)',
+                  zIndex: 2
+                }}></div>
+                
+                {/* Content */}
+                <div style={{
+                  position: 'relative',
+                  zIndex: 3,
+                  padding: '30px',
+                  width: '100%',
+                  textAlign: 'center'
+                }}>
+                  <p style={{ 
+                    fontSize: '2.2em', 
+                    fontWeight: '800',
+                    marginBottom: '15px',
+                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                    color: 'white'
+                  }}>
+                    {safeTextContent(feature.feature_name, 'Platform Feature')}
+                  </p>
+                  <p style={{ 
+                    fontSize: '1.15em', 
+                    textAlign: 'center', 
+                    opacity: 0.95,
+                    lineHeight: 1.6,
+                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                    color: 'white',
+                    margin: 0
+                  }}>
+                    {safeTextContent(feature.feature_description, 'Explore this powerful capability')}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -324,7 +404,7 @@ const Platform: React.FC = () => {
                     icon={safeIconContent(item.icon, '⚡')}
                     featureImage={item.feature_image}
                     link="/start"
-                    linkText="Get Started →"
+                    linkText="Get Started"
                     category={categories[index]}
                     imageHeight="260px"
                   />
@@ -362,48 +442,61 @@ const Platform: React.FC = () => {
             </div>
 
           {/* Scrolling Integration Marquee */}
-          <div className="marquee-container" style={{
+          <style>{`
+            @keyframes scrollPlatform {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .platform-logo-track {
+              display: flex;
+              animation: scrollPlatform 20s linear infinite;
+              width: fit-content;
+            }
+            .platform-logo-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+          
+          <div style={{
             overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            position: 'relative',
-            width: '100%',
-            padding: '20px 0',
-            marginBottom: '50px'
+            marginBottom: '50px',
+            maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
           }}>
-            <div className="marquee-content" style={{
-              display: 'inline-block',
-              paddingLeft: '100%',
-            }}>
-              {[...['Salesforce', 'HubSpot', 'Shopify', 'Stripe', 'Google Analytics', 'Segment', 
-              'Slack', 'Jira', 'GitHub', 'Vercel', 'AWS', 'Azure'], 
-              ...['Salesforce', 'HubSpot', 'Shopify', 'Stripe', 'Google Analytics', 'Segment', 
-              'Slack', 'Jira', 'GitHub', 'Vercel', 'AWS', 'Azure']].map((tool, index) => (
-              <div key={index} style={{
-                display: 'inline-block',
-              background: 'white',
-                padding: '30px 40px',
-                borderRadius: '15px',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.08)',
-            fontWeight: 'bold',
-                color: '#333',
-            fontSize: '1.1em',
-                border: '2px solid #e8eaf6',
-                marginRight: '30px',
-                cursor: 'pointer',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-5px) rotate(2deg)';
-                e.currentTarget.style.boxShadow = '0 10px 30px rgba(106, 27, 154, 0.2)';
-                e.currentTarget.style.borderColor = '#6a1b9a';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) rotate(0deg)';
-                e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.08)';
-                e.currentTarget.style.borderColor = '#e8eaf6';
-              }}>
-                {safeTextContent(tool, 'Integration')}
-              </div>
+            <div className="platform-logo-track">
+              {/* First set of integrations */}
+              {['Salesforce', 'HubSpot', 'Shopify', 'Stripe', 'Google Analytics', 'Segment', 
+              'Slack', 'Jira', 'GitHub', 'Vercel', 'AWS', 'Azure'].map((tool: string, index: number) => (
+                <div key={`integration-${index}`} style={{
+                  padding: '0 40px',
+                  fontSize: '1.8rem',
+                  fontWeight: '700',
+                  color: '#000',
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  minWidth: '200px',
+                  justifyContent: 'center'
+                }}>
+                  {safeTextContent(tool, 'Integration')}
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {['Salesforce', 'HubSpot', 'Shopify', 'Stripe', 'Google Analytics', 'Segment', 
+              'Slack', 'Jira', 'GitHub', 'Vercel', 'AWS', 'Azure'].map((tool: string, index: number) => (
+                <div key={`integration-dup-${index}`} style={{
+                  padding: '0 40px',
+                  fontSize: '1.8rem',
+                  fontWeight: '700',
+                  color: '#000',
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  minWidth: '200px',
+                  justifyContent: 'center'
+                }}>
+                  {safeTextContent(tool, 'Integration')}
+                </div>
               ))}
             </div>
             </div>
@@ -412,7 +505,7 @@ const Platform: React.FC = () => {
             <Link to="/partners" className="btn talk" style={{
               animation: 'pulse 2s ease-in-out infinite'
             }}>
-              View All 500+ Integrations →
+              View All 500+ Integrations
               </Link>
           </div>
         </div>

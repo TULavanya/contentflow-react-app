@@ -32,7 +32,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   icon,
   image,
   link,
-  linkText = 'Learn more →',
+  linkText = 'Learn more',
   gradient,
   size = 'medium',
   style = {},
@@ -195,7 +195,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
         {(link || onClick) && (
           <div style={{
             marginTop: '20px',
-            color: '#6a1b9a',
+            color: '#2563eb',
             fontWeight: 'bold',
             fontSize: '0.95em',
             display: 'flex',
@@ -205,7 +205,6 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
             transition: 'color 0.3s ease'
           }}>
             {linkText}
-            <span style={{ transition: 'transform 0.3s ease' }}>→</span>
           </div>
         )}
       </div>
