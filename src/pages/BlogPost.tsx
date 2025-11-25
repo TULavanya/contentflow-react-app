@@ -397,7 +397,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Lo Etheridge',
           bio: 'Head of Product at ContentFlow, leading the development of AI-powered content solutions and helping enterprises leverage AI effectively.',
-          profile_picture: { url: '/images/lo-etheridge-headshot.PNG', title: 'Lo Etheridge' }
+          profile_picture: { url: '/images/lo-etheridge-headshot.png', title: 'Lo Etheridge' }
         },
         gradient_colors: '#6a1b9a, #9c27b0',
         icon: { url: '/images/AI-Powered Agents.png' }
