@@ -58,8 +58,8 @@ const Blogs: React.FC = () => {
     const authorName = author?.name || author?.title || (Array.isArray(author) && author[0]?.name) || '';
     const authorImageMap: { [key: string]: string } = {
       'Lo Etheridge': '/images/Lo_Etheridge.jpg',
-      'Kaustubh Rai': '/images/Nishant.jpg',
-      'Ben Goldstein': '/images/Mike.png',
+      'Kaustubh Rai': '/images/Kaustubh_Rai.jpg',
+      'Ben Goldstein': '/images/Ben_Goldstein.jpg',
       'Sarah Chen': '/images/Jessica.png',
       'Michael Torres': '/images/Conor.jpg',
       'Emily Rodriguez': '/images/Renee.jpg'
@@ -69,7 +69,7 @@ const Blogs: React.FC = () => {
     console.log(`📸 [Blogs] Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
     
     // Add cache buster to force fresh load (increment this version when images change)
-    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=8` : undefined;
+    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=9` : undefined;
     console.log(`🎯 [Blogs] FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
     
     return imageWithCacheBuster;

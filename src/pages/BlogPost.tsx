@@ -225,7 +225,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Kaustubh Rai',
           bio: 'Application Security Engineer at Contentstack. He is adept at conducting extensive security testing, automating security protocols, and ensuring the safe deployment of a wide array of applications. Kaustubh thrives on the challenges of safeguarding digital environments and has a knack for identifying and rectifying vulnerabilities that others might overlook. Interests include discovering innovative hacking methods and continuously sharpening expertise through participation in diverse CTF competitions.',
-          profile_picture: { url: '/images/Nishant.jpg', title: 'Kaustubh Rai' }
+          profile_picture: { url: '/images/Kaustubh_Rai.jpg', title: 'Kaustubh Rai' }
         },
         gradient_colors: '#6a1b9a, #8e24aa',
         icon: { url: '/images/Security.jpg' }
@@ -290,7 +290,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Ben Goldstein',
           bio: 'Product Marketing Lead at ContentFlow, specializing in personalization strategies and customer experience optimization for enterprise brands.',
-          profile_picture: { url: '/images/Mike.png', title: 'Ben Goldstein' }
+          profile_picture: { url: '/images/Ben_Goldstein.jpg', title: 'Ben Goldstein' }
         },
         gradient_colors: '#8e24aa, #ab47bc',
         icon: { url: '/images/Customer Analytics.jpg' }
@@ -647,8 +647,8 @@ const BlogPost: React.FC = () => {
     const authorName = author?.name || author?.title || '';
     const authorImageMap: { [key: string]: string } = {
       'Lo Etheridge': '/images/Lo_Etheridge.jpg',
-      'Kaustubh Rai': '/images/Nishant.jpg',
-      'Ben Goldstein': '/images/Mike.png',
+      'Kaustubh Rai': '/images/Kaustubh_Rai.jpg',
+      'Ben Goldstein': '/images/Ben_Goldstein.jpg',
       'Sarah Chen': '/images/Jessica.png',
       'Michael Torres': '/images/Conor.jpg',
       'Emily Rodriguez': '/images/Renee.jpg'
@@ -658,7 +658,7 @@ const BlogPost: React.FC = () => {
     console.log(`📸 Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
     
     // Add cache buster to force fresh load (increment this version when images change)
-    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=8` : undefined;
+    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=9` : undefined;
     console.log(`🎯 FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
     
     return imageWithCacheBuster;
