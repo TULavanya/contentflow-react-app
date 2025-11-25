@@ -69,7 +69,7 @@ const Blogs: React.FC = () => {
     loadContent();
   }, [fetchContent]);
   
-  // Comprehensive fallback blog posts
+  // Comprehensive fallback blog posts (will use Contentstack data when available)
   const fallbackBlogPosts = [
     {
       title: 'How We Use AI to Speed Up Manual Penetration Testing at Contentstack',
@@ -82,7 +82,7 @@ const Blogs: React.FC = () => {
       author: {
         name: 'Kaustubh Rai',
         title: 'Security Engineer',
-        profile_picture: { url: '/images/Nishant.jpg' }
+        profile_picture: { url: '' }
       },
       icon: '🔒'
     },
@@ -97,7 +97,7 @@ const Blogs: React.FC = () => {
       author: {
         name: 'Ben Goldstein',
         title: 'Product Marketing Lead',
-        profile_picture: { url: '/images/Conor.jpg' }
+        profile_picture: { url: '' }
       },
       icon: '📊'
     },
@@ -112,7 +112,7 @@ const Blogs: React.FC = () => {
       author: {
         name: 'Lo Etheridge',
         title: 'Head of Product',
-        profile_picture: { url: '/images/lo-etheridge-headshot.PNG' }
+        profile_picture: { url: '' }
       },
       icon: '🤖'
     },
@@ -127,7 +127,7 @@ const Blogs: React.FC = () => {
       author: {
         name: 'Sarah Chen',
         title: 'Principal Engineer',
-        profile_picture: { url: '/images/Jessica.png' }
+        profile_picture: { url: '' }
       },
       icon: '⚙️'
     },
@@ -142,7 +142,7 @@ const Blogs: React.FC = () => {
       author: {
         name: 'Michael Torres',
         title: 'CTO',
-        profile_picture: { url: '/images/Mike.png' }
+        profile_picture: { url: '' }
       },
       icon: '🚀'
     },
@@ -157,7 +157,7 @@ const Blogs: React.FC = () => {
       author: {
         name: 'Emily Rodriguez',
         title: 'Solutions Architect',
-        profile_picture: { url: '/images/Renee.jpg' }
+        profile_picture: { url: '' }
       },
       icon: '🎯'
     }
@@ -593,7 +593,7 @@ const Blogs: React.FC = () => {
                           post.author?.profile_picture?.url || 
                           post.author?.[0]?.profile_picture || 
                           post.author?.profile_picture || 
-                          '/images/Neha mam.jpg'
+                          ''
                         }
                         alt={safeTextContent(
                           post.author?.[0]?.name || 
@@ -603,7 +603,7 @@ const Blogs: React.FC = () => {
                           'Author', 
                           'Author'
                         )}
-                        fallbackSrc="/images/Neha mam.jpg"
+                        fallbackSrc="/images/logo.png"
                         style={{
                           width: '45px',
                           height: '45px',

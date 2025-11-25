@@ -198,8 +198,8 @@ const BlogPost: React.FC = () => {
         reading_time_minute: 10,
         author: {
           name: 'Kaustubh Rai',
-          bio: 'Security Engineer at ContentFlow with expertise in application security, penetration testing, and secure architecture design. Passionate about using AI to enhance security practices.',
-          profile_picture: { url: '/images/Nishant.jpg', title: 'Kaustubh Rai' }
+          bio: 'Application Security Engineer at Contentstack. He is adept at conducting extensive security testing, automating security protocols, and ensuring the safe deployment of a wide array of applications. Kaustubh thrives on the challenges of safeguarding digital environments and has a knack for identifying and rectifying vulnerabilities that others might overlook. Interests include discovering innovative hacking methods and continuously sharpening expertise through participation in diverse CTF competitions.',
+          profile_picture: { url: '', title: 'Kaustubh Rai' }
         },
         gradient_colors: '#6a1b9a, #8e24aa',
         icon: { url: '/images/Security.jpg' }
@@ -264,7 +264,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Ben Goldstein',
           bio: 'Product Marketing Lead at ContentFlow, specializing in personalization strategies and customer experience optimization for enterprise brands.',
-          profile_picture: { url: '/images/Conor.jpg', title: 'Ben Goldstein' }
+          profile_picture: { url: '', title: 'Ben Goldstein' }
         },
         gradient_colors: '#8e24aa, #ab47bc',
         icon: { url: '/images/Customer Analytics.jpg' }
@@ -371,7 +371,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Lo Etheridge',
           bio: 'Head of Product at ContentFlow, leading the development of AI-powered content solutions and helping enterprises leverage AI effectively.',
-          profile_picture: { url: '/images/lo-etheridge-headshot.PNG', title: 'Lo Etheridge' }
+          profile_picture: { url: '', title: 'Lo Etheridge' }
         },
         gradient_colors: '#6a1b9a, #9c27b0',
         icon: { url: '/images/AI-Powered Agents.png' }
@@ -427,7 +427,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Sarah Chen',
           bio: 'Principal Engineer at ContentFlow with expertise in distributed systems, microservices architecture, and scalable web applications.',
-          profile_picture: { url: '/images/Jessica.png', title: 'Sarah Chen' }
+          profile_picture: { url: '', title: 'Sarah Chen' }
         },
         gradient_colors: '#4a148c, #6a1b9a',
         icon: { url: '/images/Headless CMS.png' }
@@ -475,7 +475,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Michael Torres',
           bio: 'CTO at ContentFlow, driving technical strategy and innovation in digital experience platforms and composable architecture.',
-          profile_picture: { url: '/images/Mike.png', title: 'Michael Torres' }
+          profile_picture: { url: '', title: 'Michael Torres' }
         },
         gradient_colors: '#7b1fa2, #9c27b0',
         icon: { url: '/images/Innovation.jpg' }
@@ -546,7 +546,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Emily Rodriguez',
           bio: 'Solutions Architect at ContentFlow, helping enterprises implement personalization strategies and optimize customer experiences.',
-          profile_picture: { url: '/images/Renee.jpg', title: 'Emily Rodriguez' }
+          profile_picture: { url: '', title: 'Emily Rodriguez' }
         },
         gradient_colors: '#8e24aa, #ba68c8',
         icon: { url: '/images/AI Personalization.jpg' }
@@ -877,9 +877,9 @@ const BlogPost: React.FC = () => {
                   border: '1px solid rgba(255,255,255,0.2)'
                 }}>
                   <ImageSync
-                    src={blogPost.author?.profile_picture?.url || blogPost.author?.profile_picture || '/images/Neha mam.jpg'}
+                    src={blogPost.author?.profile_picture?.url || blogPost.author?.profile_picture || ''}
                     alt={blogPost.author?.name || blogPost.author?.title || 'Author'}
-                    fallbackSrc="/images/Neha mam.jpg"
+                    fallbackSrc="/images/logo.png"
                     style={{
                       width: '56px',
                       height: '56px',
@@ -1161,9 +1161,9 @@ const BlogPost: React.FC = () => {
                     }}></div>
                     
                     <ImageSync
-                      src={blogPost.author.profile_picture?.url || blogPost.author.profile_picture || '/images/Neha mam.jpg'}
+                      src={blogPost.author.profile_picture?.url || blogPost.author.profile_picture || ''}
                       alt={blogPost.author.name || blogPost.author.title || 'Author'}
-                      fallbackSrc="/images/Neha mam.jpg"
+                      fallbackSrc="/images/logo.png"
                       style={{
                         width: '120px',
                         height: '120px',
