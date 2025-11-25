@@ -619,11 +619,23 @@ const BlogPost: React.FC = () => {
 
   // Author profile picture mapping for when Contentstack doesn't have images
   const getAuthorProfilePicture = (author: any): string | undefined => {
+    console.log('🔍 getAuthorProfilePicture called with:', {
+      author,
+      authorName: author?.name || author?.title,
+      profilePicture: author?.profile_picture
+    });
+    
     // Try to get the image from Contentstack data first
     const pic = author?.profile_picture;
     if (pic) {
-      if (typeof pic === 'string' && pic.trim()) return pic.trim();
-      if (pic.url && typeof pic.url === 'string' && pic.url.trim()) return pic.url.trim();
+      if (typeof pic === 'string' && pic.trim()) {
+        console.log('✅ Using Contentstack string URL:', pic.trim());
+        return pic.trim();
+      }
+      if (pic.url && typeof pic.url === 'string' && pic.url.trim()) {
+        console.log('✅ Using Contentstack object URL:', pic.url.trim());
+        return pic.url.trim();
+      }
     }
     
     // Fallback to local images based on author name
@@ -637,7 +649,10 @@ const BlogPost: React.FC = () => {
       'Emily Rodriguez': '/images/Renee.jpg'
     };
     
-    return authorImageMap[authorName] || undefined;
+    const mappedImage = authorImageMap[authorName];
+    console.log(`📸 Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
+    
+    return mappedImage || undefined;
   };
 
   const formatDate = (dateString: string) => {

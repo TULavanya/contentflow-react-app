@@ -13,11 +13,23 @@ const Blogs: React.FC = () => {
 
   // Author profile picture mapping for when Contentstack doesn't have images
   const getAuthorProfilePicture = (author: any): string | undefined => {
+    console.log('🔍 [Blogs] getAuthorProfilePicture called with:', {
+      author,
+      isArray: Array.isArray(author),
+      authorName: author?.name || author?.title || (Array.isArray(author) && author[0]?.name)
+    });
+    
     // Try to get the image from Contentstack data first
     const pic = author?.profile_picture;
     if (pic) {
-      if (typeof pic === 'string' && pic.trim()) return pic.trim();
-      if (pic.url && typeof pic.url === 'string' && pic.url.trim()) return pic.url.trim();
+      if (typeof pic === 'string' && pic.trim()) {
+        console.log('✅ [Blogs] Using Contentstack string URL:', pic.trim());
+        return pic.trim();
+      }
+      if (pic.url && typeof pic.url === 'string' && pic.url.trim()) {
+        console.log('✅ [Blogs] Using Contentstack object URL:', pic.url.trim());
+        return pic.url.trim();
+      }
     }
     
     // If author is an array (from reference field), try first item
@@ -25,8 +37,14 @@ const Blogs: React.FC = () => {
       const firstAuthor = author[0];
       const firstPic = firstAuthor?.profile_picture;
       if (firstPic) {
-        if (typeof firstPic === 'string' && firstPic.trim()) return firstPic.trim();
-        if (firstPic.url && typeof firstPic.url === 'string' && firstPic.url.trim()) return firstPic.url.trim();
+        if (typeof firstPic === 'string' && firstPic.trim()) {
+          console.log('✅ [Blogs] Using Contentstack array string URL:', firstPic.trim());
+          return firstPic.trim();
+        }
+        if (firstPic.url && typeof firstPic.url === 'string' && firstPic.url.trim()) {
+          console.log('✅ [Blogs] Using Contentstack array object URL:', firstPic.url.trim());
+          return firstPic.url.trim();
+        }
       }
     }
     
@@ -41,7 +59,10 @@ const Blogs: React.FC = () => {
       'Emily Rodriguez': '/images/Renee.jpg'
     };
     
-    return authorImageMap[authorName] || undefined;
+    const mappedImage = authorImageMap[authorName];
+    console.log(`📸 [Blogs] Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
+    
+    return mappedImage || undefined;
   };
 
   useEffect(() => {
