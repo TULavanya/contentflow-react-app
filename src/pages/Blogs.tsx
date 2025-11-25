@@ -16,12 +16,41 @@ const Blogs: React.FC = () => {
       setIsLoading(true);
       try {
         const data = await fetchContent('blogs_page');
-        console.log('📝 Blogs page data:', data);
+        console.log('Blogs page data:', data);
+        console.log('Blogs images check:', {
+          hasData: !!data,
+          featuredArticle: data?.featured_article,
+          featuredArticleIcon: data?.featured_article?.icon
+        });
         setBlogsData(data);
-        
-        // Fetch all blog posts
-        const posts = await fetchContent('blog_post', { allEntries: true });
-        console.log('📰 Blog posts:', posts);
+
+        // Fetch all blog posts with author reference
+        const posts = await fetchContent('blog_post', { 
+          allEntries: true,
+          include: ['author'] // Include author reference to get author data
+        });
+        console.log('📰 Blog posts fetched from Contentstack:', posts);
+        if (posts && posts.length > 0) {
+          console.log('📸 First blog post image check:', {
+            title: posts[0]?.title,
+            featured_image: posts[0]?.featured_image,
+            featured_image_url: posts[0]?.featured_image?.url,
+            image: posts[0]?.image,
+            image_url: posts[0]?.image?.url,
+            thumbnail: posts[0]?.thumbnail,
+            author: posts[0]?.author,
+            authorProfilePic: posts[0]?.author?.[0]?.profile_picture || posts[0]?.author?.profile_picture
+          });
+          
+          // Check all posts for images
+          const postsWithImages = posts.filter((p: any) => p.featured_image || p.image);
+          const postsWithoutImages = posts.filter((p: any) => !p.featured_image && !p.image);
+          console.log(`✅ Posts with images: ${postsWithImages.length}`);
+          console.log(`❌ Posts without images: ${postsWithoutImages.length}`);
+          if (postsWithoutImages.length > 0) {
+            console.warn('⚠️ These posts are missing images:', postsWithoutImages.map((p: any) => p.title));
+          }
+        }
         setBlogPosts(posts || []);
       } catch (error) {
         console.error('Error loading blogs content:', error);
@@ -49,17 +78,17 @@ const Blogs: React.FC = () => {
     return colors;
   };
   
-  // Get icon emoji based on category
+  // Get icon text based on category
   const getCategoryIcon = (category: string) => {
     const icons: any = {
-      'PRODUCT': '🤖',
-      'GUIDE': '🛒',
-      'CASE STUDY': '📈',
-      'TUTORIAL': '💻',
-      'RESEARCH': '📊',
-      'BEST PRACTICES': '🎨'
+      'PRODUCT': 'P',
+      'GUIDE': 'G',
+      'CASE STUDY': 'CS',
+      'TUTORIAL': 'T',
+      'RESEARCH': 'R',
+      'BEST PRACTICES': 'BP'
     };
-    return icons[category] || '📝';
+    return icons[category] || category.substring(0, 2).toUpperCase();
   };
   
   // Use only Contentstack data - no fallbacks
@@ -75,7 +104,9 @@ const Blogs: React.FC = () => {
       <SEOHead seoData={blogsData?.seo_metadata} />
       
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section" style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/BlogHero-Product_Updates-01.webp')`
+      }}>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="animated-title">
@@ -176,7 +207,7 @@ const Blogs: React.FC = () => {
             textTransform: 'uppercase',
             animation: 'fadeInUp 0.8s ease-out'
           }}>
-            {safeTextContent(blogsData?.featured_article?.section_label, '⭐ Featured Article')}
+            {safeTextContent(blogsData?.featured_article?.section_label, 'Featured Article')}
           </span>
           
           <div style={{
@@ -203,16 +234,39 @@ const Blogs: React.FC = () => {
               e.currentTarget.style.transform = 'scale(1) rotate(0deg)';
               e.currentTarget.style.boxShadow = '0 15px 40px rgba(102, 126, 234, 0.4)';
             }}>
-              <ImageSync
-                src={blogsData?.featured_article?.icon}
-                alt={safeTextContent(blogsData?.featured_article?.title, 'Featured Article')}
-                fallbackSrc="/images/BlogHero-Product_Updates-01.webp"
-                style={{
+              {blogsData?.featured_article?.icon ? (
+                <img
+                  src={
+                    blogsData.featured_article.icon?.url || 
+                    blogsData.featured_article.icon || 
+                    '/images/BlogHero-Product_Updates-01.webp'
+                  }
+                  alt={safeTextContent(blogsData?.featured_article?.title, 'Featured Article')}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }}
+                  onError={(e) => {
+                    console.error('❌ Featured article image failed to load:', blogsData?.featured_article);
+                    e.currentTarget.src = '/images/BlogHero-Product_Updates-01.webp';
+                  }}
+                />
+              ) : (
+                <div style={{
                   width: '100%',
                   height: '100%',
-                  objectFit: 'cover'
-                }}
-              />
+                  background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontSize: '1.5em',
+                  fontWeight: 'bold'
+                }}>
+                  Upload Featured Article Image
+                </div>
+              )}
                 </div>
 
             <div>
@@ -232,13 +286,13 @@ const Blogs: React.FC = () => {
               </p>
               <div style={{ display: 'flex', gap: '25px', marginBottom: '30px', color: '#666', flexWrap: 'wrap' }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '1.3em' }}>📝</span> {safeTextContent(blogsData?.featured_article?.author, 'Sarah Johnson')}
+                  By {safeTextContent(blogsData?.featured_article?.author, 'Sarah Johnson')}
                 </span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '1.3em' }}>📅</span> {safeTextContent(blogsData?.featured_article?.date, 'Oct 16, 2025')}
+                  {safeTextContent(blogsData?.featured_article?.date, 'Oct 16, 2025')}
                 </span>
                 <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ fontSize: '1.3em' }}>⏱️</span> {safeTextContent(blogsData?.featured_article?.read_time, '15 min read')}
+                  {safeTextContent(blogsData?.featured_article?.read_time, '15 min read')}
                   </span>
                 </div>
               <Link to={blogsData?.featured_article?.article_link?.href || '#'} className="btn start" style={{
@@ -306,16 +360,45 @@ const Blogs: React.FC = () => {
                   overflow: 'hidden'
                 }}>
                   {/* Blog Post Image */}
-                  <ImageSync
-                    src={post.featured_image || post.image}
-                    fallbackSrc="/images/BlogHero-Product_Updates-01.webp"
-                  alt={safeTextContent(post.title, 'Blog Post')}
-                  style={{ 
-                    width: '100%', 
+                  {(post.featured_image || post.image) ? (
+                    <img
+                      src={
+                        post.featured_image?.url || 
+                        post.featured_image || 
+                        post.image?.url || 
+                        post.image || 
+                        '/images/BlogHero-Product_Updates-01.webp'
+                      }
+                      alt={safeTextContent(post.title, 'Blog Post')}
+                      style={{ 
+                        width: '100%', 
+                        height: '100%',
+                        objectFit: 'cover'
+                      }}
+                      onError={(e) => {
+                        console.error('❌ Blog post image failed to load:', {
+                          title: post.title,
+                          featured_image: post.featured_image,
+                          image: post.image
+                        });
+                        e.currentTarget.src = '/images/BlogHero-Product_Updates-01.webp';
+                      }}
+                    />
+                  ) : (
+                    <div style={{
+                      width: '100%',
                       height: '100%',
-                      objectFit: 'cover'
-                  }}
-                />
+                      background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'white',
+                      fontSize: '1.2em',
+                      fontWeight: 'bold'
+                    }}>
+                      No Image in Contentstack
+                    </div>
+                  )}
                   
                   {/* Overlay with gradient and category */}
                 <div style={{
@@ -401,11 +484,28 @@ const Blogs: React.FC = () => {
                     fontSize: '0.9em',
                     color: '#666'
                   }}>
-                    <div>
-                      <div style={{ fontWeight: 'bold', color: '#333', marginBottom: '5px' }}>
-                        {safeTextContent(post.author?.[0]?.title || post.author, 'Author')}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <img
+                        src={(post.author?.[0]?.profile_picture?.url || post.author?.profile_picture?.url || post.author?.[0]?.profile_picture || post.author?.profile_picture) || '/images/Neha mam.jpg'}
+                        alt={safeTextContent(post.author?.[0]?.title || post.author?.name || post.author, 'Author')}
+                        style={{
+                          width: '45px',
+                          height: '45px',
+                          borderRadius: '50%',
+                          objectFit: 'cover',
+                          border: '2px solid #e8eaf6'
+                        }}
+                        onError={(e) => {
+                          console.error('Blog author image failed to load:', post.author);
+                          e.currentTarget.src = '/images/Neha mam.jpg';
+                        }}
+                      />
+                      <div>
+                        <div style={{ fontWeight: 'bold', color: '#333', marginBottom: '5px' }}>
+                          {safeTextContent(post.author?.[0]?.title || post.author?.name || post.author, 'Author')}
+                        </div>
+                        <div>{post.publish_date ? formatDate(post.publish_date) : safeTextContent(post.date, 'Date')}</div>
                       </div>
-                      <div>{post.publish_date ? formatDate(post.publish_date) : safeTextContent(post.date, 'Date')}</div>
                     </div>
                     <div style={{ 
                       background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
@@ -419,24 +519,31 @@ const Blogs: React.FC = () => {
                   </div>
                   
                   <Link 
-                    to={post.url ? `/blog/${post.url}` : '#'} 
+                    to={post.url ? `/blog/${post.url.replace(/^\/?(blog\/|blogs\/)+/, '').replace(/^\/+/, '')}` : '#'} 
+                    className="btn start"
                     style={{ 
-                      color: '#6a1b9a', 
-                      fontWeight: 'bold', 
-                      textDecoration: 'none',
                       marginTop: '20px',
                       display: 'inline-block',
-                      fontSize: '1.05em',
-                      transition: 'all 0.3s ease'
+                      fontSize: '1em',
+                      padding: '12px 30px',
+                      textDecoration: 'none',
+                      borderRadius: '50px',
+                      background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                      color: 'white',
+                      fontWeight: 'bold',
+                      boxShadow: '0 4px 15px rgba(106, 27, 154, 0.3)',
+                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = 'translateX(5px)';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 6px 20px rgba(106, 27, 154, 0.4)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = 'translateX(0)';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 4px 15px rgba(106, 27, 154, 0.3)';
                     }}
                   >
-                    Read More →
+                    Read More
                   </Link>
               </div>
             </div>
@@ -446,9 +553,25 @@ const Blogs: React.FC = () => {
           <div style={{ textAlign: 'center', marginTop: '70px' }}>
             <button className="btn talk" style={{ 
               fontSize: '1.2em',
-              animation: 'pulse 2s ease-in-out infinite'
+              padding: '16px 40px',
+              borderRadius: '50px',
+              background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+              color: 'white',
+              border: 'none',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              boxShadow: '0 6px 20px rgba(106, 27, 154, 0.4)',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.05)';
+              e.currentTarget.style.boxShadow = '0 8px 25px rgba(106, 27, 154, 0.5)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = '0 6px 20px rgba(106, 27, 154, 0.4)';
             }}>
-              Load More Articles →
+              Load More Articles
             </button>
           </div>
         </div>
@@ -465,11 +588,12 @@ const Blogs: React.FC = () => {
       }}>
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           <div style={{ 
-            fontSize: '4em', 
+            fontSize: '2.5em', 
             marginBottom: '20px',
-            animation: 'float 3s ease-in-out infinite'
+            fontWeight: 'bold',
+            color: '#6a1b9a'
           }}>
-            ✉️
+            Newsletter
           </div>
           <h2 style={{ 
             fontSize: '2.8em', 
@@ -546,7 +670,7 @@ const Blogs: React.FC = () => {
           </div>
 
           <p style={{ fontSize: '0.95em', opacity: 0.8, marginTop: '25px' }}>
-            🎉 Join 50,000+ subscribers • Unsubscribe anytime • No spam, ever
+            Join 50,000+ subscribers • Unsubscribe anytime • No spam, ever
           </p>
         </div>
       </section>
