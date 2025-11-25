@@ -153,20 +153,20 @@ const BlogPost: React.FC = () => {
     loadBlogPost();
   }, [slug, location.pathname, fetchContent]);
   
-  // Fallback blog posts
+  // Fallback blog posts - COMPLETE DATA FOR ALL POSTS
   const getFallbackBlogPost = (slug: string): BlogPost | null => {
     const fallbackPosts: BlogPost[] = [
       {
         title: 'How We Use AI to Speed Up Manual Penetration Testing at Contentstack',
         url: 'engineering/how-we-use-ai-to-speed-up-manual-penetration-testing-at-contentstack',
-        excerpt: 'Discover how we leverage AI to enhance security testing efficiency while maintaining the critical human oversight needed for complex security assessments.',
+        excerpt: 'Contentstack is more than just a headless CMS today. It\'s a composable DXP with Marketplace, Automation Hub, Brand Kit, Launch, Personalization and Lytics. That composability is powerful for builders, but it expands the attack surface. Automation catches many classes of issues, but the most interesting bugs still show up when a human tests with domain context: auth edges, tenant boundaries, unusual encodings and quirky parsers. That\'s why manual testing remains central to our security reviews. Over one week, we streamlined one of the slowest manual loops — "think → craft input → send → compare" — by wiring a small AI helper into BurpSuite. This post describes the helper, how we use it and how it fits our process.',
         content: `<h2>Introduction</h2>
         <p>Contentstack is more than just a headless CMS today. It's a composable DXP with Marketplace, Automation Hub, Brand Kit, Launch, Personalization and Lytics. That composability is powerful for builders, but it expands the attack surface. Automation catches many classes of issues, but the most interesting bugs still show up when a human tests with domain context: auth edges, tenant boundaries, unusual encodings and quirky parsers. That's why manual testing remains central to our security reviews.</p>
         
         <h2>The Challenge</h2>
         <p>Over one week, we streamlined one of the slowest manual loops — "think → craft input → send → compare" — by wiring a small AI helper into BurpSuite. This post describes the helper, how we use it and how it fits our process.</p>
         
-        <h3>Our Security Testing Approach</h3>
+        <h2>Our Security Testing Approach</h2>
         <p>Manual penetration testing requires careful analysis of authentication boundaries, tenant isolation, and edge cases that automated tools often miss. While automation is valuable for catching common vulnerabilities, sophisticated attacks require human intuition and domain expertise.</p>
         
         <h2>The AI Solution</h2>
@@ -178,7 +178,7 @@ const BlogPost: React.FC = () => {
           <li><strong>Documentation:</strong> Auto-generating test notes and findings</li>
         </ul>
         
-        <h3>Implementation Details</h3>
+        <h2>Implementation Details</h2>
         <p>The AI helper runs locally and integrates with BurpSuite's extension API. It analyzes request/response pairs and suggests next test vectors while keeping the security tester in full control of what gets executed.</p>
         
         <h2>Results and Impact</h2>
@@ -190,17 +190,8 @@ const BlogPost: React.FC = () => {
           <li>More consistent testing methodology across the team</li>
         </ul>
         
-        <h2>Best Practices</h2>
-        <p>When using AI for security testing:</p>
-        <ol>
-          <li>Always validate AI suggestions before executing tests</li>
-          <li>Keep human oversight for critical security decisions</li>
-          <li>Use AI to augment, not replace, security expertise</li>
-          <li>Regularly audit AI-suggested test cases for effectiveness</li>
-        </ol>
-        
         <h2>Conclusion</h2>
-        <p>AI-assisted penetration testing represents a significant evolution in security practices. By combining machine learning capabilities with human expertise, we can conduct more thorough, efficient security assessments while maintaining the critical thinking necessary for identifying sophisticated vulnerabilities.</p>`,
+        <p>AI-assisted penetration testing represents a significant evolution in security practices. By combining machine learning capabilities with human expertise, we can conduct more thorough, efficient security assessments.</p>`,
         featured_image: { url: '/images/Security.jpg', title: 'Security Testing' },
         category: 'ENGINEERING',
         publish_date: '2025-10-15',
@@ -212,14 +203,392 @@ const BlogPost: React.FC = () => {
         },
         gradient_colors: '#6a1b9a, #8e24aa',
         icon: { url: '/images/Security.jpg' }
+      },
+      {
+        title: 'What is Context and How Should Enterprise Brands Use It?',
+        url: 'personalization/what-is-context-and-how-should-enterprise-brands-use-it',
+        excerpt: 'Customer AI is the key they believe is to visit your site on a given day. When you have context, you can stop guessing at what your customers want and start adapting to them.',
+        content: `<h2>Understanding Context in Digital Experiences</h2>
+        <p>Customer AI is the key they believe is to visit your site on a given day. When you have context, you can stop guessing at what your customers want and start adapting to them.</p>
+        
+        <h2>What is Context?</h2>
+        <p>Context is the combination of data points that tells you about your customer at a specific moment in time. It includes:</p>
+        <ul>
+          <li><strong>Behavioral Context:</strong> What pages they've visited, what content they've engaged with</li>
+          <li><strong>Temporal Context:</strong> Time of day, day of week, season</li>
+          <li><strong>Device Context:</strong> Mobile, desktop, tablet - each indicating different intent</li>
+          <li><strong>Geographic Context:</strong> Location-based preferences and needs</li>
+          <li><strong>Historical Context:</strong> Past purchases, interactions, and preferences</li>
+        </ul>
+        
+        <h2>Why Context Matters for Enterprise Brands</h2>
+        <p>Without context, you're treating all visitors the same. With context, you can:</p>
+        <ul>
+          <li>Deliver personalized experiences at scale</li>
+          <li>Reduce bounce rates and increase engagement</li>
+          <li>Improve conversion rates significantly</li>
+          <li>Build stronger customer relationships</li>
+          <li>Optimize marketing spend efficiency</li>
+        </ul>
+        
+        <h2>How to Implement Contextual Experiences</h2>
+        <h3>1. Data Collection Strategy</h3>
+        <p>Start by collecting the right data points. Focus on actionable context that directly impacts user experience.</p>
+        
+        <h3>2. Real-Time Processing</h3>
+        <p>Context is only valuable if you can act on it in real-time. Implement systems that can process and respond to context instantly.</p>
+        
+        <h3>3. Content Orchestration</h3>
+        <p>Use your headless CMS to deliver different content based on context. This requires flexible content modeling and delivery APIs.</p>
+        
+        <h2>Real-World Examples</h2>
+        <p><strong>E-commerce:</strong> Show different products based on weather, location, and browsing history.</p>
+        <p><strong>Media:</strong> Recommend articles based on reading patterns and time of day.</p>
+        <p><strong>Financial Services:</strong> Adjust messaging based on customer lifecycle stage and account activity.</p>
+        
+        <h2>Best Practices</h2>
+        <ol>
+          <li>Start with one or two context signals and expand gradually</li>
+          <li>Always provide value - don't personalize just because you can</li>
+          <li>Respect privacy and be transparent about data usage</li>
+          <li>Test and measure the impact of contextual experiences</li>
+          <li>Keep fallback experiences for when context is unavailable</li>
+        </ol>
+        
+        <h2>Conclusion</h2>
+        <p>Context transforms generic digital experiences into personalized journeys. Enterprise brands that master contextual delivery will build stronger customer relationships and drive better business outcomes.</p>`,
+        featured_image: { url: '/images/Customer Analytics.jpg', title: 'Customer Context' },
+        category: 'PERSONALIZATION',
+        publish_date: '2025-10-22',
+        reading_time_minute: 25,
+        author: {
+          name: 'Ben Goldstein',
+          bio: 'Product Marketing Lead at ContentFlow, specializing in personalization strategies and customer experience optimization for enterprise brands.',
+          profile_picture: { url: '/images/Conor.jpg', title: 'Ben Goldstein' }
+        },
+        gradient_colors: '#8e24aa, #ab47bc',
+        icon: { url: '/images/Customer Analytics.jpg' }
+      },
+      {
+        title: 'Diving Into AI Prompting: A Technical Guide to Context, Iteration, and Brand-Specific Results',
+        url: 'ai/diving-into-ai-prompting-a-technical-guide-to-context-iteration-and-brand-specific-results',
+        excerpt: 'Discover how our new AI agents can accelerate content creation, optimization, and personalization while maintaining your brand voice.',
+        content: `<h2>Introduction to AI Prompting</h2>
+        <p>Discover how our new AI agents can accelerate content creation, optimization, and personalization while maintaining your brand voice. AI prompting is both an art and a science, requiring understanding of context, iteration techniques, and brand alignment.</p>
+        
+        <h2>Understanding Context in AI Prompting</h2>
+        <p>Context is everything when working with AI. The more relevant context you provide, the better your results will be.</p>
+        
+        <h3>Types of Context</h3>
+        <ul>
+          <li><strong>Task Context:</strong> What you're trying to accomplish</li>
+          <li><strong>Brand Context:</strong> Your brand voice, values, and guidelines</li>
+          <li><strong>Audience Context:</strong> Who the content is for</li>
+          <li><strong>Format Context:</strong> The desired output format</li>
+          <li><strong>Historical Context:</strong> Previous iterations and feedback</li>
+        </ul>
+        
+        <h2>The Iteration Framework</h2>
+        <p>Effective AI prompting is rarely a one-shot process. Follow this iteration framework:</p>
+        
+        <h3>1. Initial Prompt</h3>
+        <p>Start with a clear, specific prompt that includes:</p>
+        <ul>
+          <li>The task objective</li>
+          <li>Key constraints</li>
+          <li>Desired format</li>
+          <li>Brand guidelines</li>
+        </ul>
+        
+        <h3>2. Review & Refine</h3>
+        <p>Analyze the output for:</p>
+        <ul>
+          <li>Accuracy and relevance</li>
+          <li>Brand voice alignment</li>
+          <li>Technical correctness</li>
+          <li>Completeness</li>
+        </ul>
+        
+        <h3>3. Iterate</h3>
+        <p>Provide specific feedback and request revisions. Be explicit about what to change and why.</p>
+        
+        <h2>Brand-Specific Prompting Techniques</h2>
+        <p>To maintain brand consistency:</p>
+        
+        <h3>Create a Brand Prompt Library</h3>
+        <p>Develop reusable prompt templates that include your brand voice, tone, and style guidelines.</p>
+        
+        <h3>Use Few-Shot Learning</h3>
+        <p>Provide examples of your existing brand content to guide the AI's output style.</p>
+        
+        <h3>Implement Review Gates</h3>
+        <p>Always review AI-generated content for brand alignment before publishing.</p>
+        
+        <h2>Advanced Techniques</h2>
+        <h3>Chain-of-Thought Prompting</h3>
+        <p>Ask the AI to show its reasoning process for complex tasks.</p>
+        
+        <h3>Role-Based Prompting</h3>
+        <p>Assign specific roles to the AI (e.g., "Act as a senior technical writer...").</p>
+        
+        <h3>Constraint-Based Generation</h3>
+        <p>Use specific constraints to control output (length, format, style, technical level).</p>
+        
+        <h2>Common Pitfalls to Avoid</h2>
+        <ol>
+          <li><strong>Vague Prompts:</strong> Be specific about what you want</li>
+          <li><strong>Insufficient Context:</strong> Provide all relevant information upfront</li>
+          <li><strong>Ignoring Iteration:</strong> First outputs are rarely perfect</li>
+          <li><strong>Over-Reliance:</strong> Always add human review and expertise</li>
+          <li><strong>Inconsistent Style:</strong> Maintain consistent prompting patterns</li>
+        </ol>
+        
+        <h2>Measuring Success</h2>
+        <p>Track these metrics to optimize your AI prompting:</p>
+        <ul>
+          <li>Time saved in content creation</li>
+          <li>Number of iterations needed</li>
+          <li>Brand voice consistency scores</li>
+          <li>Content quality ratings</li>
+          <li>User engagement with AI-generated content</li>
+        </ul>
+        
+        <h2>Best Practices for Teams</h2>
+        <ul>
+          <li>Document successful prompts for reuse</li>
+          <li>Share learnings across the team</li>
+          <li>Establish review workflows</li>
+          <li>Create brand-specific prompt templates</li>
+          <li>Regularly update prompts based on results</li>
+        </ul>
+        
+        <h2>Conclusion</h2>
+        <p>Mastering AI prompting requires practice, patience, and systematic iteration. By following these techniques and maintaining focus on brand alignment, you can leverage AI to significantly accelerate content creation while maintaining quality and consistency.</p>`,
+        featured_image: { url: '/images/AI-Powered Agents.png', title: 'AI Prompting Guide' },
+        category: 'AI',
+        publish_date: '2025-10-01',
+        reading_time_minute: 8,
+        author: {
+          name: 'Lo Etheridge',
+          bio: 'Head of Product at ContentFlow, leading the development of AI-powered content solutions and helping enterprises leverage AI effectively.',
+          profile_picture: { url: '/images/lo-etheridge-headshot.PNG', title: 'Lo Etheridge' }
+        },
+        gradient_colors: '#6a1b9a, #9c27b0',
+        icon: { url: '/images/AI-Powered Agents.png' }
+      },
+      {
+        title: 'Building Scalable Headless CMS Architecture',
+        url: 'engineering/scalable-headless-cms-architecture',
+        excerpt: 'Learn how to design and implement a scalable, performant headless CMS architecture that grows with your business needs.',
+        content: `<h2>Introduction</h2>
+        <p>Learn how to design and implement a scalable, performant headless CMS architecture that grows with your business needs. Modern applications demand flexibility, speed, and reliability at scale.</p>
+        
+        <h2>Key Architecture Principles</h2>
+        <ul>
+          <li>API-first design for maximum flexibility</li>
+          <li>Microservices architecture for independent scaling</li>
+          <li>CDN integration for global performance</li>
+          <li>Caching strategies at multiple levels</li>
+          <li>Event-driven updates for real-time sync</li>
+        </ul>
+        
+        <h2>Performance Optimization</h2>
+        <p>Implement these strategies for optimal performance:</p>
+        <ul>
+          <li>GraphQL for efficient data fetching</li>
+          <li>Edge caching for reduced latency</li>
+          <li>Image optimization and lazy loading</li>
+          <li>Code splitting for faster page loads</li>
+        </ul>
+        
+        <h2>Scalability Strategies</h2>
+        <p>Design your architecture to handle growth:</p>
+        <ul>
+          <li>Horizontal scaling capabilities</li>
+          <li>Database optimization and sharding</li>
+          <li>Load balancing across regions</li>
+          <li>Auto-scaling based on demand</li>
+        </ul>
+        
+        <h2>Security Best Practices</h2>
+        <ul>
+          <li>API authentication and authorization</li>
+          <li>Rate limiting and DDoS protection</li>
+          <li>Content validation and sanitization</li>
+          <li>Regular security audits</li>
+        </ul>
+        
+        <h2>Conclusion</h2>
+        <p>A well-architected headless CMS provides the foundation for building scalable, performant digital experiences that can grow with your business.</p>`,
+        featured_image: { url: '/images/Headless CMS.png', title: 'Headless Architecture' },
+        category: 'ENGINEERING',
+        publish_date: '2025-09-28',
+        reading_time_minute: 15,
+        author: {
+          name: 'Sarah Chen',
+          bio: 'Principal Engineer at ContentFlow with expertise in distributed systems, microservices architecture, and scalable web applications.',
+          profile_picture: { url: '/images/Jessica.png', title: 'Sarah Chen' }
+        },
+        gradient_colors: '#4a148c, #6a1b9a',
+        icon: { url: '/images/Headless CMS.png' }
+      },
+      {
+        title: 'The Future of Digital Experience Platforms',
+        url: 'thought-leadership/future-of-dxp',
+        excerpt: 'Exploring the trends shaping the future of digital experiences, from AI personalization to composable architecture.',
+        content: `<h2>The Evolution of Digital Experiences</h2>
+        <p>Exploring the trends shaping the future of digital experiences, from AI personalization to composable architecture. The landscape is changing rapidly as technology advances.</p>
+        
+        <h2>Key Trends</h2>
+        <ul>
+          <li>AI-driven personalization at scale</li>
+          <li>Composable architecture adoption</li>
+          <li>Edge computing for performance</li>
+          <li>Privacy-first data strategies</li>
+          <li>Omnichannel orchestration</li>
+        </ul>
+        
+        <h2>The Composable Future</h2>
+        <p>Modern DXPs are moving toward composable architectures that allow businesses to:</p>
+        <ul>
+          <li>Choose best-of-breed solutions</li>
+          <li>Adapt quickly to market changes</li>
+          <li>Scale components independently</li>
+          <li>Reduce vendor lock-in</li>
+        </ul>
+        
+        <h2>AI and Automation</h2>
+        <p>AI is transforming digital experiences through:</p>
+        <ul>
+          <li>Intelligent content recommendations</li>
+          <li>Automated content generation</li>
+          <li>Predictive analytics</li>
+          <li>Conversational interfaces</li>
+        </ul>
+        
+        <h2>Conclusion</h2>
+        <p>The future of DXPs lies in composability, AI-driven intelligence, and customer-centric design. Organizations that embrace these trends will lead in digital innovation.</p>`,
+        featured_image: { url: '/images/Innovation.jpg', title: 'Future of DXP' },
+        category: 'THOUGHT LEADERSHIP',
+        publish_date: '2025-09-20',
+        reading_time_minute: 12,
+        author: {
+          name: 'Michael Torres',
+          bio: 'CTO at ContentFlow, driving technical strategy and innovation in digital experience platforms and composable architecture.',
+          profile_picture: { url: '/images/Mike.png', title: 'Michael Torres' }
+        },
+        gradient_colors: '#7b1fa2, #9c27b0',
+        icon: { url: '/images/Innovation.jpg' }
+      },
+      {
+        title: 'Personalization at Scale: Best Practices',
+        url: 'guides/personalization-best-practices',
+        excerpt: 'A comprehensive guide to implementing effective personalization strategies that deliver measurable business results.',
+        content: `<h2>Introduction</h2>
+        <p>A comprehensive guide to implementing effective personalization strategies that deliver measurable business results. Personalization is no longer optional—it's expected.</p>
+        
+        <h2>The Business Case</h2>
+        <ul>
+          <li>71% of consumers expect personalized interactions</li>
+          <li>Personalization can increase revenue by 10-30%</li>
+          <li>76% of consumers get frustrated with generic experiences</li>
+        </ul>
+        
+        <h2>Implementation Strategy</h2>
+        <h3>1. Data Foundation</h3>
+        <p>Build a solid data infrastructure:</p>
+        <ul>
+          <li>Collect behavioral data</li>
+          <li>Integrate customer data platforms</li>
+          <li>Ensure data quality and governance</li>
+        </ul>
+        
+        <h3>2. Segmentation</h3>
+        <p>Create meaningful customer segments:</p>
+        <ul>
+          <li>Demographic segmentation</li>
+          <li>Behavioral segmentation</li>
+          <li>Predictive segmentation</li>
+        </ul>
+        
+        <h3>3. Content Strategy</h3>
+        <p>Develop personalized content:</p>
+        <ul>
+          <li>Dynamic content blocks</li>
+          <li>Personalized recommendations</li>
+          <li>Tailored messaging</li>
+        </ul>
+        
+        <h2>Technology Stack</h2>
+        <p>Essential components for personalization:</p>
+        <ul>
+          <li>Headless CMS for flexible content</li>
+          <li>CDP for customer data unification</li>
+          <li>Analytics for insights</li>
+          <li>Testing tools for optimization</li>
+        </ul>
+        
+        <h2>Measuring Success</h2>
+        <p>Key metrics to track:</p>
+        <ul>
+          <li>Engagement rates</li>
+          <li>Conversion improvements</li>
+          <li>Customer lifetime value</li>
+          <li>Return on investment</li>
+        </ul>
+        
+        <h2>Conclusion</h2>
+        <p>Successful personalization requires strategy, technology, and continuous optimization. Start small, measure results, and scale what works.</p>`,
+        featured_image: { url: '/images/AI Personalization.jpg', title: 'Personalization' },
+        category: 'GUIDE',
+        publish_date: '2025-09-15',
+        reading_time_minute: 18,
+        author: {
+          name: 'Emily Rodriguez',
+          bio: 'Solutions Architect at ContentFlow, helping enterprises implement personalization strategies and optimize customer experiences.',
+          profile_picture: { url: '/images/Renee.jpg', title: 'Emily Rodriguez' }
+        },
+        gradient_colors: '#8e24aa, #ba68c8',
+        icon: { url: '/images/AI Personalization.jpg' }
       }
     ];
     
-    return fallbackPosts.find(post => 
-      post.url === slug || 
-      post.url.includes(slug) || 
-      slug.includes(post.url.split('/').pop() || '')
-    ) || null;
+    console.log('🔍 Searching for blog post with slug:', slug);
+    console.log('📚 Available fallback posts:', fallbackPosts.map(p => p.url));
+    
+    const found = fallbackPosts.find(post => {
+      // Try exact match
+      if (post.url === slug) {
+        console.log('✅ Exact match found:', post.title);
+        return true;
+      }
+      // Try if post URL contains slug
+      if (post.url.includes(slug)) {
+        console.log('✅ Partial match found:', post.title);
+        return true;
+      }
+      // Try if slug contains post URL
+      if (slug.includes(post.url)) {
+        console.log('✅ Slug contains URL match found:', post.title);
+        return true;
+      }
+      // Try matching just the last part (post slug)
+      const postSlugPart = post.url.split('/').pop() || '';
+      const searchSlugPart = slug.split('/').pop() || '';
+      if (postSlugPart && searchSlugPart && postSlugPart === searchSlugPart) {
+        console.log('✅ Slug part match found:', post.title);
+        return true;
+      }
+      return false;
+    });
+    
+    if (found) {
+      console.log('🎉 Returning blog post:', found.title);
+    } else {
+      console.error('❌ No fallback post found for slug:', slug);
+    }
+    
+    return found || null;
   };
 
   const formatDate = (dateString: string) => {
