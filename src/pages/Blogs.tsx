@@ -16,20 +16,25 @@ const Blogs: React.FC = () => {
     console.log('🔍 [Blogs] getAuthorProfilePicture called with:', {
       author,
       isArray: Array.isArray(author),
-      authorName: author?.name || author?.title || (Array.isArray(author) && author[0]?.name)
+      authorName: author?.name || author?.title || (Array.isArray(author) && author[0]?.name),
+      profilePicture: author?.profile_picture
     });
     
-    // Try to get the image from Contentstack data first
+    // Try to get the image from Contentstack data first - but ONLY if it's valid and non-empty
     const pic = author?.profile_picture;
     if (pic) {
-      if (typeof pic === 'string' && pic.trim()) {
+      // Check if it's a non-empty string
+      if (typeof pic === 'string' && pic.trim().length > 0) {
         console.log('✅ [Blogs] Using Contentstack string URL:', pic.trim());
         return pic.trim();
       }
-      if (pic.url && typeof pic.url === 'string' && pic.url.trim()) {
+      // Check if it's an object with a non-empty url property
+      if (typeof pic === 'object' && pic.url && typeof pic.url === 'string' && pic.url.trim().length > 0) {
         console.log('✅ [Blogs] Using Contentstack object URL:', pic.url.trim());
         return pic.url.trim();
       }
+      // If we get here, pic exists but is empty/invalid
+      console.log('⚠️ [Blogs] Profile picture exists but is empty or invalid:', pic);
     }
     
     // If author is an array (from reference field), try first item
@@ -37,14 +42,15 @@ const Blogs: React.FC = () => {
       const firstAuthor = author[0];
       const firstPic = firstAuthor?.profile_picture;
       if (firstPic) {
-        if (typeof firstPic === 'string' && firstPic.trim()) {
+        if (typeof firstPic === 'string' && firstPic.trim().length > 0) {
           console.log('✅ [Blogs] Using Contentstack array string URL:', firstPic.trim());
           return firstPic.trim();
         }
-        if (firstPic.url && typeof firstPic.url === 'string' && firstPic.url.trim()) {
+        if (typeof firstPic === 'object' && firstPic.url && typeof firstPic.url === 'string' && firstPic.url.trim().length > 0) {
           console.log('✅ [Blogs] Using Contentstack array object URL:', firstPic.url.trim());
           return firstPic.url.trim();
         }
+        console.log('⚠️ [Blogs] Array author profile picture exists but is empty or invalid:', firstPic);
       }
     }
     
@@ -61,6 +67,7 @@ const Blogs: React.FC = () => {
     
     const mappedImage = authorImageMap[authorName];
     console.log(`📸 [Blogs] Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
+    console.log(`🎯 [Blogs] FINAL RETURN VALUE:`, mappedImage || 'undefined');
     
     return mappedImage || undefined;
   };

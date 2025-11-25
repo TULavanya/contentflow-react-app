@@ -622,20 +622,25 @@ const BlogPost: React.FC = () => {
     console.log('🔍 getAuthorProfilePicture called with:', {
       author,
       authorName: author?.name || author?.title,
-      profilePicture: author?.profile_picture
+      profilePicture: author?.profile_picture,
+      profilePictureType: typeof author?.profile_picture
     });
     
-    // Try to get the image from Contentstack data first
+    // Try to get the image from Contentstack data first - but ONLY if it's a valid, non-empty URL
     const pic = author?.profile_picture;
     if (pic) {
-      if (typeof pic === 'string' && pic.trim()) {
+      // Check if it's a non-empty string
+      if (typeof pic === 'string' && pic.trim().length > 0) {
         console.log('✅ Using Contentstack string URL:', pic.trim());
         return pic.trim();
       }
-      if (pic.url && typeof pic.url === 'string' && pic.url.trim()) {
+      // Check if it's an object with a non-empty url property
+      if (typeof pic === 'object' && pic.url && typeof pic.url === 'string' && pic.url.trim().length > 0) {
         console.log('✅ Using Contentstack object URL:', pic.url.trim());
         return pic.url.trim();
       }
+      // If we get here, pic exists but is empty/invalid
+      console.log('⚠️ Profile picture exists but is empty or invalid:', pic);
     }
     
     // Fallback to local images based on author name
@@ -651,6 +656,7 @@ const BlogPost: React.FC = () => {
     
     const mappedImage = authorImageMap[authorName];
     console.log(`📸 Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
+    console.log(`🎯 FINAL RETURN VALUE:`, mappedImage || 'undefined');
     
     return mappedImage || undefined;
   };
