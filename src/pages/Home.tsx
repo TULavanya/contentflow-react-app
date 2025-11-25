@@ -15,7 +15,7 @@ const Home: React.FC = () => {
       setIsLoading(true);
       try {
         const data = await fetchContent('home_page');
-        console.log('🏠 Home page data:', data);
+        console.log('Home page data:', data);
         
         if (data) {
           console.log('✅ CONTENTSTACK DATA RECEIVED:');
@@ -46,7 +46,7 @@ const Home: React.FC = () => {
             data.cta_secondary
           ].filter(field => field !== undefined && field !== null);
           
-          console.log(`\n📊 STATUS: ${filledFields.length}/7 fields have data`);
+          console.log(`\nSTATUS: ${filledFields.length}/7 fields have data`);
           
           if (filledFields.length === 0) {
             console.warn('⚠️ DATA FETCHED BUT ALL FIELDS ARE EMPTY!');
@@ -54,8 +54,8 @@ const Home: React.FC = () => {
             console.log('   - hero_title, hero_subtitle, hero_stats, trusted_brands, features, cta_primary, cta_secondary');
           }
         } else {
-          console.warn('⚠️ No data received - using fallback content');
-          console.log('📝 Create and publish a home_page entry in Contentstack');
+          console.warn('No data received - using fallback content');
+          console.log('Create and publish a home_page entry in Contentstack');
         }
         
         setHomeData(data);
@@ -72,6 +72,56 @@ const Home: React.FC = () => {
   // Use only Contentstack data - no fallbacks
   const brandLogos = homeData?.trusted_brands || [];
 
+  // Fallback testimonials data
+  const testimonials = homeData?.testimonials || [
+    {
+      testimonial_text: 'ContentFlow has transformed how we manage and deliver content across all our channels. The results have been phenomenal.',
+      customer_name: 'Sarah Johnson',
+      customer_title: 'VP of Digital Marketing',
+      customer_company: 'TechCorp',
+      customer_photo: '/images/Renee.jpg'
+    },
+    {
+      testimonial_text: 'The flexibility and power of ContentFlow allowed us to launch our global platform in record time. Truly exceptional.',
+      customer_name: 'Michael Chen',
+      customer_title: 'Chief Technology Officer',
+      customer_company: 'GlobalRetail Inc',
+      customer_photo: '/images/Conor.jpg'
+    },
+    {
+      testimonial_text: 'We\'ve seen a 300% increase in content velocity and our team couldn\'t be happier. ContentFlow is a game-changer.',
+      customer_name: 'Emily Rodriguez',
+      customer_title: 'Head of Content',
+      customer_company: 'MediaFlow',
+      customer_photo: '/images/Jessica.png'
+    }
+  ];
+
+  // Fallback insights/resources data
+  const insightsResources = homeData?.insights_section?.resource_items || [
+    {
+      title: 'The Complete Guide to Headless CMS',
+      description: 'Learn how headless CMS architecture can transform your digital experiences and accelerate time-to-market.',
+      resource_type: 'GUIDE',
+      icon: '/images/Ebook.svg',
+      resource_link: { href: '/blogs', title: 'Download Guide' }
+    },
+    {
+      title: '2024 Digital Experience Trends',
+      description: 'Discover the top trends shaping the future of digital experiences and customer engagement.',
+      resource_type: 'REPORT',
+      icon: '/images/Research.webp',
+      resource_link: { href: '/blogs', title: 'Read Report' }
+    },
+    {
+      title: 'AI-Powered Personalization Deep Dive',
+      description: 'Explore how AI and machine learning are revolutionizing content personalization at scale.',
+      resource_type: 'RESEARCH',
+      icon: '/images/AI Personalization.jpg',
+      resource_link: { href: '/blogs', title: 'Learn More' }
+    }
+  ];
+
   // Show loading spinner while fetching data
   if (isLoading) {
     return <LoadingSpinner />;
@@ -83,7 +133,9 @@ const Home: React.FC = () => {
       <SEOHead seoData={homeData?.seo_metadata} />
       
       {/* Hero Section */}
-      <section className="hero-section">
+      <section className="hero-section" style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/AI.jpg')`
+      }}>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <h1 className="animated-title">
@@ -179,45 +231,64 @@ const Home: React.FC = () => {
             textTransform: 'uppercase',
             animation: 'fadeInUp 1s ease-out'
           }}>
-            ✨ Trusted by industry leaders worldwide ✨
+            Trusted by industry leaders worldwide
           </h3>
           
           {/* Scrolling Brand Logos Marquee */}
-          <div className="marquee-container" style={{
+          <style>{`
+            @keyframes scrollHome {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .home-logo-track {
+              display: flex;
+              animation: scrollHome 20s linear infinite;
+              width: fit-content;
+            }
+            .home-logo-track:hover {
+              animation-play-state: paused;
+            }
+          `}</style>
+          
+          <div style={{
             overflow: 'hidden',
-            whiteSpace: 'nowrap',
-            position: 'relative',
-            width: '100%',
-            padding: '20px 0'
+            maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
           }}>
-            <div className="marquee-content" style={{
-              display: 'inline-block',
-              paddingLeft: '100%',
-            }}>
-              {[...brandLogos, ...brandLogos].map((brand, index) => (
-                <div key={index} style={{
-                  display: 'inline-block',
-                  fontSize: '1.3em',
-              fontWeight: 'bold',
-                  color: '#333',
-                  padding: '15px 30px',
-              background: 'white',
-                  borderRadius: '12px',
-                  boxShadow: '0 4px 15px rgba(106, 27, 154, 0.1)',
-                  marginRight: '40px',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-5px) scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(106, 27, 154, 0.2)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 4px 15px rgba(106, 27, 154, 0.1)';
+            <div className="home-logo-track">
+              {/* First set of logos */}
+              {(brandLogos.length > 0 ? brandLogos : ['ASICS', 'Walmart', 'Mattel', 'Crocs', 'Alaska Airlines', 'MongoDB', 
+              'Glassdoor', 'TopGolf', 'Callaway', 'Steve Madden']).map((brand: any, index: number) => (
+                <div key={`logo-${index}`} style={{
+                  padding: '0 40px',
+                  fontSize: '1.8rem',
+                  fontWeight: '700',
+                  color: '#000',
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  minWidth: '200px',
+                  justifyContent: 'center'
                 }}>
                   {safeTextContent(brand, '')}
-            </div>
+                </div>
+              ))}
+              {/* Duplicate for seamless loop */}
+              {(brandLogos.length > 0 ? brandLogos : ['ASICS', 'Walmart', 'Mattel', 'Crocs', 'Alaska Airlines', 'MongoDB', 
+              'Glassdoor', 'TopGolf', 'Callaway', 'Steve Madden']).map((brand: any, index: number) => (
+                <div key={`logo-dup-${index}`} style={{
+                  padding: '0 40px',
+                  fontSize: '1.8rem',
+                  fontWeight: '700',
+                  color: '#000',
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  minWidth: '200px',
+                  justifyContent: 'center'
+                }}>
+                  {safeTextContent(brand, '')}
+                </div>
               ))}
             </div>
           </div>
@@ -250,116 +321,117 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* Enhanced Feature Cards with Large Prominent Images */}
+          {/* Enhanced Feature Cards with Full Background Images */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
             gap: '40px',
             marginTop: '60px'
           }}>
             {(homeData?.features || []).map((feature: any, index: number) => (
-              <div key={index} style={{
-                background: 'white',
-                borderRadius: '20px',
-                overflow: 'hidden',
-                boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
-                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                border: '1px solid #f0f0f0'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-15px) scale(1.02)';
-                e.currentTarget.style.boxShadow = '0 25px 50px rgba(106, 27, 154, 0.2)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.1)';
-              }}>
-                {/* Large Feature Image */}
-                <div style={{ position: 'relative', height: '240px', overflow: 'hidden' }}>
-                  <ImageSync
-                    src={feature.icon || feature.feature_image || feature.image}
-                    alt={safeTextContent(feature.title, 'Feature Image')}
-                    fallbackSrc="/images/logo.png"
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover'
-                    }}
-                  />
-                  {/* Category Badge */}
-                  <div style={{
+              <Link
+                key={index}
+                to="/platform"
+                style={{
+                  textDecoration: 'none',
+                  height: '400px',
+                  borderRadius: '25px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  color: 'white',
+                  transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  cursor: 'pointer',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+                  border: '3px solid white',
+                  backgroundColor: '#f5f5f5'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+                }}
+              >
+                {/* Background Image from Contentstack */}
+                <img
+                  src={feature.icon?.url || feature.feature_image?.url || feature.image?.url || feature.icon || feature.feature_image || feature.image}
+                  alt={safeTextContent(feature.title, 'Feature')}
+                  style={{
                     position: 'absolute',
-                    bottom: '20px',
-                    left: '20px',
-                    background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
-                    color: 'white',
-                    padding: '8px 16px',
-                    borderRadius: '20px',
-                    fontSize: '0.8em',
-                    fontWeight: 'bold',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px'
-                  }}>
-                    Core Feature
-                  </div>
-                  </div>
-
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    zIndex: 1
+                  }}
+                  onError={(e) => {
+                    console.error('Feature image failed to load:', feature.icon || feature.feature_image);
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+                
+                {/* Bottom Gradient Overlay for Text Readability */}
+                <div style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '70%',
+                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%)',
+                  zIndex: 2
+                }}></div>
+                
                 {/* Content */}
-                <div style={{ padding: '30px' }}>
-                  <h3 style={{
-                    fontSize: '1.5em',
-                    fontWeight: 'bold',
+                <div style={{
+                  position: 'relative',
+                  zIndex: 3,
+                  padding: '30px',
+                  width: '100%',
+                  textAlign: 'center'
+                }}>
+                  <p style={{ 
+                    fontSize: '2.2em', 
+                    fontWeight: '800',
                     marginBottom: '15px',
-                    color: '#333',
-                    lineHeight: 1.3
+                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                    color: 'white'
                   }}>
-                    {safeTextContent(feature.title, 'Feature Title')}
-                  </h3>
-                  <p style={{
-                    color: '#666',
-                    lineHeight: 1.6,
-                    marginBottom: '25px',
-                    fontSize: '1em'
-                  }}>
-                    {safeTextContent(feature.description, 'Feature description')}
+                    {safeTextContent(feature.title, 'Feature')}
                   </p>
-                  <Link 
-                    to="/platform" 
-                    style={{
-                      color: '#6a1b9a',
-                      fontWeight: 'bold',
-                      textDecoration: 'none',
-                      fontSize: '1em',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      transition: 'color 0.3s ease'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = '#8e24aa';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = '#6a1b9a';
-                    }}
-                  >
-                    Explore Platform <span style={{ transition: 'transform 0.3s ease' }}>→</span>
-                    </Link>
+                  <p style={{ 
+                    fontSize: '1.15em', 
+                    textAlign: 'center', 
+                    opacity: 0.95,
+                    lineHeight: 1.6,
+                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                    color: 'white',
+                    margin: 0
+                  }}>
+                    {safeTextContent(feature.description, 'Description')}
+                  </p>
                 </div>
-                </div>
-              ))}
-            </div>
+              </Link>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
       {/* Customer Success Stories */}
       <section className="testimonials-section">
         <div className="container">
           <h2>Powering Brand Breakthroughs</h2>
           <div className="testimonials-grid">
-            {(homeData?.testimonials || []).slice(0, 3).map((testimonial: any, index: number) => (
+            {testimonials.slice(0, 3).map((testimonial: any, index: number) => (
               <div key={index} className="testimonial-card">
                 <div className="rating">
-                  {'⭐'.repeat(testimonial.rating || 5)}
+                  ★★★★★
                 </div>
               <div className="testimonial-content">
                   <p>"{safeTextContent(testimonial.testimonial_text, 'Customer testimonial')}"</p>
@@ -423,7 +495,7 @@ const Home: React.FC = () => {
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
             gap: '40px'
           }}>
-            {(homeData?.insights_section?.resource_items || []).map((resource: any, index: number) => (
+            {insightsResources.map((resource: any, index: number) => (
               <div key={index} className="post-card">
                 <div style={{
                   height: '200px',
@@ -480,7 +552,7 @@ const Home: React.FC = () => {
                     to={resource.resource_link?.href || '/blogs'} 
                     style={{ color: '#6a1b9a', fontWeight: 'bold', textDecoration: 'none', marginTop: '15px', display: 'inline-block' }}
                   >
-                    {safeTextContent(resource.resource_link?.title, 'Read More')} →
+                    {safeTextContent(resource.resource_link?.title, 'Read More')}
                   </Link>
                 </div>
               </div>
@@ -553,8 +625,9 @@ const Home: React.FC = () => {
           right: '25%',
           fontSize: '1.8em',
           animation: 'float 9s ease-in-out infinite reverse',
-          opacity: 0.6
-        }}>✨</div>
+          opacity: 0.6,
+          display: 'none'
+        }}></div>
         <div style={{
           position: 'absolute',
           top: '40%',
@@ -582,7 +655,7 @@ const Home: React.FC = () => {
             animation: 'fadeInUp 0.8s ease-out',
             letterSpacing: '-1px'
           }}>
-            ✨ Reimagine What's Possible ✨
+            Reimagine What's Possible
           </h2>
           <p style={{
             fontSize: '1.3em',
