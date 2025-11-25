@@ -110,11 +110,25 @@ const BlogPost: React.FC = () => {
                 console.log('👤 Extracted author:', foundPost.author);
               }
               
+              // Handle profile_picture if it's an array or needs extraction
+              if (foundPost.author.profile_picture) {
+                if (Array.isArray(foundPost.author.profile_picture) && foundPost.author.profile_picture.length > 0) {
+                  console.log('📸 Author profile picture was an array, extracting first item...');
+                  foundPost.author.profile_picture = foundPost.author.profile_picture[0];
+                }
+                
+                // If profile_picture is an empty string or invalid, remove it to use fallback
+                if (typeof foundPost.author.profile_picture === 'string' && foundPost.author.profile_picture.trim() === '') {
+                  console.log('📸 Author profile picture is empty string, will use fallback');
+                  foundPost.author.profile_picture = null;
+                }
+              }
+              
               console.log('👤 Final author data:', {
                 name: foundPost.author?.name || foundPost.author?.title,
                 bio: foundPost.author?.bio,
                 profile_picture: foundPost.author?.profile_picture,
-                profile_picture_url: foundPost.author?.profile_picture?.url || 'NO URL'
+                profile_picture_url: foundPost.author?.profile_picture?.url || foundPost.author?.profile_picture || 'NO URL'
               });
             } else {
               console.error('❌ NO AUTHOR DATA IN BLOG POST');
@@ -889,7 +903,13 @@ const BlogPost: React.FC = () => {
                   border: '1px solid rgba(255,255,255,0.2)'
                 }}>
                   <ImageSync
-                    src={blogPost.author?.profile_picture?.url || blogPost.author?.profile_picture || ''}
+                    src={(() => {
+                      const pic = blogPost.author?.profile_picture;
+                      if (!pic) return undefined;
+                      if (typeof pic === 'string') return pic.trim() || undefined;
+                      if (pic.url && typeof pic.url === 'string') return pic.url.trim() || undefined;
+                      return undefined;
+                    })()}
                     alt={blogPost.author?.name || blogPost.author?.title || 'Author'}
                     fallbackSrc="/images/logo.png"
                     style={{
@@ -1173,7 +1193,13 @@ const BlogPost: React.FC = () => {
                     }}></div>
                     
                     <ImageSync
-                      src={blogPost.author.profile_picture?.url || blogPost.author.profile_picture || ''}
+                      src={(() => {
+                        const pic = blogPost.author?.profile_picture;
+                        if (!pic) return undefined;
+                        if (typeof pic === 'string') return pic.trim() || undefined;
+                        if (pic.url && typeof pic.url === 'string') return pic.url.trim() || undefined;
+                        return undefined;
+                      })()}
                       alt={blogPost.author.name || blogPost.author.title || 'Author'}
                       fallbackSrc="/images/logo.png"
                       style={{
