@@ -57,7 +57,7 @@ const Blogs: React.FC = () => {
     // Fallback to local images based on author name
     const authorName = author?.name || author?.title || (Array.isArray(author) && author[0]?.name) || '';
     const authorImageMap: { [key: string]: string } = {
-      'Lo Etheridge': '/images/lo-etheridge-headshot.png',
+      'Lo Etheridge': '/images/Lo_Etheridge.jpg',
       'Kaustubh Rai': '/images/Nishant.jpg',
       'Ben Goldstein': '/images/Mike.png',
       'Sarah Chen': '/images/Jessica.png',
@@ -69,7 +69,7 @@ const Blogs: React.FC = () => {
     console.log(`📸 [Blogs] Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
     
     // Add cache buster to force fresh load (increment this version when images change)
-    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=6` : undefined;
+    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=8` : undefined;
     console.log(`🎯 [Blogs] FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
     
     return imageWithCacheBuster;

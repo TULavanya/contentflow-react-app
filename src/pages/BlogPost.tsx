@@ -397,7 +397,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Lo Etheridge',
           bio: 'Head of Product at ContentFlow, leading the development of AI-powered content solutions and helping enterprises leverage AI effectively.',
-          profile_picture: { url: '/images/lo-etheridge-headshot.png', title: 'Lo Etheridge' }
+          profile_picture: { url: '/images/Lo_Etheridge.jpg', title: 'Lo Etheridge' }
         },
         gradient_colors: '#6a1b9a, #9c27b0',
         icon: { url: '/images/AI-Powered Agents.png' }
@@ -646,7 +646,7 @@ const BlogPost: React.FC = () => {
     // Fallback to local images based on author name
     const authorName = author?.name || author?.title || '';
     const authorImageMap: { [key: string]: string } = {
-      'Lo Etheridge': '/images/lo-etheridge-headshot.png',
+      'Lo Etheridge': '/images/Lo_Etheridge.jpg',
       'Kaustubh Rai': '/images/Nishant.jpg',
       'Ben Goldstein': '/images/Mike.png',
       'Sarah Chen': '/images/Jessica.png',
@@ -658,7 +658,7 @@ const BlogPost: React.FC = () => {
     console.log(`📸 Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
     
     // Add cache buster to force fresh load (increment this version when images change)
-    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=6` : undefined;
+    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=8` : undefined;
     console.log(`🎯 FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
     
     return imageWithCacheBuster;
