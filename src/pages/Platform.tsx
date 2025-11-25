@@ -208,8 +208,8 @@ const Platform: React.FC = () => {
                   bottom: 0,
                   left: 0,
                   width: '100%',
-                  height: '70%',
-                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%)',
+                  height: '100%',
+                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.4) 100%)',
                   zIndex: 2
                 }}></div>
                 
@@ -225,19 +225,21 @@ const Platform: React.FC = () => {
                     fontSize: '2.2em', 
                     fontWeight: '800',
                     marginBottom: '15px',
-                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-                    color: 'white'
+                    textShadow: '0 6px 20px rgba(0, 0, 0, 0.9), 0 2px 4px rgba(0, 0, 0, 1)',
+                    color: 'white',
+                    letterSpacing: '0.5px'
                   }}>
                     {safeTextContent(feature.feature_name, 'Platform Feature')}
                   </p>
                   <p style={{ 
                     fontSize: '1.15em', 
                     textAlign: 'center', 
-                    opacity: 0.95,
+                    opacity: 0.98,
                     lineHeight: 1.6,
-                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.9), 0 2px 4px rgba(0, 0, 0, 0.8)',
                     color: 'white',
-                    margin: 0
+                    margin: 0,
+                    fontWeight: '500'
                   }}>
                     {safeTextContent(feature.feature_description, 'Explore this powerful capability')}
                   </p>
