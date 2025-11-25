@@ -67,9 +67,12 @@ const Blogs: React.FC = () => {
     
     const mappedImage = authorImageMap[authorName];
     console.log(`📸 [Blogs] Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
-    console.log(`🎯 [Blogs] FINAL RETURN VALUE:`, mappedImage || 'undefined');
     
-    return mappedImage || undefined;
+    // Add cache buster to force fresh load (increment this version when images change)
+    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=2` : undefined;
+    console.log(`🎯 [Blogs] FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
+    
+    return imageWithCacheBuster;
   };
 
   useEffect(() => {

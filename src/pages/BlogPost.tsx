@@ -656,9 +656,12 @@ const BlogPost: React.FC = () => {
     
     const mappedImage = authorImageMap[authorName];
     console.log(`📸 Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
-    console.log(`🎯 FINAL RETURN VALUE:`, mappedImage || 'undefined');
     
-    return mappedImage || undefined;
+    // Add cache buster to force fresh load (increment this version when images change)
+    const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=2` : undefined;
+    console.log(`🎯 FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
+    
+    return imageWithCacheBuster;
   };
 
   const formatDate = (dateString: string) => {
