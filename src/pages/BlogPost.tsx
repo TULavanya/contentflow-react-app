@@ -225,7 +225,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Kaustubh Rai',
           bio: 'Application Security Engineer at Contentstack. He is adept at conducting extensive security testing, automating security protocols, and ensuring the safe deployment of a wide array of applications. Kaustubh thrives on the challenges of safeguarding digital environments and has a knack for identifying and rectifying vulnerabilities that others might overlook. Interests include discovering innovative hacking methods and continuously sharpening expertise through participation in diverse CTF competitions.',
-          profile_picture: { url: '', title: 'Kaustubh Rai' }
+          profile_picture: { url: '/images/Nishant.jpg', title: 'Kaustubh Rai' }
         },
         gradient_colors: '#6a1b9a, #8e24aa',
         icon: { url: '/images/Security.jpg' }
@@ -290,7 +290,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Ben Goldstein',
           bio: 'Product Marketing Lead at ContentFlow, specializing in personalization strategies and customer experience optimization for enterprise brands.',
-          profile_picture: { url: '', title: 'Ben Goldstein' }
+          profile_picture: { url: '/images/Mike.png', title: 'Ben Goldstein' }
         },
         gradient_colors: '#8e24aa, #ab47bc',
         icon: { url: '/images/Customer Analytics.jpg' }
@@ -397,7 +397,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Lo Etheridge',
           bio: 'Head of Product at ContentFlow, leading the development of AI-powered content solutions and helping enterprises leverage AI effectively.',
-          profile_picture: { url: '', title: 'Lo Etheridge' }
+          profile_picture: { url: '/images/lo-etheridge-headshot.PNG', title: 'Lo Etheridge' }
         },
         gradient_colors: '#6a1b9a, #9c27b0',
         icon: { url: '/images/AI-Powered Agents.png' }
@@ -453,7 +453,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Sarah Chen',
           bio: 'Principal Engineer at ContentFlow with expertise in distributed systems, microservices architecture, and scalable web applications.',
-          profile_picture: { url: '', title: 'Sarah Chen' }
+          profile_picture: { url: '/images/Jessica.png', title: 'Sarah Chen' }
         },
         gradient_colors: '#4a148c, #6a1b9a',
         icon: { url: '/images/Headless CMS.png' }
@@ -501,7 +501,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Michael Torres',
           bio: 'CTO at ContentFlow, driving technical strategy and innovation in digital experience platforms and composable architecture.',
-          profile_picture: { url: '', title: 'Michael Torres' }
+          profile_picture: { url: '/images/Conor.jpg', title: 'Michael Torres' }
         },
         gradient_colors: '#7b1fa2, #9c27b0',
         icon: { url: '/images/Innovation.jpg' }
@@ -572,7 +572,7 @@ const BlogPost: React.FC = () => {
         author: {
           name: 'Emily Rodriguez',
           bio: 'Solutions Architect at ContentFlow, helping enterprises implement personalization strategies and optimize customer experiences.',
-          profile_picture: { url: '', title: 'Emily Rodriguez' }
+          profile_picture: { url: '/images/Renee.jpg', title: 'Emily Rodriguez' }
         },
         gradient_colors: '#8e24aa, #ba68c8',
         icon: { url: '/images/AI Personalization.jpg' }
@@ -615,6 +615,29 @@ const BlogPost: React.FC = () => {
     }
     
     return found || null;
+  };
+
+  // Author profile picture mapping for when Contentstack doesn't have images
+  const getAuthorProfilePicture = (author: any): string | undefined => {
+    // Try to get the image from Contentstack data first
+    const pic = author?.profile_picture;
+    if (pic) {
+      if (typeof pic === 'string' && pic.trim()) return pic.trim();
+      if (pic.url && typeof pic.url === 'string' && pic.url.trim()) return pic.url.trim();
+    }
+    
+    // Fallback to local images based on author name
+    const authorName = author?.name || author?.title || '';
+    const authorImageMap: { [key: string]: string } = {
+      'Lo Etheridge': '/images/lo-etheridge-headshot.PNG',
+      'Kaustubh Rai': '/images/Nishant.jpg',
+      'Ben Goldstein': '/images/Mike.png',
+      'Sarah Chen': '/images/Jessica.png',
+      'Michael Torres': '/images/Conor.jpg',
+      'Emily Rodriguez': '/images/Renee.jpg'
+    };
+    
+    return authorImageMap[authorName] || undefined;
   };
 
   const formatDate = (dateString: string) => {
@@ -903,13 +926,7 @@ const BlogPost: React.FC = () => {
                   border: '1px solid rgba(255,255,255,0.2)'
                 }}>
                   <ImageSync
-                    src={(() => {
-                      const pic = blogPost.author?.profile_picture;
-                      if (!pic) return undefined;
-                      if (typeof pic === 'string') return pic.trim() || undefined;
-                      if (pic.url && typeof pic.url === 'string') return pic.url.trim() || undefined;
-                      return undefined;
-                    })()}
+                    src={getAuthorProfilePicture(blogPost.author)}
                     alt={blogPost.author?.name || blogPost.author?.title || 'Author'}
                     fallbackSrc="/images/logo.png"
                     style={{
@@ -1193,13 +1210,7 @@ const BlogPost: React.FC = () => {
                     }}></div>
                     
                     <ImageSync
-                      src={(() => {
-                        const pic = blogPost.author?.profile_picture;
-                        if (!pic) return undefined;
-                        if (typeof pic === 'string') return pic.trim() || undefined;
-                        if (pic.url && typeof pic.url === 'string') return pic.url.trim() || undefined;
-                        return undefined;
-                      })()}
+                      src={getAuthorProfilePicture(blogPost.author)}
                       alt={blogPost.author.name || blogPost.author.title || 'Author'}
                       fallbackSrc="/images/logo.png"
                       style={{

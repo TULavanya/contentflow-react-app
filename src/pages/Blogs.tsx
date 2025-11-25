@@ -11,6 +11,39 @@ const Blogs: React.FC = () => {
   const [blogPosts, setBlogPosts] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Author profile picture mapping for when Contentstack doesn't have images
+  const getAuthorProfilePicture = (author: any): string | undefined => {
+    // Try to get the image from Contentstack data first
+    const pic = author?.profile_picture;
+    if (pic) {
+      if (typeof pic === 'string' && pic.trim()) return pic.trim();
+      if (pic.url && typeof pic.url === 'string' && pic.url.trim()) return pic.url.trim();
+    }
+    
+    // If author is an array (from reference field), try first item
+    if (Array.isArray(author) && author.length > 0) {
+      const firstAuthor = author[0];
+      const firstPic = firstAuthor?.profile_picture;
+      if (firstPic) {
+        if (typeof firstPic === 'string' && firstPic.trim()) return firstPic.trim();
+        if (firstPic.url && typeof firstPic.url === 'string' && firstPic.url.trim()) return firstPic.url.trim();
+      }
+    }
+    
+    // Fallback to local images based on author name
+    const authorName = author?.name || author?.title || (Array.isArray(author) && author[0]?.name) || '';
+    const authorImageMap: { [key: string]: string } = {
+      'Lo Etheridge': '/images/lo-etheridge-headshot.PNG',
+      'Kaustubh Rai': '/images/Nishant.jpg',
+      'Ben Goldstein': '/images/Mike.png',
+      'Sarah Chen': '/images/Jessica.png',
+      'Michael Torres': '/images/Conor.jpg',
+      'Emily Rodriguez': '/images/Renee.jpg'
+    };
+    
+    return authorImageMap[authorName] || undefined;
+  };
+
   useEffect(() => {
     const loadContent = async () => {
       setIsLoading(true);
@@ -588,13 +621,7 @@ const Blogs: React.FC = () => {
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                       <ImageSync
-                        src={
-                          post.author?.[0]?.profile_picture?.url || 
-                          post.author?.profile_picture?.url || 
-                          post.author?.[0]?.profile_picture || 
-                          post.author?.profile_picture || 
-                          ''
-                        }
+                        src={getAuthorProfilePicture(post.author)}
                         alt={safeTextContent(
                           post.author?.[0]?.name || 
                           post.author?.name || 
