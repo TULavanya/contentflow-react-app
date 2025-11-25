@@ -81,12 +81,19 @@ const BlogPost: React.FC = () => {
             if (postUrl.endsWith(cleanSlug)) return true;
             if (cleanSlug.endsWith(postUrl)) return true;
             
+            // Try partial matching for nested paths (e.g., engineering/ai-testing)
+            const postUrlParts = postUrl.split('/').filter(Boolean);
+            const cleanSlugParts = cleanSlug.split('/').filter(Boolean);
+            if (postUrlParts.length === cleanSlugParts.length &&
+                postUrlParts.every((part, idx) => cleanSlugParts[idx] === part)) return true;
+            
             return false;
           });
           
           if (foundPost) {
             console.log('=== BLOG POST DEBUG ===');
-            console.log('✅ Found blog post:', foundPost);
+            console.log('✅ Found blog post:', foundPost.title);
+            console.log('📝 URL matched:', foundPost.url);
             console.log('👤 Author data RAW:', foundPost.author);
             console.log('👤 Author type:', typeof foundPost.author, Array.isArray(foundPost.author) ? 'Array' : 'Object');
             console.log('👤 Author full structure:', JSON.stringify(foundPost.author, null, 2));
@@ -416,9 +423,10 @@ const BlogPost: React.FC = () => {
                   backdropFilter: 'blur(10px)',
                   border: '1px solid rgba(255,255,255,0.2)'
                 }}>
-                  <img
-                    src={(blogPost.author?.profile_picture?.url || blogPost.author?.profile_picture) || '/images/Neha mam.jpg'}
-                    alt={blogPost.author?.name || 'Author'}
+                  <ImageSync
+                    src={blogPost.author?.profile_picture?.url || blogPost.author?.profile_picture || '/images/Neha mam.jpg'}
+                    alt={blogPost.author?.name || blogPost.author?.title || 'Author'}
+                    fallbackSrc="/images/Neha mam.jpg"
                     style={{
                       width: '56px',
                       height: '56px',
@@ -426,10 +434,6 @@ const BlogPost: React.FC = () => {
                       objectFit: 'cover',
                       border: '3px solid rgba(255,255,255,0.5)',
                       boxShadow: '0 5px 15px rgba(0,0,0,0.2)'
-                    }}
-                    onError={(e) => {
-                      console.error('Author profile picture failed to load:', blogPost.author);
-                      e.currentTarget.src = '/images/Neha mam.jpg';
                     }}
                   />
                   <div style={{ textAlign: 'left' }}>
@@ -703,9 +707,10 @@ const BlogPost: React.FC = () => {
                       animation: 'pulse 3s ease-in-out infinite'
                     }}></div>
                     
-                    <img
-                      src={(blogPost.author.profile_picture?.url || blogPost.author.profile_picture) || '/images/Neha mam.jpg'}
-                      alt={blogPost.author.name}
+                    <ImageSync
+                      src={blogPost.author.profile_picture?.url || blogPost.author.profile_picture || '/images/Neha mam.jpg'}
+                      alt={blogPost.author.name || blogPost.author.title || 'Author'}
+                      fallbackSrc="/images/Neha mam.jpg"
                       style={{
                         width: '120px',
                         height: '120px',
@@ -715,10 +720,6 @@ const BlogPost: React.FC = () => {
                         boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
                         position: 'relative',
                         zIndex: 1
-                      }}
-                      onError={(e) => {
-                        console.error('Author bio image failed to load');
-                        e.currentTarget.src = '/images/Neha mam.jpg';
                       }}
                     />
                   </div>

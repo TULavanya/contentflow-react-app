@@ -485,9 +485,23 @@ const Blogs: React.FC = () => {
                     color: '#666'
                   }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                      <img
-                        src={(post.author?.[0]?.profile_picture?.url || post.author?.profile_picture?.url || post.author?.[0]?.profile_picture || post.author?.profile_picture) || '/images/Neha mam.jpg'}
-                        alt={safeTextContent(post.author?.[0]?.title || post.author?.name || post.author, 'Author')}
+                      <ImageSync
+                        src={
+                          post.author?.[0]?.profile_picture?.url || 
+                          post.author?.profile_picture?.url || 
+                          post.author?.[0]?.profile_picture || 
+                          post.author?.profile_picture || 
+                          '/images/Neha mam.jpg'
+                        }
+                        alt={safeTextContent(
+                          post.author?.[0]?.name || 
+                          post.author?.name || 
+                          post.author?.[0]?.title || 
+                          post.author?.title || 
+                          'Author', 
+                          'Author'
+                        )}
+                        fallbackSrc="/images/Neha mam.jpg"
                         style={{
                           width: '45px',
                           height: '45px',
@@ -495,16 +509,19 @@ const Blogs: React.FC = () => {
                           objectFit: 'cover',
                           border: '2px solid #e8eaf6'
                         }}
-                        onError={(e) => {
-                          console.error('Blog author image failed to load:', post.author);
-                          e.currentTarget.src = '/images/Neha mam.jpg';
-                        }}
                       />
                       <div>
                         <div style={{ fontWeight: 'bold', color: '#333', marginBottom: '5px' }}>
-                          {safeTextContent(post.author?.[0]?.title || post.author?.name || post.author, 'Author')}
+                          {safeTextContent(
+                            post.author?.[0]?.name || 
+                            post.author?.name || 
+                            post.author?.[0]?.title || 
+                            post.author?.title || 
+                            'Content Team', 
+                            'Content Team'
+                          )}
                         </div>
-                        <div>{post.publish_date ? formatDate(post.publish_date) : safeTextContent(post.date, 'Date')}</div>
+                        <div>{post.publish_date ? formatDate(post.publish_date) : post.published_date ? formatDate(post.published_date) : 'Recent'}</div>
                       </div>
                     </div>
                     <div style={{ 
