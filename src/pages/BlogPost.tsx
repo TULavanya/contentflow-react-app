@@ -857,7 +857,7 @@ const BlogPost: React.FC = () => {
       <div className="blog-post-page">
         {/* Hero Section */}
         <section className="blog-hero" style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Report.webp')`,
+          background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 50%, #ab47bc 100%)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

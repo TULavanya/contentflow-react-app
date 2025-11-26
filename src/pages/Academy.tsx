@@ -42,7 +42,7 @@ const Academy: React.FC = () => {
       
         {/* Hero Section */}
       <section className="hero-section" style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Coding_Thumbnail_Kickstart_NextJS.jpg')`
+        background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 50%, #ab47bc 100%)'
       }}>
         <div className="hero-overlay"></div>
         <div className="hero-content">

@@ -79,7 +79,7 @@ const Talk: React.FC = () => {
       {/* Hero Section */}
       <section className="hero-section" style={{ 
         paddingBottom: '60px',
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('/images/Customer Analytics.jpg')`
+        background: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 50%, #ab47bc 100%)'
       }}>
         <div className="hero-overlay"></div>
         <div className="hero-content">
