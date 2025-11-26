@@ -1177,134 +1177,112 @@ const Plans: React.FC = () => {
           {/* Debug Panel */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '40px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
+            gap: '35px',
             maxWidth: '1300px',
             margin: '0 auto'
           }}>
-            {(plansData?.detailed_comparison?.categories || []).map((category: any, index: number) => (
+            {(plansData?.detailed_comparison?.categories || []).map((category: any, index: number) => {
+              const cardColors = [
+                '#2563eb',  // Blue
+                '#6a1b9a',  // Purple
+                '#dc2626',  // Red
+                '#0891b2',  // Cyan
+                '#7c3aed',  // Violet
+                '#059669'   // Green
+              ];
+              const cardColor = cardColors[index % 6];
+              
+              return (
               <div key={index} style={{
-                height: '500px',
-                borderRadius: '25px',
+                height: '320px',
+                borderRadius: '20px',
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'flex-end',
-                color: 'white',
-                transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                flexDirection: 'row',
+                alignItems: 'stretch',
+                transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
                 animation: `fadeInUp 0.8s ease-out ${index * 0.12}s both`,
                 cursor: 'pointer',
-                position: 'relative',
                 overflow: 'hidden',
-                boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
-                border: '3px solid white',
-                backgroundColor: '#f5f5f5'
+                boxShadow: '0 10px 30px rgba(0,0,0,0.12)',
+                backgroundColor: 'white'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+                e.currentTarget.style.transform = 'translateY(-10px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(106, 27, 154, 0.25)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.12)';
               }}>
-                {/* Background Image from Contentstack */}
-                <img
-                  src={category.icon?.url || category.icon}
-                  alt={safeTextContent(category.title, 'Category')}
-                  style={{
+                {/* Left Side - Colored Image Panel (40%) */}
+                <div style={{
+                  width: '40%',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  background: cardColor
+                }}>
+                  <img
+                    src={category.icon?.url || category.icon}
+                    alt={safeTextContent(category.title, 'Category')}
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      maxWidth: '80%',
+                      maxHeight: '80%',
+                      objectFit: 'contain',
+                      opacity: 0.9,
+                      filter: 'brightness(1.1)'
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                  {/* Decorative overlay */}
+                  <div style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover',
-                    zIndex: 1
-                  }}
-                  onError={(e) => {
-                    console.error('Category image failed to load:', category.icon);
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
+                    background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, transparent 70%)',
+                    pointerEvents: 'none'
+                  }}></div>
+                </div>
                 
-                {/* Bottom Gradient Overlay for Text Readability */}
+                {/* Right Side - White Text Panel (60%) */}
                 <div style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '75%',
-                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.6) 60%, transparent 100%)',
-                  zIndex: 2
-                }}></div>
-                
-                {/* Content */}
-                <div style={{
-                  position: 'relative',
-                  zIndex: 3,
+                  width: '60%',
                   padding: '35px 30px',
-                  width: '100%',
-                  textAlign: 'left'
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  backgroundColor: 'white'
                 }}>
                   <h3 style={{ 
-                    fontSize: '2em', 
-                    fontWeight: '800',
+                    fontSize: '1.8em', 
+                    fontWeight: '700',
                     marginBottom: '20px',
-                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-                    color: 'white',
-                    textAlign: 'center'
+                    color: '#1a1a1a',
+                    lineHeight: 1.2
                   }}>
                     {safeTextContent(category.title, 'Category')}
                   </h3>
                   
-                  <ul style={{ 
-                    listStyle: 'none', 
-                    padding: 0, 
+                  <p style={{
+                    fontSize: '1.05em',
+                    lineHeight: 1.65,
+                    color: '#666',
                     margin: 0
                   }}>
-                    {(category.feature || []).slice(0, 5).map((item: any, idx: number) => (
-                      <li key={idx} style={{ 
-                        marginBottom: '12px', 
-                        color: 'white', 
-                        paddingLeft: '28px', 
-                        position: 'relative',
-                        fontSize: '0.95em',
-                        lineHeight: '1.4',
-                        textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)',
-                        opacity: 0.95
-                      }}>
-                        <span style={{ 
-                          position: 'absolute', 
-                          left: 0,
-                          top: '2px',
-                          width: '18px',
-                          height: '18px',
-                          background: 'rgba(255, 255, 255, 0.9)',
-                          borderRadius: '50%',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          boxShadow: '0 2px 6px rgba(0,0,0,0.3)'
-                        }}></span>
-                      {item}
-                    </li>
-                  ))}
-                    {(category.feature || []).length > 5 && (
-                      <li style={{
-                        color: 'rgba(255, 255, 255, 0.8)',
-                        fontSize: '0.9em',
-                        fontStyle: 'italic',
-                        textAlign: 'center',
-                        marginTop: '15px',
-                        textShadow: '0 2px 4px rgba(0, 0, 0, 0.5)'
-                      }}>
-                        +{(category.feature || []).length - 5} more features
-                      </li>
-                    )}
-                </ul>
+                    {(category.feature || []).slice(0, 3).join('. ')}.
+                  </p>
                 </div>
-            </div>
-          ))}
+              </div>
+              );
+            })}
           </div>
         </div>
       </section>
