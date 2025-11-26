@@ -97,7 +97,7 @@ const Platform: React.FC = () => {
             </p>
         </div>
 
-          {/* Enhanced Large Capability Cards */}
+          {/* Enhanced Feature Cards with Full Background Images */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
@@ -106,48 +106,48 @@ const Platform: React.FC = () => {
           }}>
             {(platformData?.platform_features || [
               {
-                feature_name: 'Composable Architecture',
-                feature_description: 'Build with best-of-breed tools and microservices. Scale infinitely with our modular, API-first platform that adapts to your needs.',
+                feature_name: 'Headless CMS',
+                feature_description: 'API-first content management that gives you complete control over your tech stack. Build for any channel, any device, any framework.',
                 feature_image: {
                   url: '/images/headless-cms-content-hub-diagram.png',
                   title: 'Modern Cloud Architecture'
                 }
               },
               {
-                feature_name: 'Visual Content Studio',
-                feature_description: 'Intuitive content creation with real-time preview and collaborative editing capabilities that empower your team.',
+                feature_name: 'Visual Experience Composer',
+                feature_description: 'Design stunning experiences without code. Drag, drop, and deploy pages in minutes—no developer required.',
                 feature_image: {
                   url: '/images/Visual-Builder-4.gif',
                   title: 'Creative Design Workspace'
                 }
               },
               {
-                feature_name: 'Automated Workflows',
-                feature_description: 'Streamline your content operations with intelligent automation and approval processes that save time and reduce errors.',
+                feature_name: 'Personalization Engine',
+                feature_description: 'Deliver the right content to the right audience at the right time. Leverage AI and data to create hyper-personalized experiences.',
                 feature_image: {
-                  url: '/images/Workflow Automation.jpg',
+                  url: '/images/Omni.png',
                   title: 'Business Process Automation'
                 }
               },
               {
-                feature_name: 'Advanced Analytics',
-                feature_description: 'Deep insights into content performance with AI-powered recommendations and comprehensive reporting dashboards.',
+                feature_name: 'Customer Data Platform',
+                feature_description: 'Unify customer data from all touchpoints. Get a single view of your customers and activate that data across every channel.',
                 feature_image: {
-                  url: '/images/Analytics.jpg',
+                  url: '/images/Customer Data Platform.png',
                   title: 'Platform Analytics Dashboard'
                 }
               },
               {
-                feature_name: 'Developer Experience',
-                feature_description: 'Powerful APIs, SDKs, and tools designed to accelerate development and deployment for technical teams.',
+                feature_name: 'Workflow Automation',
+                feature_description: 'Streamline operations with intelligent workflows. Automate content approvals, publishing, and notifications.',
                 feature_image: {
-                  url: '/images/Coding_Thumbnail_Kickstart_NextJS.jpg',
+                  url: '/images/Workflow Automation.jpg',
                   title: 'Developer Programming Environment'
                 }
               },
               {
-                feature_name: 'AI & Personalization',
-                feature_description: 'Leverage machine learning to deliver personalized experiences at scale with intelligent content recommendations.',
+                feature_name: 'AI-Powered Agents',
+                feature_description: 'Intelligent agents that understand your brand and assist with content creation, optimization, and insights.',
                 feature_image: {
                   url: '/images/AI-Powered Agents.png',
                   title: 'Artificial Intelligence and Machine Learning'
@@ -158,91 +158,83 @@ const Platform: React.FC = () => {
                 key={index}
                 style={{
                   textDecoration: 'none',
-                  height: '280px',
-                  borderRadius: '20px',
+                  height: '400px',
+                  borderRadius: '25px',
                   display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'stretch',
-                  transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                  color: 'white',
+                  transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   cursor: 'pointer',
                   position: 'relative',
                   overflow: 'hidden',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
-                  backgroundColor: 'white'
+                  boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
+                  border: '3px solid white',
+                  backgroundColor: '#f5f5f5'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-10px)';
-                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(106, 27, 154, 0.25)';
+                  e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
+                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
                 }}
               >
-                {/* Left Side - Image/Icon with Colored Background */}
-                <div style={{
-                  width: '45%',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  background: `linear-gradient(135deg, ${
-                    ['#2563eb', '#6a1b9a', '#dc2626', '#0891b2', '#7c3aed', '#059669'][index % 6]
-                  } 0%, ${
-                    ['#3b82f6', '#8e24aa', '#ef4444', '#06b6d4', '#8b5cf6', '#10b981'][index % 6]
-                  } 100%)`
-                }}>
-                  <img
-                    src={feature.feature_image?.url || feature.feature_icon?.url || feature.feature_image || feature.feature_icon}
-                    alt={safeTextContent(feature.feature_name, 'Platform Feature')}
-                    style={{
-                      position: 'absolute',
-                      top: '50%',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      width: '80%',
-                      height: '80%',
-                      objectFit: 'contain',
-                      opacity: 0.9,
-                      filter: 'brightness(1.1)'
-                    }}
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                    }}
-                  />
-                  {/* Decorative overlay */}
-                  <div style={{
+                {/* Background Image */}
+                <img
+                  src={feature.feature_image?.url || feature.feature_icon?.url || feature.feature_image || feature.feature_icon}
+                  alt={safeTextContent(feature.feature_name, 'Platform Feature')}
+                  style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 70%)',
-                    pointerEvents: 'none'
-                  }}></div>
-                </div>
+                    objectFit: 'cover',
+                    zIndex: 1
+                  }}
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
                 
-                {/* Right Side - Text Content with White Background */}
+                {/* Bottom Gradient Overlay for Text Readability */}
                 <div style={{
-                  width: '55%',
-                  padding: '35px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  backgroundColor: 'white'
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '70%',
+                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%)',
+                  zIndex: 2
+                }}></div>
+                
+                {/* Content */}
+                <div style={{
+                  position: 'relative',
+                  zIndex: 3,
+                  padding: '30px',
+                  width: '100%',
+                  textAlign: 'center'
                 }}>
-                  <h3 style={{ 
-                    fontSize: '1.6em', 
-                    fontWeight: '700',
+                  <p style={{ 
+                    fontSize: '2.2em', 
+                    fontWeight: '800',
                     marginBottom: '15px',
-                    color: '#1a1a1a',
-                    lineHeight: 1.3,
-                    letterSpacing: '-0.5px'
+                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                    color: 'white'
                   }}>
                     {safeTextContent(feature.feature_name, 'Platform Feature')}
-                  </h3>
+                  </p>
                   <p style={{ 
-                    fontSize: '1.05em', 
-                    lineHeight: 1.65,
-                    color: '#666',
+                    fontSize: '1.15em', 
+                    textAlign: 'center', 
+                    opacity: 0.95,
+                    lineHeight: 1.6,
+                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
+                    color: 'white',
                     margin: 0
                   }}>
                     {safeTextContent(feature.feature_description, 'Explore this powerful capability')}
