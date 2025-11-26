@@ -154,97 +154,101 @@ const Platform: React.FC = () => {
                 }
               }
             ]).slice(0, 6).map((feature: any, index: number) => (
-              <Link
+              <div
                 key={index}
-                to="/start"
                 style={{
                   textDecoration: 'none',
-                  height: '400px',
-                  borderRadius: '25px',
+                  height: '280px',
+                  borderRadius: '20px',
                   display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'flex-end',
-                  color: 'white',
-                  transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  flexDirection: 'row',
+                  alignItems: 'stretch',
+                  transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   cursor: 'pointer',
                   position: 'relative',
                   overflow: 'hidden',
-                  boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
-                  border: '3px solid white',
-                  backgroundColor: '#f5f5f5'
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+                  backgroundColor: 'white'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+                  e.currentTarget.style.transform = 'translateY(-10px)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(106, 27, 154, 0.25)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
                 }}
               >
-                {/* Background Image */}
-                <img
-                  src={feature.feature_image?.url || feature.feature_icon?.url || feature.feature_image || feature.feature_icon}
-                  alt={safeTextContent(feature.feature_name, 'Platform Feature')}
-                  style={{
+                {/* Left Side - Image/Icon with Colored Background */}
+                <div style={{
+                  width: '45%',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  background: `linear-gradient(135deg, ${
+                    ['#2563eb', '#6a1b9a', '#dc2626', '#0891b2', '#7c3aed', '#059669'][index % 6]
+                  } 0%, ${
+                    ['#3b82f6', '#8e24aa', '#ef4444', '#06b6d4', '#8b5cf6', '#10b981'][index % 6]
+                  } 100%)`
+                }}>
+                  <img
+                    src={feature.feature_image?.url || feature.feature_icon?.url || feature.feature_image || feature.feature_icon}
+                    alt={safeTextContent(feature.feature_name, 'Platform Feature')}
+                    style={{
+                      position: 'absolute',
+                      top: '50%',
+                      left: '50%',
+                      transform: 'translate(-50%, -50%)',
+                      width: '80%',
+                      height: '80%',
+                      objectFit: 'contain',
+                      opacity: 0.9,
+                      filter: 'brightness(1.1)'
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                  {/* Decorative overlay */}
+                  <div style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover',
-                    zIndex: 1
-                  }}
-                  onError={(e) => {
-                    console.error('Feature image failed to load');
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
+                    background: 'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 70%)',
+                    pointerEvents: 'none'
+                  }}></div>
+                </div>
                 
-                {/* Bottom Gradient Overlay */}
+                {/* Right Side - Text Content with White Background */}
                 <div style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.4) 100%)',
-                  zIndex: 2
-                }}></div>
-                
-                {/* Content */}
-                <div style={{
-                  position: 'relative',
-                  zIndex: 3,
-                  padding: '30px',
-                  width: '100%',
-                  textAlign: 'center'
+                  width: '55%',
+                  padding: '35px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  backgroundColor: 'white'
                 }}>
-                  <p style={{ 
-                    fontSize: '2.2em', 
-                    fontWeight: '800',
+                  <h3 style={{ 
+                    fontSize: '1.6em', 
+                    fontWeight: '700',
                     marginBottom: '15px',
-                    textShadow: '0 6px 20px rgba(0, 0, 0, 0.9), 0 2px 4px rgba(0, 0, 0, 1)',
-                    color: 'white',
-                    letterSpacing: '0.5px'
+                    color: '#1a1a1a',
+                    lineHeight: 1.3,
+                    letterSpacing: '-0.5px'
                   }}>
                     {safeTextContent(feature.feature_name, 'Platform Feature')}
-                  </p>
+                  </h3>
                   <p style={{ 
-                    fontSize: '1.15em', 
-                    textAlign: 'center', 
-                    opacity: 0.98,
-                    lineHeight: 1.6,
-                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.9), 0 2px 4px rgba(0, 0, 0, 0.8)',
-                    color: 'white',
-                    margin: 0,
-                    fontWeight: '500'
+                    fontSize: '1.05em', 
+                    lineHeight: 1.65,
+                    color: '#666',
+                    margin: 0
                   }}>
                     {safeTextContent(feature.feature_description, 'Explore this powerful capability')}
                   </p>
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
         </div>
