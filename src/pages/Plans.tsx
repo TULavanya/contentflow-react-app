@@ -883,7 +883,7 @@ const Plans: React.FC = () => {
                 const planColors = [
                   { badge: 'linear-gradient(135deg, #7c4dff 0%, #9575cd 100%)', name: 'S' }, // Starter - Purple
                   { badge: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)', name: 'P' }, // Professional - Deep Purple
-                  { badge: 'linear-gradient(135deg,rgb(37, 15, 54) 0%, #f48fb1 100%)', name: 'E' }  // Enterprise - Pink
+                  { badge: 'linear-gradient(135deg, #7c4dff 0%, #9575cd 100%)', name: 'E' }  // Enterprise - Purple
                 ];
                 const planColor = planColors[index] || planColors[0];
                 
