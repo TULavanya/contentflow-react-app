@@ -74,7 +74,7 @@ const Academy: React.FC = () => {
               { 
                 icon: '', 
                 title: 'Getting Started', 
-                description: 'Learn the basics of ContentFlow and set up your first project with step-by-step guidance and hands-on tutorials.', 
+                description: 'Learn the basics of ContentFlow and set up your first project', 
                 count: '12 courses',
                 feature_image: {
                   url: '/images/Coding_Thumbnail_Kickstart_NextJS.jpg',
@@ -84,8 +84,8 @@ const Academy: React.FC = () => {
               { 
                 icon: '', 
                 title: 'Platform Fundamentals', 
-                description: 'Deep dive into core concepts, APIs, and architecture patterns for building scalable, enterprise-grade solutions.', 
-                count: '18 courses',
+                description: 'Deep dive into core concepts, APIs, and architecture', 
+                count: '18 Courses',
                 feature_image: {
                   url: '/images/About_Content_Models.png',
                   title: 'API and Platform Architecture'
@@ -94,8 +94,8 @@ const Academy: React.FC = () => {
               { 
                 icon: '', 
                 title: 'Content Modeling', 
-                description: 'Master content types, schemas, and data structures for flexible, future-proof content management systems.', 
-                count: '8 courses',
+                description: 'Master content types, schemas, and data structures', 
+                count: '8 Courses',
                 feature_image: {
                   url: '/images/headless-cms-diagram.png',
                   title: 'Content Design and Architecture'
@@ -103,9 +103,9 @@ const Academy: React.FC = () => {
               },
               { 
                 icon: '', 
-                title: 'Integrations & Workflows', 
-                description: 'Connect ContentFlow with your favorite tools and platforms. Automate complex business processes seamlessly.', 
-                count: '15 courses',
+                title: 'Launch Foundations', 
+                description: 'Automating descriptions in ContentFlow with AI', 
+                count: '15 Courses',
                 feature_image: {
                   url: '/images/Workflow Automation.jpg',
                   title: 'Integration and Automation'
@@ -113,8 +113,8 @@ const Academy: React.FC = () => {
               },
               { 
                 icon: '', 
-                title: 'Analytics & Personalization', 
-                description: 'Leverage data insights and create personalized experiences that convert visitors into customers.', 
+                title: 'Personalize Foundations', 
+                description: 'Analytics & Reporting to track your success', 
                 count: '10 courses',
                 feature_image: {
                   url: '/images/Analytics.jpg',
@@ -123,124 +123,138 @@ const Academy: React.FC = () => {
               },
               { 
                 icon: '', 
-                title: 'Security & Best Practices', 
-                description: 'Learn security fundamentals and development best practices for secure, compliant enterprise applications.', 
+                title: 'Automate with Contentstack', 
+                description: 'Understanding Journey Orchestration with Flows', 
                 count: '6 courses',
                 feature_image: {
                   url: '/images/Security.jpg',
                   title: 'Cybersecurity and Data Protection'
                 }
               }
-            ]).map((category: any, index: number) => (
+            ]).map((category: any, index: number) => {
+              const gradients = [
+                ['#1a1a1a', '#2d2d2d'],      // Black/Dark Gray
+                ['#6a1b9a', '#8e24aa'],      // Purple
+                ['#6a1b9a', '#8e24aa'],      // Purple
+                ['#1e3a5f', '#2c5282'],      // Dark Navy Blue
+                ['#1e3a5f', '#2c5282'],      // Dark Navy Blue
+                ['#6a1b9a', '#8e24aa']       // Purple
+              ];
+              return (
               <a
                 key={index}
                 href="#course-categories"
                 style={{
                   textDecoration: 'none',
-                  height: '400px',
-                  borderRadius: '25px',
+                  height: '380px',
+                  borderRadius: '20px',
                   display: 'flex',
                   flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'flex-end',
+                  justifyContent: 'space-between',
                   color: 'white',
-                  transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
                   cursor: 'pointer',
                   position: 'relative',
                   overflow: 'hidden',
-                  boxShadow: '0 15px 40px rgba(0,0,0,0.2)',
-                  border: '3px solid white',
-                  backgroundColor: '#f5f5f5'
+                  boxShadow: '0 12px 35px rgba(0,0,0,0.15)',
+                  background: `linear-gradient(135deg, ${gradients[index % 6][0]} 0%, ${gradients[index % 6][1]} 100%)`
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-15px) scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 25px 60px rgba(0,0,0,0.3)';
+                  e.currentTarget.style.transform = 'translateY(-12px)';
+                  e.currentTarget.style.boxShadow = '0 20px 45px rgba(106, 27, 154, 0.3)';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                  e.currentTarget.style.boxShadow = '0 15px 40px rgba(0,0,0,0.2)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 12px 35px rgba(0,0,0,0.15)';
                 }}
               >
-                {/* Background Image */}
-                <img
-                  src={category.feature_image?.url || category.icon?.url || category.feature_image || category.icon}
-                  alt={safeTextContent(category.title, 'Course Category')}
-                  style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    zIndex: 1
-                  }}
-                  onError={(e) => {
-                    console.error('Category image failed to load');
-                    e.currentTarget.style.display = 'none';
-                  }}
-                />
-                
-                {/* Course Count Badge */}
+                {/* Decorative Pattern Overlay */}
                 <div style={{
                   position: 'absolute',
-                  top: '20px',
-                  left: '20px',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  backgroundImage: 'radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05) 0%, transparent 50%)',
+                  pointerEvents: 'none',
+                  zIndex: 1
+                }}></div>
+                
+                {/* Course Count Badge - Top Left */}
+                <div style={{
+                  position: 'absolute',
+                  top: '25px',
+                  left: '25px',
                   background: 'rgba(255, 255, 255, 0.95)',
                   color: '#6a1b9a',
-                  padding: '10px 18px',
+                  padding: '8px 18px',
                   borderRadius: '25px',
-                  fontSize: '0.9em',
+                  fontSize: '0.85em',
                   fontWeight: 'bold',
-                  boxShadow: '0 6px 20px rgba(0,0,0,0.15)',
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
                   backdropFilter: 'blur(10px)',
-                  border: '2px solid rgba(106, 27, 154, 0.3)',
+                  border: '2px solid rgba(255, 255, 255, 0.3)',
                   zIndex: 3
                 }}>
                   {category.count}
                 </div>
                 
-                {/* Bottom Gradient Overlay */}
+                {/* Image Container - Center */}
                 <div style={{
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '70%',
-                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%)',
+                  position: 'relative',
+                  flex: 1,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '80px 30px 30px 30px',
                   zIndex: 2
-                }}></div>
+                }}>
+                  <img
+                    src={category.feature_image?.url || category.icon?.url || category.feature_image || category.icon}
+                    alt={safeTextContent(category.title, 'Course Category')}
+                    style={{
+                      maxWidth: '70%',
+                      maxHeight: '140px',
+                      objectFit: 'contain',
+                      filter: 'brightness(1.1) contrast(1.1)',
+                      opacity: 0.85
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                </div>
                 
-                {/* Content */}
+                {/* Content - Bottom */}
                 <div style={{
                   position: 'relative',
                   zIndex: 3,
                   padding: '30px',
-                  width: '100%',
-                  textAlign: 'center'
+                  background: 'linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 100%)'
                 }}>
-                  <p style={{ 
-                    fontSize: '2.2em', 
+                  <h3 style={{ 
+                    fontSize: '1.7em', 
                     fontWeight: '800',
-                    marginBottom: '15px',
-                    textShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-                    color: 'white'
+                    marginBottom: '12px',
+                    color: 'white',
+                    lineHeight: 1.2,
+                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)'
                   }}>
                     {safeTextContent(category.title, 'Course Category')}
-                  </p>
+                  </h3>
                   <p style={{ 
-                    fontSize: '1.15em', 
-                    textAlign: 'center', 
-                    opacity: 0.95,
-                    lineHeight: 1.6,
-                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)',
-                    color: 'white',
-                    margin: 0
+                    fontSize: '1.05em', 
+                    lineHeight: 1.5,
+                    color: 'rgba(255, 255, 255, 0.95)',
+                    margin: 0,
+                    textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)'
                   }}>
                     {safeTextContent(category.description, 'Description')}
                   </p>
                 </div>
               </a>
-            ))}
+              );
+            })}
           </div>
             </div>
       </section>
