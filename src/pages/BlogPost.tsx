@@ -16,8 +16,13 @@ interface BlogPost {
   reading_time_minute: number;
   author: {
     name: string;
+    title?: string;
     bio: string;
+    description?: string;
     profile_picture: any;
+    twitter?: string;
+    linkedin?: string;
+    github?: string;
   };
   gradient_colors: string;
   icon: any;
@@ -85,7 +90,7 @@ const BlogPost: React.FC = () => {
             const postUrlParts = postUrl.split('/').filter(Boolean);
             const cleanSlugParts = cleanSlug.split('/').filter(Boolean);
             if (postUrlParts.length === cleanSlugParts.length &&
-                postUrlParts.every((part, idx) => cleanSlugParts[idx] === part)) return true;
+                postUrlParts.every((part: string, idx: number) => cleanSlugParts[idx] === part)) return true;
             
             return false;
           });
@@ -224,8 +229,13 @@ const BlogPost: React.FC = () => {
         reading_time_minute: 10,
         author: {
           name: 'Kaustubh Rai',
+          title: 'Application Security Engineer',
           bio: 'Application Security Engineer at Contentstack. He is adept at conducting extensive security testing, automating security protocols, and ensuring the safe deployment of a wide array of applications. Kaustubh thrives on the challenges of safeguarding digital environments and has a knack for identifying and rectifying vulnerabilities that others might overlook. Interests include discovering innovative hacking methods and continuously sharpening expertise through participation in diverse CTF competitions.',
-          profile_picture: { url: '/images/Kaustubh Rai.jpg', title: 'Kaustubh Rai' }
+          description: 'Application Security Engineer specializing in security testing and automation.',
+          profile_picture: { url: '/images/Kaustubh Rai.jpg', title: 'Kaustubh Rai' },
+          twitter: '',
+          linkedin: '',
+          github: ''
         },
         gradient_colors: '#6a1b9a, #8e24aa',
         icon: { url: '/images/Security.jpg' }
@@ -289,8 +299,13 @@ const BlogPost: React.FC = () => {
         reading_time_minute: 25,
         author: {
           name: 'Ben Goldstein',
+          title: 'Product Marketing Lead',
           bio: 'Product Marketing Lead at ContentFlow, specializing in personalization strategies and customer experience optimization for enterprise brands.',
-          profile_picture: { url: '/images/Ben Goldstein.jpg', title: 'Ben Goldstein' }
+          description: 'Product Marketing Lead specializing in personalization and customer experience.',
+          profile_picture: { url: '/images/Ben Goldstein.jpg', title: 'Ben Goldstein' },
+          twitter: '',
+          linkedin: '',
+          github: ''
         },
         gradient_colors: '#8e24aa, #ab47bc',
         icon: { url: '/images/Customer Analytics.jpg' }
@@ -396,8 +411,13 @@ const BlogPost: React.FC = () => {
         reading_time_minute: 8,
         author: {
           name: 'Lo Etheridge',
+          title: 'Head of Product',
           bio: 'Head of Product at ContentFlow, leading the development of AI-powered content solutions and helping enterprises leverage AI effectively.',
-          profile_picture: { url: '/images/Lo Etheridge.jpg', title: 'Lo Etheridge' }
+          description: 'Head of Product at ContentFlow, leading the development of AI-powered content solutions and helping enterprises leverage AI effectively.',
+          profile_picture: { url: '/images/Lo Etheridge.jpg', title: 'Lo Etheridge' },
+          twitter: '',
+          linkedin: '',
+          github: ''
         },
         gradient_colors: '#6a1b9a, #9c27b0',
         icon: { url: '/images/AI-Powered Agents.png' }
@@ -452,8 +472,13 @@ const BlogPost: React.FC = () => {
         reading_time_minute: 15,
         author: {
           name: 'Sarah Chen',
+          title: 'Principal Engineer',
           bio: 'Principal Engineer at ContentFlow with expertise in distributed systems, microservices architecture, and scalable web applications.',
-          profile_picture: { url: '/images/Jessica.png', title: 'Sarah Chen' }
+          description: 'Principal Engineer specializing in distributed systems and scalable web applications.',
+          profile_picture: { url: '/images/Jessica.png', title: 'Sarah Chen' },
+          twitter: '',
+          linkedin: '',
+          github: ''
         },
         gradient_colors: '#4a148c, #6a1b9a',
         icon: { url: '/images/Headless CMS.png' }
@@ -500,8 +525,13 @@ const BlogPost: React.FC = () => {
         reading_time_minute: 12,
         author: {
           name: 'Michael Torres',
+          title: 'CTO',
           bio: 'CTO at ContentFlow, driving technical strategy and innovation in digital experience platforms and composable architecture.',
-          profile_picture: { url: '/images/Conor.jpg', title: 'Michael Torres' }
+          description: 'CTO driving technical strategy and innovation in digital experience platforms.',
+          profile_picture: { url: '/images/Conor.jpg', title: 'Michael Torres' },
+          twitter: '',
+          linkedin: '',
+          github: ''
         },
         gradient_colors: '#7b1fa2, #9c27b0',
         icon: { url: '/images/Innovation.jpg' }
@@ -571,8 +601,13 @@ const BlogPost: React.FC = () => {
         reading_time_minute: 18,
         author: {
           name: 'Emily Rodriguez',
+          title: 'Solutions Architect',
           bio: 'Solutions Architect at ContentFlow, helping enterprises implement personalization strategies and optimize customer experiences.',
-          profile_picture: { url: '/images/Renee.jpg', title: 'Emily Rodriguez' }
+          description: 'Solutions Architect helping enterprises optimize customer experiences.',
+          profile_picture: { url: '/images/Renee.jpg', title: 'Emily Rodriguez' },
+          twitter: '',
+          linkedin: '',
+          github: ''
         },
         gradient_colors: '#8e24aa, #ba68c8',
         icon: { url: '/images/AI Personalization.jpg' }
