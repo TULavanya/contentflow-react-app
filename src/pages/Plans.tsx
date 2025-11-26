@@ -878,7 +878,16 @@ const Plans: React.FC = () => {
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
             gap: '40px'
           }}>
-            {(plansData?.pricing_plans?.plans || []).map((plan: any, index: number) => (
+              {(plansData?.pricing_plans?.plans || []).map((plan: any, index: number) => {
+                // Define color gradients for each plan
+                const planColors = [
+                  { badge: 'linear-gradient(135deg, #7c4dff 0%, #9575cd 100%)', name: 'S' }, // Starter - Purple
+                  { badge: 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)', name: 'P' }, // Professional - Deep Purple
+                  { badge: 'linear-gradient(135deg,rgb(37, 15, 54) 0%, #f48fb1 100%)', name: 'E' }  // Enterprise - Pink
+                ];
+                const planColor = planColors[index] || planColors[0];
+                
+                return (
               <div key={index} style={{
                 background: plan.is_popular 
                   ? 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.98) 100%)'
@@ -916,7 +925,7 @@ const Plans: React.FC = () => {
                   left: 0,
                   right: 0,
                   bottom: 0,
-                  background: plan.badge_color_gradient || 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                  background: planColor.badge,
                   opacity: 0.03,
                   borderRadius: '30px',
                   pointerEvents: 'none',
@@ -930,7 +939,7 @@ const Plans: React.FC = () => {
                   top: '-18px',
                   left: '50%',
                   transform: 'translateX(-50%)',
-                  background: plan.badge_color_gradient || 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                  background: planColor.badge,
                   color: 'white',
                   padding: '12px 30px',
                   borderRadius: '30px',
@@ -949,7 +958,7 @@ const Plans: React.FC = () => {
                 width: '90px',
                 height: '90px',
                 margin: '20px auto 25px',
-                background: plan.badge_color_gradient || 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                background: planColor.badge,
                   borderRadius: '50%',
                   display: 'flex',
                   alignItems: 'center',
@@ -958,11 +967,11 @@ const Plans: React.FC = () => {
                 fontWeight: 'bold',
                 color: 'white',
                 animation: 'float 4s ease-in-out infinite',
-                boxShadow: '0 10px 30px rgba(106, 27, 154, 0.3)',
+                boxShadow: `0 10px 30px ${index === 2 ? 'rgba(236, 64, 122, 0.3)' : 'rgba(106, 27, 154, 0.3)'}`,
                 position: 'relative',
                 zIndex: 1
               }}>
-                {index === 0 ? 'S' : index === 1 ? 'P' : 'E'}
+                {planColor.name}
                 </div>
 
                 <h3 style={{ 
@@ -987,7 +996,7 @@ const Plans: React.FC = () => {
                       fontSize: '4em', 
                       fontWeight: '800',
                       lineHeight: '1',
-                    background: plan.badge_color_gradient || 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)',
+                    background: planColor.badge,
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     backgroundClip: 'text',
@@ -1068,7 +1077,7 @@ const Plans: React.FC = () => {
               
                 <Link to="/start" style={{
                   background: plan.is_popular 
-                    ? plan.badge_color_gradient || 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)'
+                    ? planColor.badge
                     : 'transparent',
                   color: plan.is_popular ? 'white' : '#6a1b9a',
                   border: plan.is_popular ? 'none' : '3px solid #6a1b9a',
@@ -1081,7 +1090,7 @@ const Plans: React.FC = () => {
                   textAlign: 'center',
                   fontSize: '1.1em',
                   transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
-                  boxShadow: plan.is_popular ? '0 8px 25px rgba(106, 27, 154, 0.35)' : '0 4px 15px rgba(0,0,0,0.1)',
+                  boxShadow: plan.is_popular ? `0 8px 25px ${index === 2 ? 'rgba(236, 64, 122, 0.35)' : 'rgba(106, 27, 154, 0.35)'}` : '0 4px 15px rgba(0,0,0,0.1)',
                   position: 'relative',
                   zIndex: 1,
                   overflow: 'hidden',
@@ -1090,18 +1099,18 @@ const Plans: React.FC = () => {
                 onMouseEnter={(e) => {
                   if (plan.is_popular) {
                     e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
-                    e.currentTarget.style.boxShadow = '0 12px 35px rgba(106, 27, 154, 0.45)';
+                    e.currentTarget.style.boxShadow = `0 12px 35px ${index === 2 ? 'rgba(236, 64, 122, 0.45)' : 'rgba(106, 27, 154, 0.45)'}`;
                   } else {
-                    e.currentTarget.style.background = plan.badge_color_gradient || 'linear-gradient(135deg, #6a1b9a 0%, #8e24aa 100%)';
+                    e.currentTarget.style.background = planColor.badge;
                     e.currentTarget.style.color = 'white';
                     e.currentTarget.style.transform = 'translateY(-3px) scale(1.02)';
-                    e.currentTarget.style.boxShadow = '0 10px 30px rgba(106, 27, 154, 0.4)';
+                    e.currentTarget.style.boxShadow = `0 10px 30px ${index === 2 ? 'rgba(236, 64, 122, 0.4)' : 'rgba(106, 27, 154, 0.4)'}`;
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (plan.is_popular) {
                     e.currentTarget.style.transform = 'translateY(0) scale(1)';
-                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(106, 27, 154, 0.35)';
+                    e.currentTarget.style.boxShadow = plan.is_popular ? `0 8px 25px ${index === 2 ? 'rgba(236, 64, 122, 0.35)' : 'rgba(106, 27, 154, 0.35)'}` : '0 4px 15px rgba(0,0,0,0.1)';
                   } else {
                     e.currentTarget.style.background = 'transparent';
                     e.currentTarget.style.color = '#6a1b9a';
@@ -1112,7 +1121,8 @@ const Plans: React.FC = () => {
                   {plan.cta_button_text}
                 </Link>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
