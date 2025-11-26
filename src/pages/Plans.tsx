@@ -1174,7 +1174,7 @@ const Plans: React.FC = () => {
           </p>
           </div>
 
-          {/* Debug Panel */}
+          {/* Split Card Grid */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))',
