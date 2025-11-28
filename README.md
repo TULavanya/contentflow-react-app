@@ -1,101 +1,4 @@
-# ContentFlow CMS - React Application 🚀
 
-A modern, fully-featured React application integrated with Contentstack CMS, featuring beautiful animations and professional design.
-
----
-
-## ✨ What's Included
-
-### **🎨 Visual Features**
-- ✅ Animated background gradients
-- ✅ Floating particle effects
-- ✅ Smooth hover animations
-- ✅ Professional card designs
-- ✅ Hero section with animated patterns
-- ✅ Purple brand theme throughout
-
-### **📸 Image System**
-- ✅ 45+ professional images
-- ✅ Smart loading with fallbacks
-- ✅ Local & Contentstack support
-- ✅ Loading states & error handling
-- ✅ Team photos, features, blog images
-
-### **📄 Pages**
-- 🏠 Home - Hero, features, testimonials
-- 💼 Platform - Product capabilities
-- 👥 Company - Leadership team
-- 📝 Blogs - Blog listing & individual posts
-- 💬 Talk - Contact/demo request form
-- 🎯 Start - Get started page
-- 🤝 Partners - Partnership page
-- 💼 Careers - Job listings
-- 📞 Contact - Contact information
-- 💰 Plans - Pricing tiers
-- 📚 Academy - Learning resources
-
----
-
-## 🚀 Quick Start
-
-### **1. Install Dependencies**
-```bash
-npm install
-```
-
-### **2. Run Development Server**
-```bash
-npm run dev
-```
-
-### **3. Open in Browser**
-```
-http://localhost:3000
-```
-
----
-
-## 📁 Project Structure
-
-```
-Contentstack project - Copy/
-├── public/
-│   └── images/              ← All 45+ images here
-│       ├── logo.png
-│       ├── Headless CMS.png
-│       ├── AI Personalization.jpg
-│       ├── Team photos/
-│       └── [... more images]
-│
-├── src/
-│   ├── components/          ← Reusable components
-│   │   ├── Header.tsx
-│   │   ├── Footer.tsx
-│   │   ├── ImageSync.tsx    ← Smart image loader
-│   │   ├── LoadingSpinner.tsx
-│   │   └── [... more]
-│   │
-│   ├── pages/               ← All page components
-│   │   ├── Home.tsx
-│   │   ├── Platform.tsx
-│   │   ├── Company.tsx
-│   │   └── [... more]
-│   │
-│   ├── context/             ← Contentstack integration
-│   │   └── ContentstackContext.tsx
-│   │
-│   ├── styles/              ← Global styles
-│   │   └── global.css
-│   │
-│   └── config/              ← Configuration
-│       └── contentstack.config.ts
-│
-├── Assets/                  ← Original images (backup)
-├── Final Contenttype/       ← Content type schemas
-└── Final Entries/           ← Sample entry data
-```
-
----
 
 ## 🔑 Contentstack Configuration
 
@@ -139,17 +42,7 @@ VITE_CONTENTSTACK_LIVE_PREVIEW=true
 
 ---
 
-## 🎨 Visual Enhancements
 
-**See details:** `VISUAL_ENHANCEMENTS_COMPLETE.md`
-
-### **Highlights:**
-- ✨ Animated gradient backgrounds
-- 🎬 Floating particle effects
-- 🎯 Smooth transitions everywhere
-- 💜 Consistent purple branding
-- 📱 Mobile responsive
-- ♿ Accessible design
 
 ---
 
@@ -261,12 +154,7 @@ npm run lint       # Run ESLint
 
 ---
 
-## 📞 Support
 
-### **Documentation**
-- **Image Upload Guide:** `CONTENTSTACK_IMAGE_UPLOAD_GUIDE.md`
-- **Visual Enhancements:** `VISUAL_ENHANCEMENTS_COMPLETE.md`
-- **This README:** Overview and quick start
 
 ### **Resources**
 - [Contentstack Docs](https://www.contentstack.com/docs/)
