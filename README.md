@@ -4,10 +4,10 @@
 
 ### **Current Setup:**
 ```
-API Key: bltc8715766359fd200
-Delivery Token: cs8bc0fd9b19dee044b3c7c2c7
-Preview Token: csd02a07e6dd335fcfd9527d72
-Environment: development
+API Key: api_key
+Delivery Token: delivery_token
+Preview Token: preview_token
+Environment: env
 Region: us
 Live Preview: Enabled
 ```
