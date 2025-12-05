@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
-import { useContentstack } from '../context/ContentstackContext';
+import { useContentstack, onEntryChange } from '../context/ContentstackContext';
 import SEOHead from '../components/SEOHead';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ImageSync from '../components/ImageSync';

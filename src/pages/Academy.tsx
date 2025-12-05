@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useContentstack } from '../context/ContentstackContext';
+import { useContentstack, onEntryChange } from '../context/ContentstackContext';
 import SEOHead from '../components/SEOHead';
 import LoadingSpinner from '../components/LoadingSpinner';
 import LargeFeatureCard, { LargeFeatureGrid } from '../components/LargeFeatureCard';
@@ -26,7 +26,12 @@ const Academy: React.FC = () => {
       }
     };
     loadContent();
-  }, [fetchContent]);
+    
+    // Listen for Live Preview content changes
+    onEntryChange(() => {
+      console.log('Academy content changed - reloading...');
+      loadContent();
+    });}, [fetchContent]);
 
   // Use only Contentstack data - no fallbacks
   const faqs = academyData?.faqs || [];
