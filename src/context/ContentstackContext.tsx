@@ -124,14 +124,6 @@ export const ContentstackProvider: React.FC<ContentstackProviderProps> = ({ chil
         return null;
       }
 
-      // Enable live preview data updates if available
-      if (result && contentstackConfig.livePreview.enable) {
-        console.log('Live Preview is enabled for:', contentType);
-        console.log('Entry data will be updated in real-time when edited');
-        console.log('Edit tags metadata automatically handled by Delivery SDK');
-        // Edit tags ($) are automatically added by the SDK when live_preview is configured
-      }
-
       return result;
       
     } catch (err) {
