@@ -65,12 +65,6 @@ const initializeLivePreviewStack = () => {
     console.log('Live Preview configured in Stack');
     console.log('Live Preview Host:', getLivePreviewHostByRegion(region));
     
-    // Initialize Live Preview SDK
-    ContentstackLivePreview.init({
-      stackSdk: Stack
-    });
-    console.log('Live Preview SDK initialized');
-    
     return Stack;
   } catch (error) {
     console.error('Failed to initialize Contentstack Stack:', error);
@@ -92,12 +86,17 @@ export const ContentstackProvider: React.FC<ContentstackProviderProps> = ({ chil
 
       // Initialize Live Preview if enabled
       if (contentstackConfig.livePreview.enable && stack) {
+        // Get region for host configuration
+        const region = (import.meta.env.VITE_CONTENTSTACK_REGION || stackConfig.region).toUpperCase().replace(/-/g, '_');
+        
         console.log('Initializing Live Preview Utils...');
         console.log('Configuration:');
         console.log('  - API Key:', stackConfig.apiKey ? `${stackConfig.apiKey.substring(0, 10)}...` : 'MISSING');
         console.log('  - Environment:', stackConfig.environment);
         console.log('  - Branch:', stackConfig.branch);
+        console.log('  - Region:', region);
         console.log('  - Preview Token:', contentstackConfig.livePreview.preview_token ? `${contentstackConfig.livePreview.preview_token.substring(0, 10)}...` : 'MISSING');
+        console.log('  - App Host:', getHostByRegion(region));
         
         try {
           ContentstackLivePreview.init({
@@ -112,7 +111,7 @@ export const ContentstackProvider: React.FC<ContentstackProviderProps> = ({ chil
             },
             clientUrlParams: {
               protocol: "https",
-              host: "app.contentstack.com",
+              host: getHostByRegion(region),
               port: 443,
             }
           });
@@ -134,7 +133,7 @@ export const ContentstackProvider: React.FC<ContentstackProviderProps> = ({ chil
       setError(errorMessage);
       setIsConnected(false);
     }
-  }, []);
+  }, [stack]);
 
   // Fetch content using Delivery SDK
   const fetchContent = async (contentType: string, options: any = {}) => {
