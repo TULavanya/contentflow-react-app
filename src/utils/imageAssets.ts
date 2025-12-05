@@ -1,4 +1,4 @@
-// 🎨 Visual Assets Library for ContentFlow
+//  Visual Assets Library for ContentFlow
 // High-quality images and icons for all features
 
 export const FeatureIcons = {

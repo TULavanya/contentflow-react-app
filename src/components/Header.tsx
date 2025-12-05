@@ -11,7 +11,7 @@ const Header: React.FC = () => {
     const loadContent = async () => {
       try {
         const data = await fetchContent('header');
-        console.log('📌 Header data from Contentstack:', data);
+        console.log(' Header data from Contentstack:', data);
         if (data && data.length > 0) {
           setHeaderData(data[0]);
         }

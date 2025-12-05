@@ -37,7 +37,7 @@ const Contact: React.FC = () => {
       setIsLoading(true);
       try {
         const data = await fetchContent('contact_page');
-        console.log('📧 Contact page data:', data);
+        console.log(' Contact page data:', data);
         setContactData(data);
       } catch (error) {
         console.error('Error loading contact content:', error);

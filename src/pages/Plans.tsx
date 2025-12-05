@@ -28,12 +28,12 @@ const Plans: React.FC = () => {
         console.log('  - pricing_faqs:', data?.pricing_faqs);
         
         if (!data) {
-          console.error('❌ NO DATA RECEIVED - Entry might not exist or not published');
+          console.error(' NO DATA RECEIVED - Entry might not exist or not published');
         }
         
         // Debug detailed comparison images
         if (data?.detailed_comparison?.categories) {
-          console.log('\n📸 Detailed Comparison Categories Debug:');
+          console.log('\n Detailed Comparison Categories Debug:');
           data.detailed_comparison.categories.forEach((cat: any, idx: number) => {
             console.log(`\nCategory ${idx + 1}:`);
             console.log('  Title:', cat.title);
@@ -45,7 +45,7 @@ const Plans: React.FC = () => {
         
         // Debug customer success testimonial
         if (data?.customer_success?.testimonial) {
-          console.log('\n💬 Customer Success Testimonial Debug:');
+          console.log('\n Customer Success Testimonial Debug:');
           console.log('  Testimonial array:', data.customer_success.testimonial);
           if (data.customer_success.testimonial[0]) {
             console.log('  First testimonial:', data.customer_success.testimonial[0]);
@@ -56,7 +56,7 @@ const Plans: React.FC = () => {
         
         // Debug product tabs
         if (data?.headless_cms || data?.realtime_cdp || data?.adaptive_dxp) {
-          console.log('\n📦 Product Tabs Debug:');
+          console.log('\n Product Tabs Debug:');
           ['headless_cms', 'realtime_cdp', 'adaptive_dxp'].forEach(tab => {
             if (data[tab]) {
               console.log(`\n${tab}:`);

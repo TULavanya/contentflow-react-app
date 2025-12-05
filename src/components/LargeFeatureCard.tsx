@@ -106,7 +106,7 @@ const LargeFeatureCard: React.FC<LargeFeatureCardProps> = ({
             transition: 'transform 0.3s ease',
             border: '3px solid rgba(255, 255, 255, 0.8)'
           }}>
-            {safeIconContent(icon, '🚀')}
+            {safeIconContent(icon, '')}
           </div>
         )}
         

@@ -25,7 +25,7 @@ const Start: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('🎉 Welcome to ContentFlow! Check your email for setup instructions.');
+    alert(' Welcome to ContentFlow! Check your email for setup instructions.');
     setFormData({
       firstName: '',
       lastName: '',
@@ -89,7 +89,7 @@ const Start: React.FC = () => {
               { stat_label: 'Free Support' }
             ]).map((stat: any, index: number) => (
               <div key={index} className="stat animated-stat">
-                <strong>✓</strong>
+                <strong></strong>
                 <span>{safeTextContent(stat.stat_label, 'Feature')}</span>
             </div>
             ))}
@@ -128,7 +128,7 @@ const Start: React.FC = () => {
                       color: '#666',
                       fontSize: '1.05em'
                     }}>
-                      ✓ {typeof item === 'string' ? item : item.benefit_text}
+                       {typeof item === 'string' ? item : item.benefit_text}
                 </li>
               ))}
             </ul>
@@ -347,32 +347,32 @@ const Start: React.FC = () => {
           }}>
             {(startData?.trial_features?.features || [
               { 
-                feature_icon: '🚀', 
+                feature_icon: '', 
                 feature_title: 'Full Platform Access', 
                 feature_description: 'Access to all features including AI agents, personalization, analytics, and advanced automation tools.',
               },
               { 
-                feature_icon: '📚', 
+                feature_icon: '', 
                 feature_title: 'Comprehensive Documentation', 
                 feature_description: 'Complete guides, tutorials, and API documentation to get you started quickly and efficiently.'
               },
               { 
-                feature_icon: '💬', 
+                feature_icon: '', 
                 feature_title: 'Free Support', 
                 feature_description: 'Email and chat support from our expert team throughout your trial period.'
               },
               { 
-                feature_icon: '🎓', 
+                feature_icon: '', 
                 feature_title: 'Academy Access', 
                 feature_description: 'Free courses and certifications to master the platform and advance your skills.'
               },
               { 
-                feature_icon: '🔧', 
+                feature_icon: '', 
                 feature_title: 'Sample Projects', 
                 feature_description: 'Pre-built templates and starter projects to accelerate development and learning.'
               },
               { 
-                feature_icon: '🤝', 
+                feature_icon: '', 
                 feature_title: 'Onboarding Session', 
                 feature_description: '1-on-1 onboarding call with our solutions team to customize your experience.'
               }
@@ -454,7 +454,7 @@ const Start: React.FC = () => {
                     alignItems: 'center',
                     gap: '6px'
                   }}>
-                    ✓ Included in Trial
+                     Included in Trial
                   </div>
                   
                   {/* Bottom Gradient Overlay */}

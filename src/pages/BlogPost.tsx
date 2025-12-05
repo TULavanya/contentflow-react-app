@@ -57,9 +57,9 @@ const BlogPost: React.FC = () => {
         
         // Clean the slug - remove any "blog/" or "blogs/" prefixes if they exist (for double blog/ cases)
         const cleanSlug = postSlug.replace(/^(blog\/|blogs\/)+/, '').replace(/^\/+/, '');
-        console.log('🔍 Looking for blog post with slug:', cleanSlug);
-        console.log('📝 Original slug from URL:', postSlug);
-        console.log('🌐 Full pathname:', location.pathname);
+        console.log(' Looking for blog post with slug:', cleanSlug);
+        console.log(' Original slug from URL:', postSlug);
+        console.log(' Full pathname:', location.pathname);
         
         // Strategy 1: Fetch all blog posts and find by URL matching
         const allPosts = await fetchContent('blog_post', {
@@ -67,7 +67,7 @@ const BlogPost: React.FC = () => {
           include: ['author'] // Include author reference
         });
         
-        console.log('📦 All blog posts fetched:', allPosts);
+        console.log(' All blog posts fetched:', allPosts);
         
         if (allPosts && allPosts.length > 0) {
           // Try to find the post by matching the URL field
@@ -97,77 +97,77 @@ const BlogPost: React.FC = () => {
           
           if (foundPost) {
             console.log('=== BLOG POST DEBUG ===');
-            console.log('✅ Found blog post:', foundPost.title);
-            console.log('📝 URL matched:', foundPost.url);
-            console.log('🖼️ Featured Image RAW:', foundPost.featured_image);
-            console.log('🖼️ Featured Image type:', typeof foundPost.featured_image, Array.isArray(foundPost.featured_image) ? 'Array' : 'Object');
-            console.log('🖼️ Featured Image URL:', foundPost.featured_image?.url || 'NO URL');
-            console.log('👤 Author data RAW:', foundPost.author);
-            console.log('👤 Author type:', typeof foundPost.author, Array.isArray(foundPost.author) ? 'Array' : 'Object');
-            console.log('👤 Author full structure:', JSON.stringify(foundPost.author, null, 2));
+            console.log(' Found blog post:', foundPost.title);
+            console.log(' URL matched:', foundPost.url);
+            console.log('️ Featured Image RAW:', foundPost.featured_image);
+            console.log('️ Featured Image type:', typeof foundPost.featured_image, Array.isArray(foundPost.featured_image) ? 'Array' : 'Object');
+            console.log('️ Featured Image URL:', foundPost.featured_image?.url || 'NO URL');
+            console.log(' Author data RAW:', foundPost.author);
+            console.log(' Author type:', typeof foundPost.author, Array.isArray(foundPost.author) ? 'Array' : 'Object');
+            console.log(' Author full structure:', JSON.stringify(foundPost.author, null, 2));
             
             // Ensure author data is properly structured
             if (foundPost.author) {
               // If author is an array (reference), take the first item
               if (Array.isArray(foundPost.author) && foundPost.author.length > 0) {
-                console.log('👤 Author was an array, extracting first item...');
+                console.log(' Author was an array, extracting first item...');
                 foundPost.author = foundPost.author[0];
-                console.log('👤 Extracted author:', foundPost.author);
+                console.log(' Extracted author:', foundPost.author);
               }
               
               // Handle profile_picture if it's an array or needs extraction
               if (foundPost.author.profile_picture) {
                 if (Array.isArray(foundPost.author.profile_picture) && foundPost.author.profile_picture.length > 0) {
-                  console.log('📸 Author profile picture was an array, extracting first item...');
+                  console.log(' Author profile picture was an array, extracting first item...');
                   foundPost.author.profile_picture = foundPost.author.profile_picture[0];
                 }
                 
                 // If profile_picture is an empty string or invalid, remove it to use fallback
                 if (typeof foundPost.author.profile_picture === 'string' && foundPost.author.profile_picture.trim() === '') {
-                  console.log('📸 Author profile picture is empty string, will use fallback');
+                  console.log(' Author profile picture is empty string, will use fallback');
                   foundPost.author.profile_picture = null;
                 }
               }
               
-              console.log('👤 Final author data:', {
+              console.log(' Final author data:', {
                 name: foundPost.author?.name || foundPost.author?.title,
                 bio: foundPost.author?.bio,
                 profile_picture: foundPost.author?.profile_picture,
                 profile_picture_url: foundPost.author?.profile_picture?.url || foundPost.author?.profile_picture || 'NO URL'
               });
             } else {
-              console.error('❌ NO AUTHOR DATA IN BLOG POST');
+              console.error(' NO AUTHOR DATA IN BLOG POST');
             }
             
             // Handle featured_image if it's an array
             if (foundPost.featured_image && Array.isArray(foundPost.featured_image) && foundPost.featured_image.length > 0) {
-              console.log('🖼️ Featured image was an array, extracting first item...');
+              console.log('️ Featured image was an array, extracting first item...');
               foundPost.featured_image = foundPost.featured_image[0];
-              console.log('🖼️ Extracted featured image:', foundPost.featured_image);
+              console.log('️ Extracted featured image:', foundPost.featured_image);
             }
             
-            console.log('🖼️ Final featured image URL:', foundPost.featured_image?.url || foundPost.featured_image);
+            console.log('️ Final featured image URL:', foundPost.featured_image?.url || foundPost.featured_image);
             
             setBlogPost(foundPost);
           } else {
-            console.warn('⚠️ No blog post found matching:', cleanSlug);
+            console.warn('️ No blog post found matching:', cleanSlug);
             console.warn('Available URLs:', allPosts.map((p: any) => p.url));
             
             // Try fallback blog posts
-            console.log('🔄 Searching fallback blog posts...');
+            console.log(' Searching fallback blog posts...');
             const fallbackPost = getFallbackBlogPost(cleanSlug);
             if (fallbackPost) {
-              console.log('✅ Using fallback blog post:', fallbackPost.title);
+              console.log(' Using fallback blog post:', fallbackPost.title);
               setBlogPost(fallbackPost);
             } else {
               throw new Error('Blog post not found');
             }
           }
         } else {
-          console.warn('⚠️ No blog posts found in Contentstack, using fallback');
+          console.warn('️ No blog posts found in Contentstack, using fallback');
           const fallbackPost = getFallbackBlogPost(cleanSlug);
           if (fallbackPost) {
-            console.log('✅ Using fallback blog post:', fallbackPost.title);
+            console.log(' Using fallback blog post:', fallbackPost.title);
             setBlogPost(fallbackPost);
           } else {
             throw new Error('Blog post not found');
@@ -614,39 +614,39 @@ const BlogPost: React.FC = () => {
       }
     ];
     
-    console.log('🔍 Searching for blog post with slug:', slug);
-    console.log('📚 Available fallback posts:', fallbackPosts.map(p => p.url));
+    console.log(' Searching for blog post with slug:', slug);
+    console.log(' Available fallback posts:', fallbackPosts.map(p => p.url));
     
     const found = fallbackPosts.find(post => {
       // Try exact match
       if (post.url === slug) {
-        console.log('✅ Exact match found:', post.title);
+        console.log(' Exact match found:', post.title);
         return true;
       }
       // Try if post URL contains slug
       if (post.url.includes(slug)) {
-        console.log('✅ Partial match found:', post.title);
+        console.log(' Partial match found:', post.title);
         return true;
       }
       // Try if slug contains post URL
       if (slug.includes(post.url)) {
-        console.log('✅ Slug contains URL match found:', post.title);
+        console.log(' Slug contains URL match found:', post.title);
         return true;
       }
       // Try matching just the last part (post slug)
       const postSlugPart = post.url.split('/').pop() || '';
       const searchSlugPart = slug.split('/').pop() || '';
       if (postSlugPart && searchSlugPart && postSlugPart === searchSlugPart) {
-        console.log('✅ Slug part match found:', post.title);
+        console.log(' Slug part match found:', post.title);
         return true;
       }
       return false;
     });
     
     if (found) {
-      console.log('🎉 Returning blog post:', found.title);
+      console.log(' Returning blog post:', found.title);
     } else {
-      console.error('❌ No fallback post found for slug:', slug);
+      console.error(' No fallback post found for slug:', slug);
     }
     
     return found || null;
@@ -654,7 +654,7 @@ const BlogPost: React.FC = () => {
 
   // Author profile picture mapping for when Contentstack doesn't have images
   const getAuthorProfilePicture = (author: any): string | undefined => {
-    console.log('🔍 getAuthorProfilePicture called with:', {
+    console.log(' getAuthorProfilePicture called with:', {
       author,
       authorName: author?.name || author?.title,
       profilePicture: author?.profile_picture,
@@ -666,16 +666,16 @@ const BlogPost: React.FC = () => {
     if (pic) {
       // Check if it's a non-empty string
       if (typeof pic === 'string' && pic.trim().length > 0) {
-        console.log('✅ Using Contentstack string URL:', pic.trim());
+        console.log(' Using Contentstack string URL:', pic.trim());
         return pic.trim();
       }
       // Check if it's an object with a non-empty url property
       if (typeof pic === 'object' && pic.url && typeof pic.url === 'string' && pic.url.trim().length > 0) {
-        console.log('✅ Using Contentstack object URL:', pic.url.trim());
+        console.log(' Using Contentstack object URL:', pic.url.trim());
         return pic.url.trim();
       }
       // If we get here, pic exists but is empty/invalid
-      console.log('⚠️ Profile picture exists but is empty or invalid:', pic);
+      console.log('️ Profile picture exists but is empty or invalid:', pic);
     }
     
     // Fallback to local images based on author name
@@ -690,11 +690,11 @@ const BlogPost: React.FC = () => {
     };
     
     const mappedImage = authorImageMap[authorName];
-    console.log(`📸 Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
+    console.log(` Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
     
     // Add cache buster to force fresh load (increment this version when images change)
     const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=10` : undefined;
-    console.log(`🎯 FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
+    console.log(` FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
     
     return imageWithCacheBuster;
   };
@@ -1019,7 +1019,7 @@ const BlogPost: React.FC = () => {
                   alignItems: 'center',
                   gap: '0.5rem'
                 }}>
-                  <span style={{ fontSize: '1.2rem' }}>📖</span>
+                  <span style={{ fontSize: '1.2rem' }}></span>
                   {blogPost.reading_time_minute} min read
                 </div>
               </div>
@@ -1202,7 +1202,7 @@ const BlogPost: React.FC = () => {
                   padding-left: 3rem !important;
                 }
                 .blog-content ul li::before {
-                  content: "✦" !important;
+                  content: "" !important;
                   position: absolute !important;
                   left: 1.2rem !important;
                   color: #6a1b9a !important;
@@ -1412,7 +1412,7 @@ const BlogPost: React.FC = () => {
                             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
                             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                           >
-                            🐦
+                            
                           </a>
                         )}
                         {blogPost.author.linkedin && (
@@ -1444,7 +1444,7 @@ const BlogPost: React.FC = () => {
                             onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.2)'}
                             onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
                           >
-                            💻
+                            
                           </a>
                         )}
                       </div>

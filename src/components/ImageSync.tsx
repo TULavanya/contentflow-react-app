@@ -88,7 +88,7 @@ const ImageSync: React.FC<ImageSyncProps> = ({
       resolvedSrc = defaultFallback;
     }
 
-    console.log('🖼️ ImageSync setting src:', {
+    console.log('️ ImageSync setting src:', {
       originalSrc: src,
       resolvedSrc,
       fallbackSrc,
@@ -100,14 +100,14 @@ const ImageSync: React.FC<ImageSyncProps> = ({
 
   const handleLoad = () => {
     setIsLoading(false);
-    console.log('✅ ImageSync - Image loaded successfully:', imageSrc);
+    console.log(' ImageSync - Image loaded successfully:', imageSrc);
     onLoad?.();
   };
 
   const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
     setIsLoading(false);
     
-    console.error('❌ ImageSync - Image failed to load:', {
+    console.error(' ImageSync - Image failed to load:', {
       attemptedSrc: imageSrc,
       fallbackSrc,
       defaultFallback,
@@ -117,19 +117,19 @@ const ImageSync: React.FC<ImageSyncProps> = ({
     
     // Try fallback if we haven't already
     if (imageSrc !== fallbackSrc && fallbackSrc) {
-      console.warn('🔄 Trying fallbackSrc:', fallbackSrc);
+      console.warn(' Trying fallbackSrc:', fallbackSrc);
       setImageSrc(fallbackSrc);
       return;
     }
     
     // Use default fallback
     if (imageSrc !== defaultFallback) {
-      console.warn('🔄 Trying defaultFallback:', defaultFallback);
+      console.warn(' Trying defaultFallback:', defaultFallback);
       setImageSrc(defaultFallback);
       return;
     }
     
-    console.error('❌ All image loading attempts failed!');
+    console.error(' All image loading attempts failed!');
     onError?.();
   };
 
@@ -256,7 +256,7 @@ export const safeTextContent = (content: any, fallback: string = ''): string => 
 };
 
 // Safe utility to extract icon content (emoji or icon URL)
-export const safeIconContent = (icon: any, fallback: string = '📄'): string => {
+export const safeIconContent = (icon: any, fallback: string = ''): string => {
   if (icon === null || icon === undefined) return fallback;
   if (typeof icon === 'string') return icon.trim();
   

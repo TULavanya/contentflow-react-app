@@ -21,7 +21,7 @@ const Platform: React.FC = () => {
         console.log('Page header:', data?.page_header);
         setPlatformData(data);
       } catch (error) {
-        console.error('❌ Error loading platform content:', error);
+        console.error(' Error loading platform content:', error);
         setPlatformData(null); // Ensure data is null on error
       } finally {
         setIsLoading(false);
@@ -48,13 +48,13 @@ const Platform: React.FC = () => {
         textAlign: 'center'
       }}>
         <h2 style={{ fontSize: '2em', color: '#333', marginBottom: '20px' }}>
-          📄 Page Content Not Available
+           Page Content Not Available
         </h2>
         <p style={{ color: '#666', marginBottom: '30px', maxWidth: '600px' }}>
           The Platform page content hasn't been published in Contentstack yet. Please publish the 'platform_page' entry in your Contentstack dashboard.
         </p>
         <Link to="/" className="btn start">
-          🏠 Go to Homepage
+           Go to Homepage
         </Link>
       </div>
     );
@@ -295,7 +295,7 @@ const Platform: React.FC = () => {
           fontSize: '3em',
           animation: 'float 7s ease-in-out infinite',
           opacity: 0.7
-        }}>⚡</div>
+        }}></div>
         <div style={{
           position: 'absolute',
           bottom: '30%',
@@ -303,7 +303,7 @@ const Platform: React.FC = () => {
           fontSize: '2.5em',
           animation: 'float 5s ease-in-out infinite reverse',
           opacity: 0.6
-        }}>🚀</div>
+        }}></div>
         <div style={{
           position: 'absolute',
           top: '70%',
@@ -311,7 +311,7 @@ const Platform: React.FC = () => {
           fontSize: '2.8em',
           animation: 'float 6s ease-in-out infinite',
           opacity: 0.65
-        }}>🔒</div>
+        }}></div>
         <div style={{
           position: 'absolute',
           top: '25%',
@@ -319,7 +319,7 @@ const Platform: React.FC = () => {
           fontSize: '2.2em',
           animation: 'float 8s ease-in-out infinite reverse',
           opacity: 0.5
-        }}>🌍</div>
+        }}></div>
         <div style={{
           position: 'absolute',
           bottom: '15%',
@@ -327,7 +327,7 @@ const Platform: React.FC = () => {
           fontSize: '2.6em',
           animation: 'float 4.5s ease-in-out infinite',
           opacity: 0.55
-        }}>📈</div>
+        }}></div>
           <div className="container">
           <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
             <h2 style={{ 
@@ -340,7 +340,7 @@ const Platform: React.FC = () => {
               animation: 'fadeInUp 0.8s ease-out',
               letterSpacing: '-0.5px'
             }}>
-              ⚡ Built for Performance, Scale, and Security 🚀
+               Built for Performance, Scale, and Security 
             </h2>
             <p style={{
               textAlign: 'center',
@@ -351,13 +351,13 @@ const Platform: React.FC = () => {
               textShadow: '0 2px 10px rgba(0,0,0,0.2)',
               fontWeight: '500'
             }}>
-              🌟 Enterprise-grade infrastructure trusted by global brands worldwide 🌟
+               Enterprise-grade infrastructure trusted by global brands worldwide 
             </p>
             
             <LargeFeatureGrid gap="40px">
               {[
                 { 
-                  icon: '⚡', 
+                  icon: '', 
                   title: 'Lightning Fast Performance', 
                   text: 'Global CDN with 150+ edge locations delivering <50ms response times. Optimized for speed and performance worldwide.',
                   feature_image: {
@@ -366,7 +366,7 @@ const Platform: React.FC = () => {
                   }
                 },
                 { 
-                  icon: '📈', 
+                  icon: '', 
                   title: 'Infinitely Scalable Architecture', 
                   text: 'Auto-scaling cloud infrastructure that seamlessly handles billions of API calls and traffic spikes per month.',
                   feature_image: {
@@ -375,7 +375,7 @@ const Platform: React.FC = () => {
                   }
                 },
                 { 
-                  icon: '🔒', 
+                  icon: '', 
                   title: 'Enterprise-Grade Security', 
                   text: 'SOC 2 Type II certified with GDPR & CCPA compliance. 99.9% uptime SLA and advanced threat protection.',
                   feature_image: {
@@ -384,7 +384,7 @@ const Platform: React.FC = () => {
                   }
                 },
                 { 
-                  icon: '🌍', 
+                  icon: '', 
                   title: 'Global Reach & Localization', 
                   text: 'Multi-region deployment with advanced localization support for 100+ languages and international markets.',
                   feature_image: {
@@ -399,7 +399,7 @@ const Platform: React.FC = () => {
                     key={index}
                     title={safeTextContent(item.title, 'Infrastructure Feature')}
                     description={safeTextContent(item.text, 'Technical excellence feature')}
-                    icon={safeIconContent(item.icon, '⚡')}
+                    icon={safeIconContent(item.icon, '')}
                     featureImage={item.feature_image}
                     link="/start"
                     linkText="Get Started"
@@ -566,7 +566,7 @@ const content = await stack.getEntry('homepage');`}
       </div>
     );
   } catch (error) {
-    console.error('🚨 CRITICAL: Platform page render error:', error);
+    console.error(' CRITICAL: Platform page render error:', error);
     return (
       <div style={{ 
         minHeight: '60vh', 
@@ -578,7 +578,7 @@ const content = await stack.getEntry('homepage');`}
         textAlign: 'center'
       }}>
         <h2 style={{ fontSize: '2em', color: '#e53935', marginBottom: '20px' }}>
-          ⚠️ Page Rendering Error
+          ️ Page Rendering Error
         </h2>
         <p style={{ color: '#666', marginBottom: '20px', maxWidth: '600px' }}>
           An error occurred while rendering the Platform page. Please check the browser console for details.
@@ -587,7 +587,7 @@ const content = await stack.getEntry('homepage');`}
           Error: {error instanceof Error ? error.message : 'Unknown error'}
         </p>
         <Link to="/" className="btn start">
-          🏠 Go to Homepage
+           Go to Homepage
         </Link>
       </div>
     );

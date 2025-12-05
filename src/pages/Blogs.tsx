@@ -13,7 +13,7 @@ const Blogs: React.FC = () => {
 
   // Author profile picture mapping for when Contentstack doesn't have images
   const getAuthorProfilePicture = (author: any): string | undefined => {
-    console.log('🔍 [Blogs] getAuthorProfilePicture called with:', {
+    console.log(' [Blogs] getAuthorProfilePicture called with:', {
       author,
       isArray: Array.isArray(author),
       authorName: author?.name || author?.title || (Array.isArray(author) && author[0]?.name),
@@ -25,16 +25,16 @@ const Blogs: React.FC = () => {
     if (pic) {
       // Check if it's a non-empty string
       if (typeof pic === 'string' && pic.trim().length > 0) {
-        console.log('✅ [Blogs] Using Contentstack string URL:', pic.trim());
+        console.log(' [Blogs] Using Contentstack string URL:', pic.trim());
         return pic.trim();
       }
       // Check if it's an object with a non-empty url property
       if (typeof pic === 'object' && pic.url && typeof pic.url === 'string' && pic.url.trim().length > 0) {
-        console.log('✅ [Blogs] Using Contentstack object URL:', pic.url.trim());
+        console.log(' [Blogs] Using Contentstack object URL:', pic.url.trim());
         return pic.url.trim();
       }
       // If we get here, pic exists but is empty/invalid
-      console.log('⚠️ [Blogs] Profile picture exists but is empty or invalid:', pic);
+      console.log('️ [Blogs] Profile picture exists but is empty or invalid:', pic);
     }
     
     // If author is an array (from reference field), try first item
@@ -43,14 +43,14 @@ const Blogs: React.FC = () => {
       const firstPic = firstAuthor?.profile_picture;
       if (firstPic) {
         if (typeof firstPic === 'string' && firstPic.trim().length > 0) {
-          console.log('✅ [Blogs] Using Contentstack array string URL:', firstPic.trim());
+          console.log(' [Blogs] Using Contentstack array string URL:', firstPic.trim());
           return firstPic.trim();
         }
         if (typeof firstPic === 'object' && firstPic.url && typeof firstPic.url === 'string' && firstPic.url.trim().length > 0) {
-          console.log('✅ [Blogs] Using Contentstack array object URL:', firstPic.url.trim());
+          console.log(' [Blogs] Using Contentstack array object URL:', firstPic.url.trim());
           return firstPic.url.trim();
         }
-        console.log('⚠️ [Blogs] Array author profile picture exists but is empty or invalid:', firstPic);
+        console.log('️ [Blogs] Array author profile picture exists but is empty or invalid:', firstPic);
       }
     }
     
@@ -66,11 +66,11 @@ const Blogs: React.FC = () => {
     };
     
     const mappedImage = authorImageMap[authorName];
-    console.log(`📸 [Blogs] Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
+    console.log(` [Blogs] Author "${authorName}" mapped to local image:`, mappedImage || 'NO MAPPING FOUND');
     
     // Add cache buster to force fresh load (increment this version when images change)
     const imageWithCacheBuster = mappedImage ? `${mappedImage}?v=10` : undefined;
-    console.log(`🎯 [Blogs] FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
+    console.log(` [Blogs] FINAL RETURN VALUE:`, imageWithCacheBuster || 'undefined');
     
     return imageWithCacheBuster;
   };
@@ -93,9 +93,9 @@ const Blogs: React.FC = () => {
           allEntries: true,
           include: ['author'] // Include author reference to get author data
         });
-        console.log('📰 Blog posts fetched from Contentstack:', posts);
+        console.log(' Blog posts fetched from Contentstack:', posts);
         if (posts && posts.length > 0) {
-          console.log('📸 First blog post image check:', {
+          console.log(' First blog post image check:', {
             title: posts[0]?.title,
             featured_image: posts[0]?.featured_image,
             featured_image_url: posts[0]?.featured_image?.url,
@@ -109,22 +109,22 @@ const Blogs: React.FC = () => {
           // Check all posts for images
           const postsWithImages = posts.filter((p: any) => p.featured_image || p.image);
           const postsWithoutImages = posts.filter((p: any) => !p.featured_image && !p.image);
-          console.log(`✅ Posts with images: ${postsWithImages.length}`);
-          console.log(`❌ Posts without images: ${postsWithoutImages.length}`);
+          console.log(` Posts with images: ${postsWithImages.length}`);
+          console.log(` Posts without images: ${postsWithoutImages.length}`);
           if (postsWithoutImages.length > 0) {
-            console.warn('⚠️ These posts are missing images:', postsWithoutImages.map((p: any) => p.title));
+            console.warn('️ These posts are missing images:', postsWithoutImages.map((p: any) => p.title));
           }
         }
         // If no posts from Contentstack, use fallback
         if (!posts || posts.length === 0) {
-          console.warn('⚠️ No blog posts in Contentstack, using fallback data');
+          console.warn('️ No blog posts in Contentstack, using fallback data');
           setBlogPosts(fallbackBlogPosts);
         } else {
           setBlogPosts(posts);
         }
       } catch (error) {
-        console.error('❌ Error loading blogs content:', error);
-        console.log('📝 Using fallback blog posts');
+        console.error(' Error loading blogs content:', error);
+        console.log(' Using fallback blog posts');
         setBlogPosts(fallbackBlogPosts);
       } finally {
         setIsLoading(false);
@@ -148,7 +148,7 @@ const Blogs: React.FC = () => {
         title: 'Security Engineer',
         profile_picture: { url: '' }
       },
-      icon: '🔒'
+      icon: ''
     },
     {
       title: 'Understanding Customer Behavior with Real-Time Analytics',
@@ -163,7 +163,7 @@ const Blogs: React.FC = () => {
         title: 'Product Marketing Lead',
         profile_picture: { url: '' }
       },
-      icon: '📊'
+      icon: ''
     },
     {
       title: 'Discover How AI Agents Accelerate Content Creation',
@@ -178,7 +178,7 @@ const Blogs: React.FC = () => {
         title: 'Head of Product',
         profile_picture: { url: '' }
       },
-      icon: '🤖'
+      icon: ''
     },
     {
       title: 'Building Scalable Headless CMS Architecture',
@@ -193,7 +193,7 @@ const Blogs: React.FC = () => {
         title: 'Principal Engineer',
         profile_picture: { url: '' }
       },
-      icon: '⚙️'
+      icon: '️'
     },
     {
       title: 'The Future of Digital Experience Platforms',
@@ -208,7 +208,7 @@ const Blogs: React.FC = () => {
         title: 'CTO',
         profile_picture: { url: '' }
       },
-      icon: '🚀'
+      icon: ''
     },
     {
       title: 'Personalization at Scale: Best Practices',
@@ -223,7 +223,7 @@ const Blogs: React.FC = () => {
         title: 'Solutions Architect',
         profile_picture: { url: '' }
       },
-      icon: '🎯'
+      icon: ''
     }
   ];
   
@@ -284,7 +284,7 @@ const Blogs: React.FC = () => {
           <div style={{ marginTop: '30px', animation: 'fadeInUp 1.2s ease-out' }}>
             <input 
               type="text" 
-              placeholder="🔍 Search articles, guides, and tutorials..." 
+              placeholder=" Search articles, guides, and tutorials..." 
               style={{
                 width: '100%',
                 maxWidth: '600px',
@@ -414,7 +414,7 @@ const Blogs: React.FC = () => {
                     objectFit: 'cover'
                   }}
                   onError={(e) => {
-                    console.error('❌ Featured article image failed to load:', blogsData?.featured_article);
+                    console.error(' Featured article image failed to load:', blogsData?.featured_article);
                     e.currentTarget.src = '/images/BlogHero-Product_Updates-01.webp';
                   }}
                 />
@@ -546,7 +546,7 @@ const Blogs: React.FC = () => {
                         objectFit: 'cover'
                       }}
                       onError={(e) => {
-                        console.error('❌ Blog post image failed to load:', {
+                        console.error(' Blog post image failed to load:', {
                           title: post.title,
                           featured_image: post.featured_image,
                           image: post.image

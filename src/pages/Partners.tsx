@@ -40,36 +40,36 @@ const Partners: React.FC = () => {
       title: 'Technology Partners',
       description: 'Integration with leading technology platforms',
       partners: [
-        { name: 'Salesforce', type: 'CRM', icon: '☁️' },
-        { name: 'HubSpot', type: 'Marketing', icon: '🎯' },
-        { name: 'Shopify', type: 'E-commerce', icon: '🛒' },
-        { name: 'Stripe', type: 'Payments', icon: '💳' },
-        { name: 'Google Analytics', type: 'Analytics', icon: '📊' },
-        { name: 'Segment', type: 'CDP', icon: '🔄' }
+        { name: 'Salesforce', type: 'CRM', icon: '️' },
+        { name: 'HubSpot', type: 'Marketing', icon: '' },
+        { name: 'Shopify', type: 'E-commerce', icon: '' },
+        { name: 'Stripe', type: 'Payments', icon: '' },
+        { name: 'Google Analytics', type: 'Analytics', icon: '' },
+        { name: 'Segment', type: 'CDP', icon: '' }
       ]
     },
     {
       title: 'Cloud & Infrastructure',
       description: 'Deployed on world-class infrastructure',
       partners: [
-        { name: 'AWS', type: 'Cloud', icon: '☁️' },
-        { name: 'Azure', type: 'Cloud', icon: '☁️' },
-        { name: 'Google Cloud', type: 'Cloud', icon: '☁️' },
-        { name: 'Vercel', type: 'Hosting', icon: '▲' },
-        { name: 'Netlify', type: 'Hosting', icon: '🌐' },
-        { name: 'Cloudflare', type: 'CDN', icon: '🔒' }
+        { name: 'AWS', type: 'Cloud', icon: '️' },
+        { name: 'Azure', type: 'Cloud', icon: '️' },
+        { name: 'Google Cloud', type: 'Cloud', icon: '️' },
+        { name: 'Vercel', type: 'Hosting', icon: '' },
+        { name: 'Netlify', type: 'Hosting', icon: '' },
+        { name: 'Cloudflare', type: 'CDN', icon: '' }
       ]
     },
     {
       title: 'Developer Tools',
       description: 'Seamless integration with your workflow',
       partners: [
-        { name: 'GitHub', type: 'Version Control', icon: '🐙' },
-        { name: 'GitLab', type: 'Version Control', icon: '🦊' },
-        { name: 'Jira', type: 'Project Management', icon: '📋' },
-        { name: 'Slack', type: 'Communication', icon: '💬' },
-        { name: 'Figma', type: 'Design', icon: '🎨' },
-        { name: 'Postman', type: 'API Testing', icon: '📮' }
+        { name: 'GitHub', type: 'Version Control', icon: '' },
+        { name: 'GitLab', type: 'Version Control', icon: '' },
+        { name: 'Jira', type: 'Project Management', icon: '' },
+        { name: 'Slack', type: 'Communication', icon: '' },
+        { name: 'Figma', type: 'Design', icon: '' },
+        { name: 'Postman', type: 'API Testing', icon: '' }
       ]
     },
     {
@@ -88,7 +88,7 @@ const Partners: React.FC = () => {
 
   const partnerBenefits = partnersData?.partner_benefits || [
     {
-      icon: '🤝',
+      icon: '',
       title: 'Co-Marketing Opportunities',
       description: 'Joint marketing initiatives, case studies, and co-branded content to showcase your expertise and grow together.',
       feature_image: {
@@ -97,7 +97,7 @@ const Partners: React.FC = () => {
       }
     },
     {
-      icon: '🎓',
+      icon: '',
       title: 'Training & Certification Program',
       description: 'Comprehensive partner training programs, certifications, and dedicated support resources for your team.',
       feature_image: {
@@ -106,7 +106,7 @@ const Partners: React.FC = () => {
       }
     },
     {
-      icon: '💰',
+      icon: '',
       title: 'Revenue Sharing Program',
       description: 'Competitive commission structure with attractive revenue opportunities and performance-based incentives.',
       feature_image: {
@@ -115,7 +115,7 @@ const Partners: React.FC = () => {
       }
     },
     {
-      icon: '🛠️',
+      icon: '️',
       title: 'Technical Support & Resources',
       description: 'Dedicated technical support, integration assistance, and early access to new features and capabilities.',
       feature_image: {
@@ -124,7 +124,7 @@ const Partners: React.FC = () => {
       }
     },
     {
-      icon: '📈',
+      icon: '',
       title: 'Lead Generation & Growth',
       description: 'Access to qualified leads from our customer base and growth opportunities in new markets.',
       feature_image: {
@@ -133,7 +133,7 @@ const Partners: React.FC = () => {
       }
     },
     {
-      icon: '🏆',
+      icon: '',
       title: 'Partner Recognition & Awards',
       description: 'Featured placement in our partner directory, marketing materials, and exclusive recognition events for achievements.',
       feature_image: {
@@ -546,7 +546,7 @@ const Partners: React.FC = () => {
                 marginBottom: '20px', 
                 animation: 'float 3s ease-in-out infinite',
                 filter: 'drop-shadow(0 5px 15px rgba(192, 192, 192, 0.3))'
-              }}>🥉</div>
+              }}></div>
               
               <h3 style={{ 
                 fontSize: '2em', 
@@ -564,16 +564,16 @@ const Partners: React.FC = () => {
                 fontSize: '1.05em'
               }}>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}>✓</span> Partner directory listing
+                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}></span> Partner directory listing
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}>✓</span> Basic training access
+                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}></span> Basic training access
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}>✓</span> 10% revenue share
+                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}></span> 10% revenue share
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}>✓</span> Email support
+                  <span style={{ color: '#c0c0c0', fontSize: '1.2em' }}></span> Email support
                 </li>
               </ul>
             </div>
@@ -635,7 +635,7 @@ const Partners: React.FC = () => {
                 marginBottom: '20px', 
                 animation: 'float 3s ease-in-out infinite 0.3s',
                 filter: 'drop-shadow(0 5px 15px rgba(255, 215, 0, 0.4))'
-              }}>🥈</div>
+              }}></div>
               <h3 style={{ 
                 fontSize: '2em', 
                 marginBottom: '20px',
@@ -655,18 +655,18 @@ const Partners: React.FC = () => {
                 fontSize: '1.05em'
               }}>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}>✓</span> Featured directory placement
+                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}></span> Featured directory placement
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}>✓</span> Advanced training & certification
+                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}></span> Advanced training & certification
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}>✓</span> 15% revenue share</li>
+                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}></span> 15% revenue share</li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}>✓</span> Priority support (4hr response)
+                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}></span> Priority support (4hr response)
                 </li>
                 <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}>✓</span> Co-marketing opportunities
+                  <span style={{ color: '#6a1b9a', fontSize: '1.2em' }}></span> Co-marketing opportunities
                 </li>
               </ul>
             </div>
@@ -689,15 +689,15 @@ const Partners: React.FC = () => {
               e.currentTarget.style.transform = 'translateY(0)';
               e.currentTarget.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
             }}>
-              <div style={{ fontSize: '3em', marginBottom: '15px', animation: 'float 3s ease-in-out infinite 1s' }}>🥇</div>
+              <div style={{ fontSize: '3em', marginBottom: '15px', animation: 'float 3s ease-in-out infinite 1s' }}></div>
               <h3 style={{ fontSize: '1.8em', marginBottom: '15px' }}>Platinum Partner</h3>
               <ul style={{ textAlign: 'left', color: '#666', lineHeight: 2, listStyle: 'none', paddingLeft: 0 }}>
-                <li>✓ Premium directory placement</li>
-                <li>✓ Exclusive training programs</li>
-                <li>✓ 20% revenue share</li>
-                <li>✓ Dedicated partner manager</li>
-                <li>✓ Lead generation program</li>
-                <li>✓ Early access to features</li>
+                <li> Premium directory placement</li>
+                <li> Exclusive training programs</li>
+                <li> 20% revenue share</li>
+                <li> Dedicated partner manager</li>
+                <li> Lead generation program</li>
+                <li> Early access to features</li>
             </ul>
               </div>
           </div>
@@ -717,7 +717,7 @@ const Partners: React.FC = () => {
             gap: '40px'
           }}>
             <div className="testimonial-card">
-              <div className="rating">★★★★★</div>
+              <div className="rating"></div>
               <div className="testimonial-content">
                 <p>"Partnering with ContentFlow has been transformational for our agency. We've doubled our revenue and landed enterprise clients we never thought possible."</p>
               </div>
@@ -731,7 +731,7 @@ const Partners: React.FC = () => {
             </div>
 
             <div className="testimonial-card">
-              <div className="rating">★★★★★</div>
+              <div className="rating"></div>
               <div className="testimonial-content">
                 <p>"The technical support and training have been outstanding. ContentFlow truly invests in their partners' success."</p>
               </div>
@@ -745,7 +745,7 @@ const Partners: React.FC = () => {
             </div>
 
             <div className="testimonial-card">
-              <div className="rating">★★★★★</div>
+              <div className="rating"></div>
               <div className="testimonial-content">
                 <p>"The revenue sharing model is generous and the lead quality is exceptional. Best partnership decision we've made."</p>
               </div>

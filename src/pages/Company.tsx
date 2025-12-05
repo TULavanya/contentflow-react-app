@@ -83,7 +83,7 @@ const Company: React.FC = () => {
       setIsLoading(true);
       try {
         const data = await fetchContent('company_page');
-        console.log('🏢 Company page data:', data);
+        console.log(' Company page data:', data);
         setCompanyData(data);
       } catch (error) {
         console.error('Error loading company content:', error);
@@ -298,7 +298,7 @@ const Company: React.FC = () => {
                     justifyContent: 'center',
                     fontSize: '1.2em'
                   }}>
-                    ✓
+                    
                   </div>
                 </div>
 
@@ -374,7 +374,7 @@ const Company: React.FC = () => {
                     alignItems: 'center',
                     gap: '10px'
                   }}>
-                    <span>📝</span> Bio
+                    <span></span> Bio
                   </h3>
                   <p style={{
                     lineHeight: '1.8',
@@ -713,7 +713,7 @@ const Company: React.FC = () => {
                       boxShadow: '0 5px 15px rgba(106, 27, 154, 0.3)',
                       flexShrink: 0
                     }}>
-                      {safeIconContent(milestone.icon, '📅')}
+                      {safeIconContent(milestone.icon, '')}
                     </div>
                     
                     <div>
@@ -868,7 +868,7 @@ const Company: React.FC = () => {
                     justifyContent: 'center',
                     fontSize: '1.2em'
                   }}>
-                    ✓
+                    
                   </div>
                 </div>
                 <h3 style={{ fontSize: '1.3em', marginBottom: '5px', color: '#333' }}>
@@ -962,7 +962,7 @@ const Company: React.FC = () => {
                   animation: 'float 3s ease-in-out infinite',
                   animationDelay: `${index * 0.3}s`
                 }}>
-                  🏆
+                  
                 </div>
                 <h3 style={{ fontSize: '1.3em', marginBottom: '10px', color: '#333' }}>
                   {safeTextContent(award.award_title || award.title, 'Award Title')}
@@ -1113,7 +1113,7 @@ const AnimatedNumbers: React.FC = () => {
             { count: counts.countries, suffix: '+', label: 'Countries Served', gradient: 'linear-gradient(135deg, #8e24aa 0%, #ab47bc 100%)' },
             { count: counts.teamMembers, suffix: '+', label: 'Team Members', gradient: 'linear-gradient(135deg, #ab47bc 0%, #ba68c8 100%)' },
             { count: counts.uptime.toFixed(1), suffix: '%', label: 'Uptime SLA', gradient: 'linear-gradient(135deg, #ba68c8 0%, #ce93d8 100%)' },
-            { count: counts.rating.toFixed(1), suffix: '★', label: 'Customer Rating', gradient: 'linear-gradient(135deg, #ce93d8 0%, #e1bee7 100%)' }
+            { count: counts.rating.toFixed(1), suffix: '', label: 'Customer Rating', gradient: 'linear-gradient(135deg, #ce93d8 0%, #e1bee7 100%)' }
           ].map((stat, index) => (
             <div key={index} style={{ 
               textAlign: 'center',

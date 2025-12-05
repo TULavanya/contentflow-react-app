@@ -27,7 +27,7 @@ const Talk: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('🎉 Demo request received! Our team will contact you within 24 hours to schedule your personalized demo.');
+    alert(' Demo request received! Our team will contact you within 24 hours to schedule your personalized demo.');
     setFormData({
       firstName: '',
       lastName: '',
@@ -54,7 +54,7 @@ const Talk: React.FC = () => {
       setIsLoading(true);
       try {
         const data = await fetchContent('talk_page');
-        console.log('💬 Talk page data:', data);
+        console.log(' Talk page data:', data);
         setTalkData(data);
       } catch (error) {
         console.error('Error loading talk content:', error);
@@ -137,7 +137,7 @@ const Talk: React.FC = () => {
                       color: '#666',
                       fontSize: '1.05em'
                     }}>
-                      ✓ {safeTextContent(typeof item === 'string' ? item : (item.benefit_text || item.text), 'Benefit')}
+                       {safeTextContent(typeof item === 'string' ? item : (item.benefit_text || item.text), 'Benefit')}
                     </li>
                   ))}
                 </ul>
@@ -606,32 +606,32 @@ const Talk: React.FC = () => {
           }}>
             {(talkData?.what_to_expect?.expectation_items || [
               { 
-                icon: '📋', 
+                icon: '', 
                 item_title: 'Needs Assessment', 
                 item_description: 'We\'ll discuss your current challenges, goals, and specific requirements to tailor the demo.',
               },
               { 
-                icon: '🎬', 
+                icon: '', 
                 item_title: 'Live Platform Demo', 
                 item_description: 'See the platform in action with examples and use cases relevant to your industry.'
               },
               { 
-                icon: '💡', 
+                icon: '', 
                 item_title: 'Best Practices', 
                 item_description: 'Learn how leading brands are using ContentFlow to achieve measurable business results.'
               },
               { 
-                icon: '🗺️', 
+                icon: '️', 
                 item_title: 'Implementation Plan', 
                 item_description: 'Get a customized roadmap and timeline for your successful ContentFlow implementation.'
               },
               { 
-                icon: '💬', 
+                icon: '', 
                 item_title: 'Q&A Session', 
                 item_description: 'Ask anything—our solutions experts are here to answer all your technical and business questions.'
               },
               { 
-                icon: '📊', 
+                icon: '', 
                 item_title: 'ROI Analysis', 
                 item_description: 'Understand the potential ROI, cost savings, and business impact for your organization.'
               }
@@ -772,13 +772,13 @@ const Talk: React.FC = () => {
 
           <div className="testimonials-grid">
             {(talkData?.testimonials_section?.testimonials || [
-              { rating: '★★★★★', quote: 'The demo completely sold us. Seeing the platform in action and understanding how it could solve our specific challenges made the decision easy.', customer_name: 'Jennifer Taylor', customer_title: 'CTO, RetailCorp', customer_photo: '/images/Jessica.png' },
-              { rating: '★★★★★', quote: 'The solutions team was incredibly knowledgeable and patient. They took the time to understand our needs and showed us exactly how ContentFlow would work for us.', customer_name: 'Marcus Johnson', customer_title: 'VP Digital, FinanceHub', customer_photo: '/images/Mike.png' },
-              { rating: '★★★★★', quote: 'Best demo experience we\'ve had. They didn\'t just show us features—they showed us solutions to our actual problems. We signed up immediately after.', customer_name: 'Sarah Mitchell', customer_title: 'Head of Marketing, TechGlobal', customer_photo: '/images/Renee.jpg' }
+              { rating: '', quote: 'The demo completely sold us. Seeing the platform in action and understanding how it could solve our specific challenges made the decision easy.', customer_name: 'Jennifer Taylor', customer_title: 'CTO, RetailCorp', customer_photo: '/images/Jessica.png' },
+              { rating: '', quote: 'The solutions team was incredibly knowledgeable and patient. They took the time to understand our needs and showed us exactly how ContentFlow would work for us.', customer_name: 'Marcus Johnson', customer_title: 'VP Digital, FinanceHub', customer_photo: '/images/Mike.png' },
+              { rating: '', quote: 'Best demo experience we\'ve had. They didn\'t just show us features—they showed us solutions to our actual problems. We signed up immediately after.', customer_name: 'Sarah Mitchell', customer_title: 'Head of Marketing, TechGlobal', customer_photo: '/images/Renee.jpg' }
             ]).map((testimonial: any, index: number) => (
               <div key={index} className="testimonial-card">
                 <div className="rating">
-                  {testimonial.rating === '5' || testimonial.rating === 5 ? '★★★★★' : (testimonial.rating || '★★★★★')}
+                  {testimonial.rating === '5' || testimonial.rating === 5 ? '' : (testimonial.rating || '')}
                 </div>
               <div className="testimonial-content">
                   <p>"{safeTextContent(testimonial.quote, 'Great experience!')}"</p>

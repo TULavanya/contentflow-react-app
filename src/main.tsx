@@ -12,7 +12,7 @@ const clearStaleCache = () => {
     if (!cacheTimestamp || parseInt(cacheTimestamp) < oneHourAgo) {
       localStorage.removeItem('contentstack-cache');
       localStorage.setItem('app-cache-timestamp', Date.now().toString());
-      console.log('🧹 Cleared stale cache');
+      console.log(' Cleared stale cache');
     }
   } catch (e) {
     console.warn('Cache cleanup failed:', e);
@@ -23,7 +23,7 @@ clearStaleCache();
 
 // Global error handler
 window.addEventListener('error', (event) => {
-  console.error('🚨 Global Error:', {
+  console.error(' Global Error:', {
     message: event.message,
     filename: event.filename,
     lineno: event.lineno,
@@ -33,17 +33,17 @@ window.addEventListener('error', (event) => {
 });
 
 window.addEventListener('unhandledrejection', (event) => {
-  console.error('🚨 Unhandled Promise Rejection:', event.reason);
+  console.error(' Unhandled Promise Rejection:', event.reason);
   event.preventDefault(); // Prevent default rejection handling
 });
 
 // Performance monitoring
-console.log('🚀 Application starting...');
+console.log(' Application starting...');
 const startTime = performance.now();
 
 // HMR for development
 if (import.meta.env && import.meta.env.DEV) {
-  console.log('🔥 HMR enabled');
+  console.log(' HMR enabled');
 }
 
 // Clear service workers (if any) - they can cause caching issues
@@ -51,7 +51,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.getRegistrations().then(function(registrations) {
     for(let registration of registrations) {
       registration.unregister();
-      console.log('🧹 Service worker unregistered');
+      console.log(' Service worker unregistered');
     }
   });
 }
@@ -67,9 +67,9 @@ try {
   );
   
   const endTime = performance.now();
-  console.log(`✅ React app mounted successfully in ${(endTime - startTime).toFixed(2)}ms`);
+  console.log(` React app mounted successfully in ${(endTime - startTime).toFixed(2)}ms`);
 } catch (error) {
-  console.error('💥 Failed to mount React app:', error);
+  console.error(' Failed to mount React app:', error);
   
   // Fallback error display
   document.body.innerHTML = `
@@ -85,7 +85,7 @@ try {
       text-align: center;
       padding: 40px;
     ">
-      <div style="font-size: 4em; margin-bottom: 20px;">💥</div>
+      <div style="font-size: 4em; margin-bottom: 20px;"></div>
       <h1 style="color: #d32f2f; margin-bottom: 15px;">Application Failed to Start</h1>
       <p style="color: #666; margin-bottom: 30px; max-width: 600px;">
         The React application failed to initialize. Please check the console for details.
@@ -100,7 +100,7 @@ try {
         cursor: pointer;
         font-weight: bold;
       ">
-        🔄 Clear Cache & Reload
+         Clear Cache & Reload
       </button>
     </div>
   `;

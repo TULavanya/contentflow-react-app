@@ -22,7 +22,7 @@ const Careers: React.FC = () => {
         console.log('Recognition Awards:', data?.recognition_awards);
         
         if (data?.company_culture?.group) {
-          console.log('📸 Detailed Culture Items Debug:');
+          console.log(' Detailed Culture Items Debug:');
           data.company_culture.group.forEach((item: any, idx: number) => {
             console.log(`\nCulture Item ${idx + 1}:`);
             console.log('  Title:', item.title);
@@ -32,15 +32,15 @@ const Careers: React.FC = () => {
             console.log('  Icon URL:', item.icon?.url || item.icon?.href || 'NO URL FOUND');
             
             if (!item.icon) {
-              console.warn(`  ⚠️ Item "${item.title}" has NO icon field!`);
+              console.warn(`  ️ Item "${item.title}" has NO icon field!`);
             } else if (!item.icon.url && !item.icon.href) {
-              console.warn(`  ⚠️ Item "${item.title}" has icon field but NO URL!`);
+              console.warn(`  ️ Item "${item.title}" has icon field but NO URL!`);
             }
           });
         }
         
         if (data?.recognition_awards) {
-          console.log('\n🏆 Recognition Awards Debug:');
+          console.log('\n Recognition Awards Debug:');
           data.recognition_awards.forEach((award: any, idx: number) => {
             console.log(`\nAward ${idx + 1}:`);
             console.log('  Title:', award.title);
@@ -433,7 +433,7 @@ const Careers: React.FC = () => {
               <div style={{
                 fontSize: '4rem',
                 marginBottom: '20px'
-              }}>🎯</div>
+              }}></div>
               <h3 style={{
                 fontSize: '2rem',
                 fontWeight: '700',
@@ -452,7 +452,7 @@ const Careers: React.FC = () => {
               <div style={{
                 fontSize: '4rem',
                 marginBottom: '20px'
-              }}>🚀</div>
+              }}></div>
               <h3 style={{
                 fontSize: '2rem',
                 fontWeight: '700',
@@ -471,7 +471,7 @@ const Careers: React.FC = () => {
               <div style={{
                 fontSize: '4rem',
                 marginBottom: '20px'
-              }}>💎</div>
+              }}></div>
               <h3 style={{
                 fontSize: '2rem',
                 fontWeight: '700',
@@ -873,8 +873,8 @@ const Careers: React.FC = () => {
                     {job.job_title || job.title}
                   </h3>
                     <div style={{ display: 'flex', gap: '15px', marginBottom: '10px', flexWrap: 'wrap', color: '#666', fontSize: '0.9em' }}>
-                      <span>📁 {job.department}</span>
-                      <span>📍 {job.location}</span>
+                      <span> {job.department}</span>
+                      <span> {job.location}</span>
                       <span>⏰ {job.job_type || job.type}</span>
             </div>
                     <p style={{ color: '#666', lineHeight: 1.5, fontSize: '0.95em' }}>

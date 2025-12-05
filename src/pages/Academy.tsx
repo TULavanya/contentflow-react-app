@@ -325,7 +325,7 @@ const Academy: React.FC = () => {
                 opacity: 0.15,
                 animation: 'float 4s ease-in-out infinite'
               }}>
-                📺
+                
               </div>
               
               {/* Content */}
@@ -382,7 +382,7 @@ const Academy: React.FC = () => {
                   fontWeight: 'bold',
                   border: '2px solid rgba(255, 255, 255, 0.3)'
                 }}>
-                  🎥 Click to Watch Tutorial
+                   Click to Watch Tutorial
                 </div>
               </div>
             </div>
@@ -810,7 +810,7 @@ const Academy: React.FC = () => {
                   boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
                   animation: 'pulse 2.5s ease-in-out infinite'
                 }}>
-                  🏆 Excellence in Learning
+                   Excellence in Learning
                 </div>
               </div>
             </div>

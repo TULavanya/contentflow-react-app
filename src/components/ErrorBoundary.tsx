@@ -53,7 +53,7 @@ class ErrorBoundary extends Component<Props, State> {
             fontSize: '4em',
             marginBottom: '20px',
             animation: 'bounce 2s infinite'
-          }}>⚠️</div>
+          }}>️</div>
           <h1 style={{ 
             fontSize: '2.5em', 
             marginBottom: '15px',
@@ -90,7 +90,7 @@ class ErrorBoundary extends Component<Props, State> {
                 color: '#2563eb',
                 fontSize: '1.1em'
               }}>
-                🔍 Error Details (Development Mode)
+                 Error Details (Development Mode)
               </summary>
               <code style={{ 
                 fontSize: '0.9em',
@@ -125,7 +125,7 @@ class ErrorBoundary extends Component<Props, State> {
                 boxShadow: '0 4px 15px rgba(106, 27, 154, 0.3)'
               }}
             >
-              🔄 Reload Page
+               Reload Page
             </button>
             <Link 
               to="/" 
@@ -145,7 +145,7 @@ class ErrorBoundary extends Component<Props, State> {
                 gap: '8px'
               }}
             >
-              🏠 Go to Homepage
+               Go to Homepage
             </Link>
           </div>
         </div>

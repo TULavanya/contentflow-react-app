@@ -11,13 +11,23 @@
  * VITE_CONTENTSTACK_REGION=us
  */
 
-export const contentstackConfig = {
-  enabled: import.meta.env.VITE_CONTENTSTACK_ENABLED !== 'false', // Can be disabled
+// Stack configuration for Live Preview
+export const stackConfig = {
   apiKey: import.meta.env.VITE_CONTENTSTACK_API_KEY || 'bltc8715766359fd200',
   deliveryToken: import.meta.env.VITE_CONTENTSTACK_DELIVERY_TOKEN || 'cs8bc0fd9b19dee044b3c7c2c7',
   environment: import.meta.env.VITE_CONTENTSTACK_ENVIRONMENT || 'development',
   region: (import.meta.env.VITE_CONTENTSTACK_REGION || 'us') as 'us' | 'eu' | 'azure-na' | 'azure-eu' | 'gcp-na',
-  host: import.meta.env.VITE_CONTENTSTACK_HOST || undefined,
+  branch: import.meta.env.VITE_CONTENTSTACK_BRANCH || 'main'
+};
+
+export const contentstackConfig = {
+  enabled: import.meta.env.VITE_CONTENTSTACK_ENABLED !== 'false', // Can be disabled
+  apiKey: stackConfig.apiKey,
+  deliveryToken: stackConfig.deliveryToken,
+  environment: stackConfig.environment,
+  region: stackConfig.region,
+  branch: stackConfig.branch,
+  host: import.meta.env.VITE_CONTENTSTACK_HOST || 'rest-preview.contentstack.com',
   // Enable live preview for editors (ENABLED by default!)
   livePreview: {
     enable: import.meta.env.VITE_CONTENTSTACK_LIVE_PREVIEW !== 'false', // Enabled by default

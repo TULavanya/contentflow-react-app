@@ -58,7 +58,7 @@ function App() {
       </ErrorBoundary>
     );
   } catch (error: any) {
-    console.error('🚨 CRITICAL App error:', error);
+    console.error(' CRITICAL App error:', error);
     return (
       <div style={{
         display: 'flex',
@@ -70,7 +70,7 @@ function App() {
         textAlign: 'center',
         background: 'linear-gradient(135deg, #f9f9f9 0%, #ffffff 100%)'
       }}>
-        <div style={{ fontSize: '4em', marginBottom: '20px' }}>⚠️</div>
+        <div style={{ fontSize: '4em', marginBottom: '20px' }}>️</div>
         <h1 style={{ fontSize: '2.5em', marginBottom: '15px', color: '#6a1b9a' }}>
           Critical Error Detected
         </h1>
@@ -91,7 +91,7 @@ function App() {
             boxShadow: '0 4px 15px rgba(106, 27, 154, 0.3)'
           }}
         >
-          🔄 Reload Application
+           Reload Application
         </button>
       </div>
     );

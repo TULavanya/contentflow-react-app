@@ -18,9 +18,9 @@ const Home: React.FC = () => {
         console.log('Home page data:', data);
         
         if (data) {
-          console.log('✅ CONTENTSTACK DATA RECEIVED:');
+          console.log(' CONTENTSTACK DATA RECEIVED:');
           console.log('');
-          console.log('🔎 CHECKING EXPECTED FIELD UIDs:');
+          console.log(' CHECKING EXPECTED FIELD UIDs:');
           console.log('  hero_title:', data.hero_title);
           console.log('  hero_subtitle:', data.hero_subtitle);
           console.log('  hero_stats:', data.hero_stats);
@@ -29,11 +29,11 @@ const Home: React.FC = () => {
           console.log('  cta_primary:', data.cta_primary);
           console.log('  cta_secondary:', data.cta_secondary);
           console.log('');
-          console.log('🔑 ALL FIELD UIDs IN YOUR CONTENTSTACK ENTRY:');
+          console.log(' ALL FIELD UIDs IN YOUR CONTENTSTACK ENTRY:');
           console.log(Object.keys(data).filter(key => !key.startsWith('_') && key !== 'uid' && key !== 'locale' && key !== 'created_by' && key !== 'updated_by'));
           console.log('');
-          console.log('💡 If any field shows "undefined", check field UIDs in Contentstack');
-          console.log('📦 RAW DATA:', JSON.stringify(data, null, 2));
+          console.log(' If any field shows "undefined", check field UIDs in Contentstack');
+          console.log(' RAW DATA:', JSON.stringify(data, null, 2));
           
           // Count how many fields are actually filled
           const filledFields = [
@@ -49,8 +49,8 @@ const Home: React.FC = () => {
           console.log(`\nSTATUS: ${filledFields.length}/7 fields have data`);
           
           if (filledFields.length === 0) {
-            console.warn('⚠️ DATA FETCHED BUT ALL FIELDS ARE EMPTY!');
-            console.log('🔧 FIX: Check that field UIDs in Contentstack match:');
+            console.warn('️ DATA FETCHED BUT ALL FIELDS ARE EMPTY!');
+            console.log(' FIX: Check that field UIDs in Contentstack match:');
             console.log('   - hero_title, hero_subtitle, hero_stats, trusted_brands, features, cta_primary, cta_secondary');
           }
         } else {
@@ -431,7 +431,7 @@ const Home: React.FC = () => {
             {testimonials.slice(0, 3).map((testimonial: any, index: number) => (
               <div key={index} className="testimonial-card">
                 <div className="rating">
-                  ★★★★★
+                  
                 </div>
               <div className="testimonial-content">
                   <p>"{safeTextContent(testimonial.testimonial_text, 'Customer testimonial')}"</p>
@@ -618,7 +618,7 @@ const Home: React.FC = () => {
           fontSize: '2em',
           animation: 'float 7s ease-in-out infinite',
           opacity: 0.7
-        }}>🚀</div>
+        }}></div>
         <div style={{
           position: 'absolute',
           bottom: '30%',
@@ -635,7 +635,7 @@ const Home: React.FC = () => {
           fontSize: '2.2em',
           animation: 'float 8s ease-in-out infinite',
           opacity: 0.8
-        }}>💫</div>
+        }}></div>
         <div style={{
           position: 'absolute',
           bottom: '40%',
@@ -643,7 +643,7 @@ const Home: React.FC = () => {
           fontSize: '1.9em',
           animation: 'float 6s ease-in-out infinite reverse',
           opacity: 0.7
-        }}>🌟</div>
+        }}></div>
 
         <div style={{ maxWidth: '1000px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <h2 style={{ 
@@ -667,7 +667,7 @@ const Home: React.FC = () => {
             maxWidth: '700px',
             margin: '0 auto 50px auto'
           }}>
-            🌈 Because with ContentFlow, it is possible. And we'll help you get there. 🌈
+             Because with ContentFlow, it is possible. And we'll help you get there. 
           </p>
           <div style={{
             display: 'flex',
@@ -699,7 +699,7 @@ const Home: React.FC = () => {
               e.currentTarget.style.boxShadow = '0 6px 25px rgba(0,0,0,0.2)';
               e.currentTarget.style.background = 'rgba(255, 255, 255, 0.95)';
             }}
-            >🎯 Request a Demo</Link>
+            > Request a Demo</Link>
             <Link to="/start" style={{
               background: 'linear-gradient(135deg, #4a148c 0%, #6a1b9a 50%, #8e24aa 100%)',
               color: 'white',
@@ -723,7 +723,7 @@ const Home: React.FC = () => {
               e.currentTarget.style.boxShadow = '0 6px 25px rgba(74, 20, 140, 0.4)';
               e.currentTarget.style.background = 'linear-gradient(135deg, #4a148c 0%, #6a1b9a 50%, #8e24aa 100%)';
             }}
-            >🚀 Start Free Trial</Link>
+            > Start Free Trial</Link>
           </div>
         </div>
         

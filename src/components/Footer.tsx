@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
     const loadContent = async () => {
       try {
         const data = await fetchContent('footer');
-        console.log('📌 Footer data from Contentstack:', data);
+        console.log(' Footer data from Contentstack:', data);
         if (data && data.length > 0) {
           setFooterData(data[0]);
         }
