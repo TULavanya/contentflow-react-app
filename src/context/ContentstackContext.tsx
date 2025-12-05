@@ -2,6 +2,7 @@ import React, { createContext, useContext, ReactNode, useState, useEffect } from
 import ContentstackLivePreview from '@contentstack/live-preview-utils';
 import Contentstack from 'contentstack';
 import contentstackConfig, { stackConfig } from '../config/contentstack.config';
+import { getLivePreviewHostByRegion, getHostByRegion } from '../utils/utils';
 
 interface ContentstackContextType {
   stack: any;
@@ -18,6 +19,15 @@ interface ContentstackProviderProps {
 
 // Initialize Live Preview Stack
 const initializeLivePreviewStack = () => {
+  // Environment Variables
+  const {
+    VITE_CONTENTSTACK_API_KEY,
+    VITE_CONTENTSTACK_DELIVERY_TOKEN,
+    VITE_CONTENTSTACK_ENVIRONMENT,
+    VITE_CONTENTSTACK_REGION,
+    VITE_CONTENTSTACK_PREVIEW_TOKEN
+  } = import.meta.env;
+
   // Check if Contentstack is disabled
   if (!contentstackConfig.enabled) {
     console.log('Contentstack is DISABLED - using fallback content only');
@@ -35,23 +45,33 @@ const initializeLivePreviewStack = () => {
   console.log('API Host:', contentstackConfig.host);
   
   try {
+    // Map region to uppercase format for utility functions
+    const region = (VITE_CONTENTSTACK_REGION || stackConfig.region).toUpperCase().replace(/-/g, '_');
+    
     // Initialize Contentstack Stack with Live Preview configuration
-    const LivePreviewStack = Contentstack.Stack({
-      api_key: stackConfig.apiKey,
-      delivery_token: stackConfig.deliveryToken,
-      environment: stackConfig.environment,
+    const Stack = Contentstack.Stack({
+      api_key: VITE_CONTENTSTACK_API_KEY as string,
+      delivery_token: VITE_CONTENTSTACK_DELIVERY_TOKEN as string,
+      environment: VITE_CONTENTSTACK_ENVIRONMENT as string,
       region: stackConfig.region as any,
       live_preview: {
         enable: true,
-        host: "rest-preview.contentstack.com",
-        preview_token: contentstackConfig.livePreview.preview_token
+        host: getLivePreviewHostByRegion(region),
+        preview_token: VITE_CONTENTSTACK_PREVIEW_TOKEN as string
       }
     });
 
     console.log('Contentstack Stack initialized successfully!');
     console.log('Live Preview configured in Stack');
+    console.log('Live Preview Host:', getLivePreviewHostByRegion(region));
     
-    return LivePreviewStack;
+    // Initialize Live Preview SDK
+    ContentstackLivePreview.init({
+      stackSdk: Stack
+    });
+    console.log('Live Preview SDK initialized');
+    
+    return Stack;
   } catch (error) {
     console.error('Failed to initialize Contentstack Stack:', error);
     return null;
@@ -230,6 +250,8 @@ export const useContentstack = () => {
   }
   return context;
 };
+
+export const onEntryChange = ContentstackLivePreview.onEntryChange;
 
 export default ContentstackContext;
 
