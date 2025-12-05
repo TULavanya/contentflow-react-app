@@ -31,7 +31,7 @@ export const contentstackConfig = {
   // Enable live preview for editors (ENABLED by default!)
   livePreview: {
     enable: import.meta.env.VITE_CONTENTSTACK_LIVE_PREVIEW !== 'false', // Enabled by default
-    preview_token: import.meta.env.VITE_CONTENTSTACK_PREVIEW_TOKEN || 'csd02a07e6dd335fcfd9527d72',
+    preview_token: import.meta.env.VITE_CONTENTSTACK_PREVIEW_TOKEN || 'cs2fecf14e41118cc21e6edb57',
     host: import.meta.env.VITE_CONTENTSTACK_LIVE_PREVIEW_HOST || 'rest-preview.contentstack.com',
     ssr: false, // Set to true if using SSR
     mode: 'builder' // Set to 'builder' for Visual Builder, 'preview' for Live Preview only
