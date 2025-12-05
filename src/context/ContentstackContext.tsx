@@ -51,6 +51,7 @@ const initializeStack = () => {
     // Initialize Live Preview Utils SDK
     ContentstackLivePreview.init({
       enable: true,
+      mode: 'builder',
       ssr: false,
       stackSdk: Stack,
       editButton: { enable: true },
