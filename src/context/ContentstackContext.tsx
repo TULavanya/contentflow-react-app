@@ -1,4 +1,5 @@
 import React, { createContext, useContext, ReactNode, useState } from 'react';
+import ContentstackLivePreview from '@contentstack/live-preview-utils';
 import Contentstack from 'contentstack';
 import contentstackConfig, { stackConfig } from '../config/contentstack.config';
 
@@ -31,15 +32,41 @@ const initializeStack = () => {
   console.log('Region:', stackConfig.region);
   
   try {
-    // Initialize Contentstack Stack
+    // Initialize Contentstack Stack with Live Preview
     const Stack = Contentstack.Stack({
       api_key: stackConfig.apiKey,
       delivery_token: stackConfig.deliveryToken,
       environment: stackConfig.environment,
-      region: stackConfig.region as any
+      region: stackConfig.region as any,
+      live_preview: {
+        preview_token: contentstackConfig.previewToken,
+        enable: true,
+        host: 'rest-preview.contentstack.com'
+      }
     });
 
-    console.log('Contentstack Delivery SDK initialized successfully!');
+    console.log('Contentstack Stack initialized with Live Preview!');
+    console.log('Preview Service Host: rest-preview.contentstack.com');
+    
+    // Initialize Live Preview Utils SDK
+    ContentstackLivePreview.init({
+      enable: true,
+      ssr: false,
+      stackSdk: Stack,
+      editButton: { enable: true },
+      stackDetails: {
+        apiKey: stackConfig.apiKey,
+        environment: stackConfig.environment,
+        branch: 'main'
+      },
+      clientUrlParams: {
+        protocol: 'https',
+        host: 'app.contentstack.com',
+        port: 443
+      }
+    });
+    
+    console.log('Live Preview SDK initialized successfully!');
     
     return Stack;
   } catch (error) {
@@ -160,6 +187,9 @@ export const useContentstack = () => {
   }
   return context;
 };
+
+// Export onEntryChange for components to listen to Live Preview updates
+export const onEntryChange = ContentstackLivePreview.onEntryChange;
 
 export default ContentstackContext;
 

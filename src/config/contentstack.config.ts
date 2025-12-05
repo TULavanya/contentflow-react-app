@@ -22,7 +22,8 @@ export const contentstackConfig = {
   apiKey: stackConfig.apiKey,
   deliveryToken: stackConfig.deliveryToken,
   environment: stackConfig.environment,
-  region: stackConfig.region
+  region: stackConfig.region,
+  previewToken: import.meta.env.VITE_CONTENTSTACK_PREVIEW_TOKEN || 'cs2fecf14e41118cc21e6edb57'
 };
 
 export default contentstackConfig;
